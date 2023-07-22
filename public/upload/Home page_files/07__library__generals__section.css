@@ -1,0 +1,208 @@
+/* ==========================================================================
+   07_GENERALS: SECTION
+   --------------------------------------------------------------------------
+   * README
+
+   * SECTION
+   * SECTION HEADER
+   * SECTION CONTENT
+   * SECTION FOOTER
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Section default styles.
+ * That means they apply to the HTML you can find first thing inside
+ * {% block section %}{% endblock %} in each .page file, and therefore, they
+ * apply to all site pages.
+
+ * If you need to deal with an exception to these Section default styles, you
+ * should manage it by adding a .section--modifier class to the .section element
+ * and develop the given exception nested to this .section--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Section component or a new
+ * sub-element for an existing one, you should develop them in this stylesheet,
+ * under a new component subtitle or under the correspondent one accordingly.
+ */
+
+/* SECTION
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To manage first-level information in each page. The most complex part is the
+   .section__header element, as it contemplates several possible sub-elements
+   (explicited in the class names) - of course, only keep the ones that suit
+   your needs in each case.
+   --------------------------------------------------------------------------
+
+    <section class="section">
+        <div class="section__header">
+            <div class="section__header__image">
+                <img src="X">
+            </div>
+
+            <div class="section__header__text">
+                <h2 class="section__header__text__title">
+                    <span class="section__header__text__title__icon"></span> X
+                </h2>
+
+                <div class="section__header__text__subtitle">X</div>
+            </div>
+
+            <div class="section__header__actions">
+                <a class="link" href="X">X</a>
+
+                <a class="button button--default" href="X">X</a>
+            </div>
+        </div>
+
+        <div class="section__content">X</div>
+
+        <div class="section__footer">X</div>
+    </section>
+
+   -------------------------------------------------------------------------- */
+
+.section {
+    margin: 0 auto;
+    width: 100%;
+}
+
+* + .section {
+    margin-top: 56px;
+}
+
+/* SECTION HEADER
+   ========================================================================== */
+.section__header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.section__header:not(.section__header--hr-bottom) + * {
+    margin-top: 32px;
+}
+
+.section__header__image {
+    width: 56px;
+    margin-right: 16px;
+}
+
+.section__header__image img {
+    display: block;
+    margin: auto;
+    border-radius: 100%;
+    width: 100%;
+}
+
+.section__header__text {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.section__header__text__title__icon {
+    margin-right: 8px;
+}
+
+.section__header__text__title {
+    line-height: 150%;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .section__header__text__title {
+        font-weight: 500;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .section__header__text__title {
+        font-weight: 400;
+    }
+
+}
+
+.section__header__text__title--1 {
+    font-size: 32px; /* Used in SearchJobs, Details, Wizards and Profile section titles */
+}
+
+.section__header__text__title--2 {
+    font-size: 28px; /* Used in HM Dashboard */
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .section__header__text__title--2 {
+        font-size: 22px;
+    }
+
+}
+
+.section__header__text__title--3 {
+    font-size: 26px; /* Used in Success section titles */
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .section__header__text__title--3 {
+        font-size: 20px; /* Used in Success section titles */
+    }
+
+}
+
+.section__header__text__title--4 {
+    font-size: 24px; /* Used everywhere else */
+}
+
+.section__header__text__subtitle {
+    font-size: 16px;
+}
+
+*+.section__header__text__subtitle {
+    margin-top: 8px;
+}
+
+*+.section__header__text__paragraph {
+    margin-top: 8px;
+}
+
+.section__header__actions {
+    margin-left: 16px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.section__header__actions > * {
+    margin-left: 4px;
+}
+
+/* SECTION CONTENT
+   ========================================================================== */
+.section__content+.section__content {
+    margin-top: 16px;
+}
+
+/* SECTION FOOTER
+   ========================================================================== */
+.section__footer {
+    margin-top: 40px;
+}
+
+.section__footer .link+.link {
+    margin-left: 16px;
+}

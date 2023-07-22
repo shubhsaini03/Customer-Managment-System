@@ -1,0 +1,499 @@
+/* ==========================================================================
+   05_NAVIGATION: INTERNAL
+   --------------------------------------------------------------------------
+   * README
+
+   * BREADCRUMBS
+   * TABS
+   * SUBTABS
+   * LIST CONTROLS (RESULTS, RESET, SORT AND PAGINATION)
+   * SORT (LOOSE OR IN TABLES HEAD)
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Internal Navigation default styles.
+ * That means they apply to different HTML components you can use to browse
+ * the site internally, and therefore, they apply only to the pages that display
+ * one or more of these components.
+
+ * At the moment we have not had to deal with any exception to these Internal
+ * Navigation default styles, but if it becomes necessary, let's talk about it
+ * and find a way to incorporate the given exception to these Internal Navigation
+ * default styles, as they should be able to cover any possible use without
+ * exceptions.
+ */
+
+/* BREADCRUMBS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To be used as the first element in the content of a given page, before of
+   after any .cols, .section or .aside elements.
+   --------------------------------------------------------------------------
+
+    {% block section %}
+        <div class="breadcrumbs">
+            <a class="breadcrumbs__item" href="X">X</a>
+
+            &gt; <a class="breadcrumbs__item" href="X">X</a>
+
+            &gt; <span>X</span>
+        </div>
+
+        ...
+
+    {% endblock %}
+
+   -------------------------------------------------------------------------- */
+
+.breadcrumbs--top {
+    margin-bottom: 40px;
+}
+
+.breadcrumbs--bottom {
+    margin-top: 40px;
+}
+
+.breadcrumbs>*+* {
+    margin-left: 8px;
+}
+
+/* TABS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To be used as an alternate content for the .section__header element
+   in a given page, as semantically the .tabs__list__item--active works as a
+   .section__header__text__title element.
+   --------------------------------------------------------------------------
+
+    <div class="section__header">
+        <div class="tabs">
+            <ul class="tabs__list clearfix">
+                <li class="tabs__list__item tabs__list__item--active"><h2>X</h2></li>
+                <li class="tabs__list__item"><a href="X">X</a></li>
+                <li class="tabs__list__item"><a href="X">X</a></li>
+            </ul>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+.tabs {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.tabs__list {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.tabs__list__item {
+    font-size: 16px;
+    font-family: "GothamBlack", Arial, Helvetica, sans-serif;
+    color: #1b1b1b;
+}
+
+.tabs__list__item:not(.tabs__list__item--active) {
+    cursor: pointer;
+}
+
+.tabs__list__item--active {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: #09afdc;
+    cursor: default;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .tabs {
+        position: relative;
+    }
+
+    .tabs__placeholder {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        vertical-align: middle;
+        font-family: 'GothamBlack', Arial, Helvetica, sans-serif;
+    }
+
+    .tabs .tabs__list {
+        display: none;
+        position: absolute;
+        top: calc(100% - 1px);
+        left: -9999px;
+        z-index: 4;
+        border-radius: 0 0 5px 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        background-color: #FFFFFF;
+    }
+
+    .tabs.tabs--open .tabs__list {
+        display: block;
+        left: 0;
+    }
+
+    .tabs__list__item {
+        padding: 8px 16px;
+        display: inline-block;
+    }
+
+    .tabs__list__item:first-of-type {
+        padding-top: 16px;
+    }
+
+    .tabs__list__item:last-of-type {
+        padding-bottom: 16px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .tabs__placeholder {
+        padding: 8px 0;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .tabs__placeholder {
+        padding: 15px 0;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .tabs__list {
+        width: 100%;
+    }
+
+    .tabs__list__item {
+        float: left;
+        margin-bottom: -1px;
+        border-bottom-width: 3px;
+        border-bottom-style: solid;
+        padding: 10px 0px;
+        font-weight: 500;
+        margin: 0 24px;
+    }
+
+    .tabs__placeholder {
+        display: none;
+    }
+
+    .tabs__list__item:not(.tabs__list__item--active) {
+        border-bottom-color: transparent;
+    }
+
+    .tabs__list__item--active {
+        border-bottom-color: #09afdc;;
+        /* var(--color--text--1) */
+    }
+
+}
+
+/* SUBTABS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To be used as an alternate content for the .section__header element
+   in a given page, as semantically the .tabs__list__item--active works as a
+   .section__header__text__title element.
+   --------------------------------------------------------------------------
+
+    <div class="section__header">
+        <div class="tabs">
+            <ul class="tabs__list clearfix">
+                <li class="tabs__list__item tabs__list__item--active"><h2>X</h2></li>
+                <li class="tabs__list__item"><a href="X">X</a></li>
+                <li class="tabs__list__item"><a href="X">X</a></li>
+            </ul>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+.subtabs {
+    width: 100%;
+}
+
+.subtabs__placeholder {
+    display: none;
+}
+
+.subtabs__list {
+    width: 100%;
+}
+
+.subtabs__list__item {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.subtabs__list__item:not(.subtabs__list__item--active) {
+    cursor: pointer;
+}
+
+.subtabs__list__item--active {
+    color: #1D3C6D;
+    /* var(--color--clickable) */
+    cursor: default;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .subtabs__list {
+        width: 100%;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .subtabs__list__item {
+        float: left;
+        padding: 13px 0;
+    }
+
+    .subtabs__list__item+.subtabs__list__item {
+        margin-left: 32px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .subtabs__list__item {
+        padding: 16px 0;
+    }
+
+    .subtabs__list__item+.subtabs__list__item {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .subtabs__list__item--active h3:after {
+        margin-left: 16px;
+        content: "\f105";
+        font: normal normal normal 24px/24px FontAwesome;
+    }
+
+}
+
+/* LIST CONTROLS (RESULTS, RESET, SORT AND PAGINATION)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To be used on top or bottom of a table/list of results. The original
+   code in paginationX.tpt includes conditionals and variables, the following is
+   an example of the final rendered output.
+   --------------------------------------------------------------------------
+
+    <div class="section__content">
+        <div class="list-controls list-controls--top clearfix">
+            <span class="list-controls__legend">X-X of X results</span>
+            <a class="list-controls__pagination__item paginationLink currentPageLink" href="X">X</a>
+            <a class="list-controls__pagination__item paginationLink" href="X">X</a>
+        </div>
+
+        ...
+
+        <div class="list-controls list-controls--bottom clearfix">
+            <span class="list-controls__legend">X-X of X results</span>
+            <a class="list-controls__pagination__item paginationLink currentPageLink" href="X">X</a>
+            <a class="list-controls__pagination__item paginationLink" href="X">X</a>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.list-controls {
+    font-size: 14px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.list-controls--top {
+    text-align: right;
+}
+
+.list-controls--top>* {
+    margin-bottom: 8px;
+}
+
+.list-controls--bottom>* {
+    margin-top: 8px;
+}
+
+.list-controls>[class*="list-controls__"] {
+    display: inline-block;
+}
+
+.list-controls__switcher {
+    float: left;
+    margin-right: 16px;
+}
+
+.list-controls__legend {
+    float: left;
+    margin-right: 16px;
+}
+
+.list-controls__reset {
+    float: left;
+    font-family: 'GothamBlack';
+    font-size: 1.2em;
+}
+
+.list-controls__sort {
+    margin-left: 16px;
+}
+
+.list-controls__pagination {
+    margin-left: 16px;
+}
+
+.list-controls__pagination__item {
+    display: inline-block;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    line-height: normal;
+    color: #1D3C6D;
+    /* var(--color--clickable) */
+    text-decoration: none;
+}
+
+.list-controls__pagination__item:hover,
+.list-controls__pagination__item:active,
+.list-controls__pagination__item:visited {
+    border-bottom-color: inherit;
+    text-decoration: none;
+}
+
+.list-controls__pagination__item.currentPageLink,
+.list-controls__pagination__item.currentPageLink:hover,
+.list-controls__pagination__item.currentPageLink:active,
+.list-controls__pagination__item.currentPageLink:visited {
+    text-decoration: none;
+    color: #666666;
+    /* var(--color--text--1) */
+}
+
+.list-controls__pagination__item+.list-controls__pagination__item {
+    margin-left: 16px;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .list-controls--bottom {
+        text-align: center;
+    }
+
+    .list-controls--top .list-controls__pagination {
+        display: none !important;
+    }
+
+    .list-controls__reset {
+        clear: both;
+    }
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .list-controls__switcher {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .list-controls--bottom {
+        text-align: right;
+    }
+
+}
+
+/* SORT (LOOSE OR IN TABLES HEAD)
+   ========================================================================== */
+.sort {
+    margin-bottom: 20px;
+    font-size: 14px;
+    outline: 0;
+    cursor: pointer;
+}
+
+.sort__legend {
+    margin-right: 20px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.sort__item {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+a.sort__item+a.sort__item {
+    margin-left: 16px;
+}
+
+.sort__item--active {
+    border-bottom-color: #1D3C6D;
+    /* var(--color--clickable) */
+}
+
+.sort__item__icon {
+    max-width: 10px;
+}
+
+th .sort__item__icon {
+    margin-left: -6px;
+}
+
+.sort__item .fa-sort {
+    color: inherit;
+}
+
+.sort__item .fa-sort-asc,
+.sort__item .fa-sort-desc {
+    color: transparent;
+}
+
+.sort__item:hover .fa-sort-asc,
+.sort__item:focus .fa-sort-asc,
+.sort__item:active .fa-sort-asc,
+.sort__item--ASC .fa-sort-asc {
+    color: #1D3C6D;
+    /* var(--color--clickable) */
+}
+
+.sort__item--ASC:hover .fa-sort-desc,
+.sort__item--ASC:focus .fa-sort-desc,
+.sort__item--ASC:active .fa-sort-desc,
+.sort__item--DESC .fa-sort-desc {
+    color: #1D3C6D;
+    /* var(--color--clickable) */
+}

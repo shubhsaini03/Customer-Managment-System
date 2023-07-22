@@ -1,0 +1,1681 @@
+/* ==========================================================================
+   15_COMMON PAGETYPES
+   --------------------------------------------------------------------------
+   * README
+
+   * BLOCKING LOGIN: SITE LEVEL
+   * BLOCKING LOGIN: ARTICLE LEVEL
+   * SOCIAL LOGIN
+   * SOCIAL LOGIN: INFO ORGANIZATION LEVEL
+
+   * DASHBOARD: DASHLETS: ARTICLE LEVEL
+
+   * LISTS: COLLAPSIBLE SEARCH FORM: SECTION AND FORM LEVEL
+
+   * DETAILS: ARTICLE LEVEL
+   * DETAILS: INFO ORGANIZATION LEVEL: FROM VIEW
+   * DETAILS: INFO ORGANIZATION LEVEL: ATTACHMENTS
+   * DETAILS: INFO ORGANIZATION LEVEL: HISTORY
+   * DETAILS: INFO ORGANIZATION LEVEL: QUESTION AND ANSWER
+
+   * SOCIAL SHARE
+   * SOCIAL SHARE IN ASIDE
+   * SOCIAL SHARE IN SECTION
+   * SOCIAL SHARE: OPEN
+   * SOCIAL SHARE: INFO ORGANIZATION LEVEL
+
+   * POPUP: ARTICLE LEVEL
+
+   * VIEW MORE IN ASIDE: ARTICLE LEVEL
+   * VIEW MORE IN SECTION: ARTICLE LEVEL
+   * VIEW MORE: INFO ORGANIZATION LEVEL
+
+   * STEPS BAR: INFO ORGANIZATION LEVEL
+
+   * REG/APP METHODS: SECTION LEVEL
+   * REG/APP METHODS: ARTICLE LEVEL
+   * REG/APP METHODS: FORM LEVEL
+
+   * SUBMIT NEW: FORM LEVEL
+
+   * SUCCESS: SECTION LEVEL
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Common Pagetypes styles.
+
+ * That means they apply to pagetypes, modules or widgets that are featured in
+ * more than one Portal, and therefore they sholud look the same everywhere.
+
+ * Bear in mind that if you modify X here, that modification will show not only
+ * where you are looking at that moment, but also everywhere else X is featured
+ * troughout that client Portals. That's the reason of being for this library!
+
+ * These .X--modifier or custom classes and its nested styles are grouped by pagetype
+ * in which they are featured, and sorted by HTML depth as the BEM naming shows itself.
+
+ * If you need to develop any new common pagetype, module or widget, you can either
+ * add a .X--modifier class to a given .X element and style nested to it, or you
+ * can develop a new set of custom classes, under the corresponding page subtitle.
+ */
+
+/* BLOCKING LOGIN: SITE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .body modifier we style the body in a login page when it's a blocking page.
+ */
+
+.body--login {
+    background-color: #D8D8D8;
+    /* var(--color--brandeable--2) */
+    background-image: var(--login-pattern--background--image);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+
+.body--login .main {
+    background-color: transparent;
+}
+
+.body--login .main__wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100;
+    max-width: 344px;
+    min-height: 100vh;
+}
+
+/* BLOCKING LOGIN: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style the article in a login page when it's a blocking page.
+ */
+
+.article--login {
+    border-radius: 8px;
+    background-color: #FFFFFF;
+}
+
+.article--login .article__header {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding: 24px 24px;
+}
+
+.article--login .article__header__text__title {
+    display: block;
+    float: left;
+    width: 249px;
+    height: 46px;
+    background-image: var(--KHColourLogo--background--image);
+    background-position: left center;
+    -webkit-background-size: contain;
+    background-size: contain;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.article--login .article__content {
+    margin-top: 0;
+    padding: 24px 24px;
+}
+
+.article--login .article__footer {
+    margin-top: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding: 16px 24px;
+    background-color: #B4B8BB;
+    /* var(--color--brandeable--3) */
+    font-size: 14px;
+    text-align: center;
+}
+
+/* SOCIAL LOGIN
+   ========================================================================== */
+
+/*!
+ * With this custom classes we style the social login widget.
+ */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+<div class="social-login">
+    <div class="social-login__text">
+        X
+    </div>
+
+    <div class="social-login__bar">
+        X
+    </div>
+</div>
+   -------------------------------------------------------------------------- */
+
+.social-login__text {
+    margin-bottom: 16px;
+    color: #565656;
+    /* var(--color--text--2) */
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* SOCIAL LOGIN: INFO ORGANIZATION LEVEL
+   ========================================================================== */
+
+/*!
+  * With this .list modifier we style the list of vendors in the social login widget.
+ */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+<ul class="list--social-login clearfix">
+    {% for method in loginMethods %}
+        <li class="list__item list__item--{{ method.getName() }}">
+            {{ method.getHtml()|raw }}
+
+            {# <a id="loginButton--X" class="loginButton loginButton--X" aria-describedby="descriptionLoginButton--X" role="button" tabindex="0" href="X">X</a> #}
+        </li>
+    {% endfor %}
+</ul>
+
+   -------------------------------------------------------------------------- */
+
+.list--social-login .list__item {
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 16px;
+}
+
+/* DASHBOARD: DASHLETS: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style a dashlet.
+ */
+
+.grid__item .article--dashlet {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.article--dashlet .article__content {
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.article--dashlet .article__footer {
+    font-size: 12px;
+    line-height: 150%;
+    font-weight: 500;
+}
+
+.article--dashlet .article__footer .link {
+    text-transform: uppercase;
+}
+
+/* LISTS: COLLAPSIBLE SEARCH FORM: SECTION AND FORM LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .section modifier we style the contained search form to be collapsible
+ * relative to it on mobile and tablet, and we patch different scenarios.
+
+ * This modifier has a function hooked to it in tptImplementation.js, and for it
+ * to work properly, you also need to prepend to .form--search the following HTML:
+
+    <a class="form__toggle js-toggle-search" href="#">
+        <i class="fv fv-search fa-sm" aria-hidden="true"></i>
+    </a>
+ */
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .section--collapsible-form-search {
+        position: relative;
+    }
+
+    .section--collapsible-form-search .section__header__text,
+    .section--collapsible-form-search .tabs__placeholder {
+        padding-right: 48px;
+        /* This makes space for the .form__toggle absolutely positioned at the top right on the .section. */
+    }
+
+    .section--collapsible-form-search .section__header__text {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .section--collapsible-form-search .grid__item--filters {
+        padding-top: 0;
+        /* Patch: Because the .form is the only child and it gets collapsed, when there is a filters left sidebar and it goes full width, it should not take vertical space at all. */
+    }
+
+    .grid__item--subtabs+.grid__item .section--collapsible-form-search .form--search {
+        top: -16px;
+        /* Patch: this manages the form upper positioning, when there is a subtabs left sidebar and it goes full width. */
+    }
+
+    .section--collapsible-form-search .form--search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 3;
+    }
+
+    .section--collapsible-form-search .form--search .form__toggle {
+        content: "\f002";
+        font: normal normal normal 24px/24px FontAwesome;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 4;
+        border-radius: 3px 3px 0 0;
+        text-align: center;
+        color: #666666;
+        /* var(--color--brandeable--1) */
+    }
+
+    .section--collapsible-form-search .form--search .form__toggle:hover,
+    .section--collapsible-form-search .form--search .form__toggle:focus,
+    .section--collapsible-form-search .form--search.form--open .form__toggle {
+        background-color: #FFFFFF;
+        /* var(--color--brandeable--3) */
+    }
+
+    .section--collapsible-form-search .form--search .Section {
+        display: none;
+        border-radius: 3px 0 3px 3px;
+        background-color: #FFFFFF;
+        /* var(--color--brandeable--3) */
+        transform: scale(.95);
+        opacity: .2;
+        transition: all 150ms ease-in-out;
+    }
+
+    .section--collapsible-form-search .form--search.form--open .Section {
+        display: block;
+        opacity: 1;
+        transform: scale(1);
+        transition: all 150ms ease-in-out;
+    }
+
+    .section--collapsible-form-search .form--search .button-bar--1col .button {
+        float: left;
+        width: auto;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .section--collapsible-form-search .section__header__text {
+        padding: 1px 0;
+        min-height: 37px;
+    }
+
+    .section--collapsible-form-search .form--search .form__toggle {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .section--collapsible-form-search .form--search .Section {
+        margin-top: 37px;
+        margin-right: -16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        margin-left: -16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+        padding-top: 16px;
+        padding-right: 16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        padding-bottom: 16px;
+        padding-left: 16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .section--collapsible-form-search .section__header__text {
+        padding: 8px 0;
+        min-height: 49px;
+    }
+
+    .section--collapsible-form-search .form--search .form__toggle {
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+    }
+
+    .section--collapsible-form-search .form--search .Section {
+        margin-top: 49px;
+        margin-left: 0;
+        padding-top: 16px;
+        padding-right: 16px;
+        padding-bottom: 0;
+        padding-left: 0;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .section--collapsible-form-search .section__header.visibility--mobile-and-tablet+* {
+        margin-top: 0;
+        /* Patch: for a particular scenario: when the section title is not visible on desktop (Search Jobs page?). */
+    }
+
+    .section--collapsible-form-search .form--search .form__toggle {
+        display: none !important;
+    }
+
+}
+
+/* DETAILS: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style the articles in a Detail page.
+ */
+
+.article--details+.article--details {
+    margin-top: 20px;
+}
+
+.article--details .paragraph br+br+br {
+    display: none;
+    /* Patch: I don't remember the scenario for this patch, but let's keep it for now. */
+}
+
+/* DETAILS: INFO ORGANIZATION LEVEL: FROM VIEW
+   ========================================================================== */
+
+/*!
+ * With this custom classes we style information brought from a view in a Detail page.
+ * Please notice these custom classes should be added as needed in the view settings in the backend.
+ * PENDING to be reviewed in depth in a specific upcoming case.
+ */
+
+.article__view {
+    /* container */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.view--col {
+    /* renglón con dos columnas */
+    width: 49%;
+    flex-basis: 49%;
+}
+
+.view--col-3 {
+    /* renglón con tres columnas */
+    width: 32%;
+    flex-basis: 32%;
+}
+
+.view--col-4 {
+    /* renglón con cuatro columnas */
+    width: 24%;
+    flex-basis: 24%;
+}
+
+.view--col .fieldSetLabel {
+    display: inline-block;
+    font-weight: 700;
+}
+
+.view--col .fieldSetValue {
+    display: inline-block;
+}
+
+.view--title {
+    width: 100%;
+    font-weight: 700;
+    font-size: 32px;
+    margin-top: 40px;
+    color: #4a4a4a;
+}
+
+.view--subtitle,
+.view--subtitle-alt,
+.view--no-label .fieldSetLabel {
+    width: 100%;
+    font-weight: 700;
+    font-size: 24px;
+    margin-top: 20px;
+    color: #4a4a4a;
+}
+
+.view--subtitle--alt {
+    font-size: 20px;
+    margin-bottom: 10px !important;
+    margin-top: 30px;
+    font-weight: 700;
+}
+
+.view--separator {
+    width: 100%;
+    display: block;
+}
+
+.view--separator-line {
+    border-top: 1px solid #d8d8d8;
+    padding-top: 10px;
+}
+
+.view--subtitle.view--separator-line {
+    padding-top: 30px;
+}
+
+.view--row {
+    width: 100%;
+    display: block;
+}
+
+.view--col.view--table .fieldSetLabel,
+.view--row .fieldSetLabel {
+    width: 100%;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    color: #4a4a4a;
+}
+
+.view--row .fieldSetLabel {
+    font-size: 24px;
+}
+
+.view--row.no-label .fieldSetLabel,
+.view--row.no-label .fieldSetValue br {
+    display: none;
+}
+
+.view--row-alt {
+    width: 100%;
+    display: block;
+    margin-bottom: 15px
+}
+
+.view--row-alt .fieldSetLabel {
+    display: inline-block;
+    font-weight: 700;
+}
+
+.view--row-alt .fieldSetValue {
+    display: inline-block;
+}
+
+.view--table table {
+    /* tabla que emula las otras tablas del sitio */
+    width: 100%;
+    max-width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d8d8d8;
+    table-layout: fixed;
+    border-collapse: separate;
+    text-align: left;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.view--table table thead th {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #E1E1E1;
+    background-color: #F3F3F3;
+    text-transform: uppercase;
+    color: #4A4A4A;
+    padding: 8px 8px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+.view--table table tbody td {
+    font-size: 14px;
+    padding: 8px 8px;
+    word-wrap: break-word;
+    -ms-word-wrap: break-word;
+    line-height: 150%;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.view--table table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.view--no-label .MultipleDataSetFieldLabel {
+    display: none;
+}
+
+.view--no-label .MultipleDataSetFieldValue {
+    padding-top: 5px;
+    display: block;
+    line-height: 1.5;
+}
+
+.view--no-label .MultipleDataSetField:first-child .MultipleDataSetFieldValue {
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: 5px;
+    color: #4a4a4a;
+    padding-top: 10px
+}
+
+/* table emulator for views */
+.table__emu {
+    border: 1px solid #e1e1e1;
+    margin-bottom: 20px
+}
+
+.table__emu__thead {
+    background-color: #f3f3f3;
+    display: flex;
+}
+
+.table__emu__th {
+    width: 100%;
+    text-transform: uppercase;
+    color: #4A4A4A;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 8px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.table__emu__tbody {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px
+}
+
+.table__emu__td--container {
+    display: flex;
+    align-items: center;
+}
+
+.table__emu__td--container.separator {
+    border-bottom: 1px solid #e1e1e1;
+    width: 100%;
+    padding: 0
+}
+
+.view__table-col1_2 {
+    width: 66%;
+}
+
+.view__table-col3 {
+    width: 34%;
+}
+
+.view__table-col3 .fieldSetLabel {
+    display: none;
+}
+
+.table__emu__td {
+    width: 100%;
+    padding: 15px 8px;
+}
+
+.view__table-col3 .fieldSetValue {
+    padding: 15px;
+}
+
+.table__emu__td--container.separator .table__emu__td {
+    padding: 0
+}
+
+@media all and (max-width:768px) {
+    .view--col {
+        width: 100%;
+        flex-basis: 100%;
+        padding-right: 0;
+    }
+
+    .view--col.view--table .fieldSetValue {
+        display: block;
+        width: 100%;
+    }
+
+    .view--table table {
+        width: inherit;
+        border: none;
+    }
+
+    .view--table table thead th {
+        display: none;
+    }
+
+    .view--row .tableField tbody tr td,
+    .view--table table tbody td {
+        width: 100%;
+        display: block;
+        padding: 10px 15px 0;
+    }
+
+    .view--row .tableField tbody tr td:first-child,
+    .view--table table tbody td:first-child {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .view--row .tableField tbody tr td:last-child,
+    .view--table table tbody td:last-child {
+        padding-bottom: 10px;
+    }
+
+    .fieldTemplateWidget {
+        max-width: 100%;
+    }
+
+    .table__emu__thead {
+        display: none;
+    }
+
+    .table__emu__td--container {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+    }
+
+    .table__emu__td.fieldSetLabel {
+        padding: 10px 15px 0 !important;
+        font-weight: 600;
+        display: block !important;
+    }
+
+    .view__table-col3 .table__emu__td.fieldSetLabel {
+        padding: 0 15px 0 !important;
+    }
+
+    .table__emu__td.fieldSetValue {
+        padding: 0 15px 15px !important;
+    }
+
+    .table__emu__td--container.separator .table__emu__td {
+        padding: 0 !important;
+    }
+
+}
+
+/* DETAILS: INFO ORGANIZATION LEVEL: ATTACHMENTS
+   ========================================================================== */
+
+/*!
+ * With this .list modifier we style the list of attachments in a Detail page.
+ */
+
+.list--attachments .list__item+.list__item {
+    margin-top: 30px;
+}
+
+.list--attachments .list__item__text__title {
+    font-weight: 500;
+}
+
+.list--attachments .list__item__actions {
+    margin-top: 8px;
+}
+
+.list--attachments .list__item__actions .link {
+    font-weight: 500;
+}
+
+.attachment-preview {
+    margin: 0;
+    height: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    transition-property: margin, height, padding, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.attachment-preview.attachment-preview--show {
+    margin: 30px 0 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    height: auto;
+    padding: 8px 16px 16px;
+    transition-property: margin, height, padding, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    opacity: 1;
+}
+
+.attachment-preview .attachment-preview__bar {
+    margin-bottom: 8px;
+    text-align: right;
+}
+
+.attachment-preview:not(.attachment-preview--show) .attachment-preview__bar {
+    display: none;
+}
+
+.attachment-preview .attachment-preview__bar .link {
+    font-weight: 500;
+}
+
+.attachment-preview .attachment-preview__preview {
+    width: 100%;
+    height: 360px;
+}
+
+/* DETAILS: INFO ORGANIZATION LEVEL: HISTORY
+   ========================================================================== */
+
+/*!
+ * With this .list modifier we style the list of work/education history (which has 2 levels of information) in a Detail page.
+ */
+
+.list--history {
+    margin-bottom: -16px !important;
+    /* Patch: we compensate the padding-bottom for the bottom row of .list__item (which may contain mor than one .list__item if the .list is combined with CSS columns), so it doesn't add up space */
+}
+
+.list--history .list__item {
+    padding-bottom: 16px;
+}
+
+.list--history .list__item__text__title {
+    font-weight: 500;
+}
+
+.list--history .list__item__text__subtitle {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+/* DETAILS: INFO ORGANIZATION LEVEL: QUESTION AND ANSWER
+   ========================================================================== */
+
+/*!
+ * With this .list modifier we style the list of question/answer from, for example, an attached form in a Detail page.
+ */
+
+.list--question-and-answer {
+    margin-bottom: -24px !important;
+    /* Patch: we compensate the padding-bottom for the bottom row of .list__item (which may contain mor than one .list__item if the .list is combined with CSS columns), so it doesn't add up space */
+}
+
+.list--question-and-answer .list__item {
+    padding-bottom: 24px;
+}
+
+.list--question-and-answer .list__item__text__title {
+    font-weight: 500;
+}
+
+/* SOCIAL SHARE
+   ========================================================================== */
+
+/*!
+ * With this custom classes we style the social share widget.
+ */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+<div class="social-share">
+    <div class="social-share__text">
+        {% trans %}X:{% endtrans %}
+    </div>
+
+    <a class="social-share__button button button--action-secondary tpt_socialShareButton" role="button" tabindex="0">
+        <i class="fv fv-share-alt visibility--tablet-and-desktop" aria-hidden="true"></i>
+
+        <span class="visibility--only-mobile">
+            {% trans %}X{% endtrans %}
+        </span>
+    </a>
+
+    <div class="social-share__popup clearfix">
+        X
+    </div>
+</div>
+   -------------------------------------------------------------------------- */
+
+.social-share__text {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.social-share__popup {
+    white-space: nowrap;
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+/* SOCIAL SHARE IN ASIDE
+   ========================================================================== */
+
+/*!
+ * With this nesting we style the social share widget when it's placed in the right sidebar (Detail pages).
+ * As the social share widget is printed from a .tpt file, we can't use a modifier for each scenario, as we do with the View More article.
+ */
+
+.aside .social-share__button {
+    display: none;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .aside .social-share {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    .aside .social-share__text {
+        margin-right: 8px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .aside .social-share__text {
+        margin-bottom: 4px;
+    }
+
+}
+
+/* SOCIAL SHARE IN SECTION
+   ========================================================================== */
+
+/*!
+ * With this nesting we style the social share widget when it is placed in the maIN SECTION (Search Job pages).
+ * As the social share widget is printed from a .tpt file, we can't use a modifier for each scenario, as we do with the View More article.
+ */
+
+.section .social-share {
+    display: inline-block;
+    position: relative;
+}
+
+.section .social-share__text {
+    display: none;
+}
+
+.section .social-share__popup {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background-color: #FFFFFF;
+    padding: 8px 8px;
+}
+
+.section .social-share__popup:before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    z-index: 1;
+    width: 8px;
+    height: 8px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background: #FFFFFF;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .section .social-share__popup {
+        left: -9999px;
+        margin-right: -620%;
+    }
+
+    .section .social-share__popup:before {
+        left: 20px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .section .social-share__popup {
+        right: -9999px;
+        margin-left: -620%;
+    }
+
+    .section .social-share__popup:before {
+        right: 20px;
+    }
+
+}
+
+/* SOCIAL SHARE: OPEN
+   ========================================================================== */
+
+/*!
+ * With this nesting we style the social share widget when it's open.
+ * This styling is placed last, to avoid using !important in some properties that are also nested to .aside or .section priorly.
+
+ * This --open modifier is added by a function hooked to .tpt_socialShareButton in tptImplementation.js.
+ */
+
+.social-share--open .social-share__popup {
+    display: block;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .social-share--open .social-share__popup {
+        bottom: 100%;
+        left: 4px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .social-share--open .social-share__button {
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        background-color: #FFFFFF;
+        color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .social-share--open .social-share__popup {
+        bottom: calc(100% + 10px);
+        right: -4px;
+    }
+
+}
+
+/* SOCIAL SHARE: INFO ORGANIZATION LEVEL
+   ========================================================================== */
+
+/*!
+  * With this .list modifier we style the list of vendors in the social share widget.
+ */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+<ul class="list list--social-share">
+    {% if X %}
+        <li class="list__item">
+            <a
+                class="list__item__link tpt_socialShareIcon tpt_socialSharePopupTrigger"
+                href="X"
+                rel="nofollow"
+                tabindex="-1"
+                target="_blank"
+            >
+                <img src="images/social-share--X.svg" alt="{% trans %}X{% endtrans %}" />
+
+                <span class="visibility--visually-hidden">
+                    {% trans %}X{% endtrans %}
+                </span>
+            </a>
+        </li>
+    {% endif %}
+
+    X
+</ul>
+
+   -------------------------------------------------------------------------- */
+
+.list--social-share .list__item {
+    float: left;
+}
+
+.list--social-share .list__item+.list__item {
+    margin-left: 8px;
+}
+
+.list--social-share .list__item__link,
+.list--social-share .list__item__link img {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+
+/* POPUP: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style the article in a Popup.
+ */
+
+.article--popup .article__header {
+    margin-bottom: 8px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding-bottom: 8px;
+}
+
+/* VIEW MORE IN ASIDE: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style the article showing more records when it's placed in the right sidebar (Detail pages).
+ */
+
+*+.article--view-more--aside .article__header {
+    padding-top: 16px;
+    /* Patch: we add up some upper space if there is any other .article before this one */
+}
+
+.article--view-more--aside .article__header {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding-bottom: 4px;
+}
+
+.article--view-more--aside .article__content {
+    margin-top: 4px;
+    /* Patch: we make this margin smaller than it is by default */
+}
+
+.article--view-more--aside .article__footer {
+    margin-top: 8px;
+    /* Patch: we make this margin smaller than it is by default */
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .article--actions+.article--view-more--aside {
+        margin-top: 0;
+        /* Patch: Because the .article--actions gets a fixed position, the .article--view-more--aside should behave as a first-child and have not upper margin. */
+
+    }
+
+    .article--view-more--aside {
+        /* var(--color--brandeable--3) */
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    .article--view-more--aside .article__footer .link {
+        font-size: 14px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .article--view-more--aside {
+        margin-left: -16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+        margin-right: -16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        width: calc(100% + 16px + 16px);
+        /* 100% + var(--main__wrapper--padding-right--mobile) + var(--main__wrapper--padding-left--mobile) */
+        padding-right: 16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        padding-left: 16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .article--view-more--aside {
+        margin-left: -32px;
+        /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+        margin-right: -32px;
+        /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        width: calc(100% + 32px + 32px);
+        /* 100% + var(--main__wrapper--padding-right--tablet-and-desktop) + var(--main__wrapper--padding-left--tablet-and-desktop) */
+        padding-right: 32px;
+        /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-left: 32px;
+        /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+}
+
+/* VIEW MORE IN SECTION: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifier we style the article showing more records when it is placed in the maIN SECTION (Success pages).
+ */
+
+.article--view-more--content {
+    text-align: left;
+    /* Patch: we restore the left text alignment in Success pages, that have centered text alignment */
+}
+
+.article--view-more--content .article__header {
+    /* Patch: we change the .article__header default flex vertical align, as the .link in .article__header__actions it's in a smaller text relative to the .article__title and it looks weird */
+    -webkit-box-align: baseline;
+    -webkit-align-items: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+}
+
+.article--view-more--content .article__header__text {
+    /* Patch: we change the .article__header__text default grow, as the .link in .article__header__actions needs to be right next to the .article__title */
+    -webkit-box-flex: initial;
+    -webkit-flex: initial;
+    -ms-flex-positive: initial;
+    flex-grow: initial;
+}
+
+/* VIEW MORE: INFO ORGANIZATION LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .list modifier we style the list of more records, either it's placed in the right sidebar (Detail pages) or in the maIN SECTION (Success pages).
+ */
+
+.list--view-more a {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 8px 0;
+}
+
+.list--view-more .list__item__image {
+    flex-shrink: 0;
+    width: 34px;
+    margin-right: 8px;
+}
+
+.list--view-more .list__item__image img {
+    display: block;
+    border-radius: 100%;
+}
+
+.list--view-more .list__item__text {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 100%;
+    padding-top: 3px;
+}
+
+.list--view-more .list__item__image+.list__item__text {
+    width: calc(100% - 42px);
+}
+
+.list--view-more .list__item__text__title {
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list--view-more .list__item__text__title,
+.list--view-more .list__item:hover .list__item__text__title {
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+.list--view-more .list__item__text__subtitle {
+    padding-top: 4px;
+    font-size: 14px;
+    color: #565656;
+    /* var(--color--text--2) */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list--view-more .list__item__text__rating {
+    padding-top: 3px;
+}
+
+.list--view-more .list__item__text__extra {
+    padding-top: 3px;
+    font-size: 12px;
+    color: #9B9B9B;
+}
+
+/* STEPS BAR: INFO ORGANIZATION LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .list modifier we style the list of steps in a steps bar.
+ */
+
+.list--steps {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.list--steps:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    border-radius: 2px;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    width: 100%;
+}
+
+.list--steps .list__item {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.list--steps .list__item--current {
+    color: #202020;
+}
+
+.list--steps .list__item--filled {
+    color: #202020;
+}
+
+.list--steps .list__item .list__item__text:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    border-radius: 2px;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    border-bottom-color: #666666;
+    /* var(--color--brandeable--1) */
+    width: 0;
+}
+
+.list--steps .list__item--filled .list__item__text:after {
+    width: 100%;
+}
+
+.list--steps .list__item__text__title {
+    text-transform: uppercase;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .list--steps .list__item .list__item__text {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .list--steps .list__item--current .list__item__text:after {
+        width: 100%;
+    }
+
+    .list--steps .list__item__text__title {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        font-size: 14px;
+    }
+
+    .list--steps .list__item__text__subtitle {
+        font-size: 14px;
+    }
+
+    .list--steps .list__item:not(.list__item--current) {
+        display: none;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .list--steps .list__item--current .list__item__text:after {
+        width: 50%;
+    }
+
+    .list--steps .list__item__text__title {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .list--steps .list__item__text__subtitle {
+        position: relative;
+        z-index: 3;
+        margin: 8px auto -8px;
+        border-radius: 100%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #FFFFFF;
+        width: 24px;
+        height: 24px;
+        background-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 500;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    .list--steps .list__item--current .list__item__text__subtitle {
+        background-color: #666666;
+        /* var(--color--brandeable--1) */
+    }
+
+    .list--steps .list__item--filled .list__item__text__subtitle {
+        background-color: #666666;
+        /* var(--color--brandeable--1) */
+    }
+
+}
+
+/* REG/APP METHODS: SECTION LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .section modifiers we style the sections in a Methods page.
+ */
+
+.section--registered .section__header,
+.section--methods .section__header {
+    text-align: center;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .section--registered {
+        margin-top: 32px;
+    }
+
+    .section--registered .section__header__text__title,
+    .section--methods .section__header__text__title {
+        font-size: 22px;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+
+    .section--registered,
+    .section--methods {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 720px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+
+    .section--registered,
+    .section--methods {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 746px;
+    }
+
+}
+
+/* REG/APP METHODS: ARTICLE LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .article modifiers we style the articles in a Methods page.
+ */
+
+.article--registered .article__content+.article__content {
+    margin-top: 54px;
+    /* Patch: we give here way more space than the default */
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .article--registered {
+        background-color: #B4B8BB;
+        /* var(--color--brandeable--3) */
+        margin-left: -16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+        margin-right: -16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        width: calc(100% + 16px + 16px);
+        /* 100% + var(--main__wrapper--padding-right--mobile) + var(--main__wrapper--padding-left--mobile) */
+        padding-top: 20px;
+        padding-right: 16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        padding-bottom: 32px;
+        padding-left: 16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+    .article--methods {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 230px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .article--methods .article__content:first-of-type {
+        margin-right: -34px;
+        margin-left: -34px;
+    }
+
+}
+
+/* REG/APP METHODS: FORM LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .form modifier we style the form in a Methods page.
+ */
+
+.form--methods .tpt_uploadResumeError {
+    display: none;
+}
+
+.form--methods .tpt_uploadResumeNextButton.tpt_uploadResumeNextButtonInactive {
+    display: none;
+}
+
+.form--methods div[class*="fieldSpec"] .selectedFile {
+    display: block;
+    padding-top: 4px;
+    clear: both;
+}
+
+.form--methods div[class*="fieldSpec"] .selectedFile span {
+    font-size: 14px;
+    line-height: 150%;
+    font-style: italic;
+    word-break: break-all;
+}
+
+.form--methods div[class*="fieldSpec"] .selectedFile .button {
+    margin-left: 16px;
+}
+
+/* SUBMIT NEW: FORM LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .form modifier we style from the "outside" the form with a select that gets printed with {{ jobTemplateWidget(X)|raw }} in the From Template .article.
+ */
+
+.form--submit-new-template form:before,
+.form--submit-new-template form:after {
+    content: "";
+    /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    display: table;
+    /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.form--submit-new-template form:after {
+    clear: both;
+    /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.form--submit-new-template select {
+    margin-bottom: 24px;
+    /* var(--fieldSpec--padding-bottom) + 8px */
+}
+
+.form--submit-new-template button {
+    float: left;
+}
+
+.form--submit-new-template #jobTemplateWidgetDescription {
+    display: none;
+    clear: both;
+    padding-top: 8px;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.form--submit-new-template #jobTemplateWidgetDescription:empty {
+    display: none;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .form--submit-new-template button {
+        width: 100%;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .form--submit-new-template button {
+        width: calc(50% - 12px);
+        /* 50% - 0.5 * var(--grid--gutters--24) */
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .form--submit-new-template button {
+        min-width: 120px;
+    }
+
+}
+
+/* SUCCESS: SECTION LEVEL
+   ========================================================================== */
+
+/*!
+ * With this .section modifier we style the Success pages.
+ */
+
+.section--success .section__header__image img {
+    border-radius: 0;
+    max-width: 223px;
+}
+
+.section--success .section__header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+}
+
+.section--success .section__header__text__title {
+    font-weight: 400;
+}
+
+.section--success .section__header__text__title+.section__header__text__title {
+    margin-top: 8px;
+}
+
+.section--success .section__header__image {
+    margin-bottom: 24px;
+    margin-right: 0;
+    width: 100%;
+}
+
+.section--success .section__content {
+    text-align: center;
+}

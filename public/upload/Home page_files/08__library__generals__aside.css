@@ -1,0 +1,277 @@
+/* ==========================================================================
+   08_GENERALS: ASIDE
+   ==========================================================================
+   * README
+
+   * ASIDE
+   * EXTRA PANEL FROM SIDE
+   * EXTRA PANEL FROM MODAL
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Aside default styles.
+ * That means they apply to the HTML you can find first thing inside
+ * {% block aside %}{% endblock %}, and therefore, they apply only to the pages
+ * that display this block.
+
+ * If you need to deal with an exception to these Aside default styles, you
+ * should manage it by adding a .aside--modifier class to the .aside element
+ * and develop the given exception nested to this .aside--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Aside component or a new
+ * sub-element for an existing one, you should develop them in this stylesheet,
+ * under a new component subtitle or under the correspondent one accordingly.
+ */
+
+/* ASIDE
+   ========================================================================== */
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .aside {
+        position: relative;
+        z-index: 1;
+        overflow-x: hidden;
+        height: 100%;
+    }
+
+    .body--aside-fixed-on-scroll .aside {
+        position: fixed;
+        width: calc(284px + 32px); /* var(--aside--width--desktop) + var(--main__wrapper--padding-right--tablet-and-desktop) */
+        height: auto;
+        padding-right: 32px; /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-bottom: 32px; /* var(--main__wrapper--padding-bottom--tablet-and-desktop) */
+    }
+
+}
+
+/* ASIDE: ACTIONS
+   ========================================================================== */
+.aside .article--actions .button-bar,
+.aside .article--actions .button-bar .button:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .aside .article--actions {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 4;
+        -webkit-box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+        box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+        width: 100vw;
+        min-height: 88px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        background-color: #FFFFFF;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .aside .article--actions {
+        padding-right: 26px; /* var(--main__wrapper--padding-right--mobile) */
+        padding-left: 16px; /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .aside .article--actions {
+        padding-right: 32px; /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-left: 32px; /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .aside .article--actions {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: space-between;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: space-between;
+        justify-content: space-between;
+    }
+
+    .aside .article--actions .button-bar {
+        text-align: center;
+    }
+
+    .aside .article--actions .button-bar .button {
+        /*float: left !important;*/
+        margin-bottom: 0 !important;
+        width: auto;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    .aside .article--actions .button-bar button + button,
+    .aside .article--actions .button-bar input[type="submit"] + input[type="submit"],
+    .aside .article--actions .button-bar .button + .button {
+        margin-left: 16px;
+    }
+
+    .aside .article--actions .alert {
+        margin-bottom: 0;
+    }
+
+    .aside .article--actions .article__content:nth-of-type(2) {
+        margin-top: 0;
+    }
+
+}
+
+/* SIDETABS
+   ========================================================================== */
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .body--aside-fixed-on-scroll .grid__item--subtabs .aside {
+        width: 207px;
+        padding-right: 0;
+    }
+
+}
+
+/* EXTRA PANEL FROM SIDE
+   ========================================================================== */
+.body--extra-panel-from-side #extra-panel {
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    z-index: 5;
+    background-color: #FFFFFF;
+    visibility: hidden;
+    overflow: hidden;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.body--extra-panel-from-side.body--extra-panel-from-side__open #extra-panel {
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    visibility: visible;
+    overflow-y: auto;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .body--extra-panel-from-side.body--extra-panel-from-side__open {
+        overflow: hidden;
+    }
+
+    .body--extra-panel-from-side #extra-panel {
+        position: fixed;
+        width: 100vw;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .body--extra-panel-from-side.body--extra-panel-from-side__open #extra-panel {
+        left: 0;
+    }
+
+    .body--extra-panel-from-side #extra-panel .form {
+        max-width: 323px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .body--extra-panel-from-side #extra-panel {
+        padding-right: 16px; /* var(--main__wrapper--padding-right--mobile) */
+        padding-left: 16px; /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+    .body--extra-panel-from-side.body--header-fixed-on-scroll #extra-panel {
+        top: 60px; /* This is the .header height */
+        padding-top: 16px; /* var(--main__wrapper--padding-top--mobile) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .body--extra-panel-from-side #extra-panel {
+        padding-right: 32px; /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-left: 32px; /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+    .body--extra-panel-from-side.body--header-fixed-on-scroll #extra-panel {
+        padding-top: 32px; /* var(--main__wrapper--padding-top--tablet-and-desktop) */
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .body--extra-panel-from-side #extra-panel {
+        position: absolute;
+        width: calc(284px + 32px + 32px); /* var(--aside--width--desktop) + var(--main__wrapper--padding-right--tablet-and-desktop) + var(--main__wrapper--padding-left--tablet-and-desktop) */
+        padding-top: 0;
+        padding-right: 32px; /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-bottom: 32px; /* var(--main__wrapper--padding-bottom--tablet-and-desktop) */
+        padding-left: 32px; /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+    .body--extra-panel-from-side.body--extra-panel-from-side__open .aside {
+        overflow: hidden;
+    }
+
+    .body--extra-panel-from-side.body--extra-panel-from-side__open #extra-panel {
+        left: -32px; /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+}
+
+/* EXTRA PANEL FROM MODAL
+   ========================================================================== */
+.body--extra-panel-from-modal #extra-panel {
+    display: none;
+    transform: scale(.95);
+    opacity: .2;
+    transition: all 150ms ease-in-out;
+}
+
+.body--extra-panel-from-modal.body--extra-panel-from-modal__open #extra-panel.showing {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 150ms ease-in-out;
+}
+
+.body--extra-panel-from-modal #extra-panel .form {
+    max-width: 460px;
+}
+
+.body--extra-panel-from-modal #main-panel {
+    transition: all 150ms ease-in-out;
+}
+
+.body--extra-panel-from-modal #main-panel.hidden {
+    display: none;
+}
+
+.body--extra-panel-from-modal.body--extra-panel-from-modal__open #main-panel {
+    transform: scale(.95);
+    opacity: .2;
+}

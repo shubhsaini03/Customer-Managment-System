@@ -1,0 +1,485 @@
+/* ==========================================================================
+   03_GENERALS: SITE
+   --------------------------------------------------------------------------
+   * README
+
+   * DOCUMENT
+   * HEADER
+   * HEADER FIXED ON SCROLL
+   * BANNER
+   * BANNER FIXED ON SCROLL
+   * MAIN
+   * FOOTER
+   * FOOTER STICKY
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Site default styles.
+ * That means they apply to the HTML components you can find in the
+ * BaseTemplate.nopage file, and therefore, they apply to all site pages.
+
+ * If you need to deal with an exception to these Site default styles, you
+ * should manage it by adding a .body--modifier class via
+ * {% block extraBodyClass %}{% endblock %} in the .page file that requires it,
+ * and develop the given exception nested to that body modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Site component or a new
+ * sub-element for an existing one, you should develop them in this stylesheet,
+ * under a new component subtitle or under the correspondent one accordingly.
+ */
+
+/*FONT DEFINITION*/
+
+/* Gotham Book - latin */
+@font-face {
+    font-family: 'GothamBook';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Gotham-Book_Web.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* Gotham Book - latin */
+@font-face {
+    font-family: 'GothamUltraItalic';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/Gotham-UltraItalic_Web.woff') format('woff');
+}
+
+/* Gotham Black - latin */
+@font-face {
+    font-family: 'GothamBlack';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/Gotham-Black_Web.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* DOCUMENT
+   ========================================================================== */
+.body {
+    margin: 0 auto;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    font-family: 'GothamBook', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: normal;
+    font-weight: 400;
+    font-style: normal;
+    color: #1B1B1B;
+    overflow-x: hidden;
+}
+
+[class*="__wrapper"] {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1272px;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    [class*="__wrapper"] {
+        padding-right: 16px;
+        /* var(--main__wrapper--padding-right--mobile) */
+        padding-left: 16px;
+        /* var(--main__wrapper--padding-left--mobile) */
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    [class*="__wrapper"] {
+        padding-right: 32px;
+        /* var(--main__wrapper--padding-right--tablet-and-desktop) */
+        padding-left: 32px;
+        /* var(--main__wrapper--padding-left--tablet-and-desktop) */
+    }
+
+}
+
+/* HEADER
+   ========================================================================== */
+.header {
+    margin: 0 auto;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #666666;
+    /* var(--color--text--1) */
+    position: relative;
+}
+
+.header__wrapper {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (max-width:1024px) {
+    .header__wrapper {
+        padding-top: 42px;
+        padding-bottom: 42px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .header__wrapper {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+}
+
+.header__logo {
+    display: block;
+    float: left;
+    width: 200px;
+    height: 36px;
+    background-image: var(--KHColourLogo--background--image);
+    background-position: left center;
+    -webkit-background-size: contain;
+    background-size: contain;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .header__logo {
+        width: 140px;
+    }
+}
+
+/* HEADER FIXED ON SCROLL
+   ========================================================================== */
+.body--header-fixed-on-scroll .body__content {
+    /* padding-top: (the .header height value will be set as part of this element inline padding-top via JS) */
+}
+
+.body--header-fixed-on-scroll .header {
+    position: fixed;
+    top: 0;
+    z-index: 9;
+}
+
+.body--header-fixed-on-scroll .header--scrolling {
+    -webkit-box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+    box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+}
+
+/* BANNER: MAIN
+   ========================================================================== */
+.banner {
+    margin: 0 auto;
+    width: 100%;
+
+    /* var(--color--brandeable--3) */
+    color: #1B1B1B;
+    /* var(--color--text--1) */
+}
+
+.banner--main {
+    background: var(--lightblue-pattern--background--image) no-repeat center;
+}
+
+.banner__wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.banner__image {
+    margin-right: 12px;
+}
+
+.banner__image img {
+    display: block;
+    border-radius: 100%;
+    border: 2px solid #FFFFFF;
+}
+
+.banner__text__title {
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.banner__text__subtitle {
+    text-transform: uppercase;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .banner__image {
+        width: 46px;
+    }
+
+    .banner__text__subtitle {
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .banner--main {
+        height: auto;
+        min-height: 70px;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    .banner__text__title {
+        font-size: 28px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .banner__text__title br {
+        display: none;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .banner--main {
+        height: 95px;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    .banner__text__title {
+        font-size: 34px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .banner--main {
+        height: 250px;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    .banner__image {
+        width: 68px;
+    }
+
+    .banner__text__title {
+        font-size: 36px;
+    }
+
+}
+
+/* BANNER FIXED ON SCROLL
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   To be used only in combination with .body--header-fixed-on-scroll
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .body--banner-fixed-on-scroll .body__content {
+        /* padding-top: (the .banner height value will be set as part of this element inline padding-top via JS) */
+    }
+
+    .body--banner-fixed-on-scroll .banner--main {
+        position: fixed;
+        /* top: (the .header height value will be set as this element inline top via JS) */
+        z-index: 8;
+        /* max-height: (this element height will be overrided with a scroll-changing inline max-height set via JS) */
+    }
+
+    .body--banner-fixed-on-scroll .banner--main.banner--scrolling .banner__wrapper {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main .banner__image {
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main.banner--scrolling .banner__image {
+        width: 46px;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main .banner__text__title {
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main.banner--scrolling .banner__text__title {
+        font-size: 28px;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main .banner__text__subtitle {
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .body--banner-fixed-on-scroll .banner--main.banner--scrolling .banner__text__subtitle {
+        font-size: 12px;
+    }
+
+}
+
+/* MAIN
+   ========================================================================== */
+.main {
+    margin: 0 auto;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #1B1B1B;
+    padding-top: 0;
+    /* var(--color--text--1) */
+}
+
+.main__wrapper {
+    height: 100%;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .main__wrapper {
+        padding-top: 0px;
+        /* var(--main__wrapper--padding-top--mobile) */
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .main__wrapper {
+
+        /* var(--main__wrapper--padding-top--tablet-and-desktop) */
+    }
+
+}
+
+/* FOOTER
+   ========================================================================== */
+.footer {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    margin: 0 auto;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #A1A1A1;
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.footer .link {
+    color: inherit;
+}
+
+.footer__langs .link+.link {
+    margin-left: 16px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .footer {
+        text-align: center;
+    }
+
+    .footer__rights .footer__rights__links {
+        display: none;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .footer__wrapper {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .footer__rights .footer__rights__copy {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .footer__wrapper {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    .footer__rights {
+        float: left;
+    }
+
+    .footer__langs {
+        float: right;
+    }
+
+}
+
+/* FOOTER STICKY
+   ========================================================================== */
+.body--footer-sticky .body__content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body--footer-sticky.body--IE {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.body--footer-sticky .main {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.body--footer-sticky .footer {
+    flex-shrink: 0;
+}
+

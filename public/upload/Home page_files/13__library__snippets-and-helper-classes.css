@@ -1,0 +1,1337 @@
+/* ==========================================================================
+   13_SNIPPETS AND HELPER CLASSES
+   --------------------------------------------------------------------------
+   * README
+
+   * MODIFICATOR SUFFIX: --BOXED
+   * MODIFICATOR SUFFIX: --HR-TOP
+   * MODIFICATOR SUFFIX: --HR-BOTTOM
+   * MODIFICATOR SUFFIX: --SEMI-NARROW
+   * MODIFICATOR SUFFIX: --NARROW
+   * MODIFICATOR SUFFIX: --NARROWER
+
+   * HELPER CLASSES: CLEARING
+   * HELPER CLASSES: MARGINS AND PADDINGS
+   * HELPER CLASSES: VISIBILITY
+
+   * TEXT: ELLIPSIS
+   * TEXT: LINK LIKE
+   * TEXT: PARAGRAPH
+
+   * ACCORDION: SECTION AND/OR ARTICLE LEVEL
+
+   * SNIPPET: ALERTS
+   * SNIPPET: DROPDOWN LIKE
+   * SNIPPET: MESSAGE BOX
+   * SNIPPET: PAGE BUSY
+   * SNIPPET: PARTIAL SAVE
+   * SNIPPET: PRELOADER
+   * SNIPPET: POP-UP ON HOVER
+   * SNIPPET: RATING STARS
+   * SNIPPET: SWITCHER
+   * SNIPPET: VERTICAL CENTERING
+   * SNIPPET: VIDEO EMBEDDING
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * X
+ */
+
+/* MODIFICATOR SUFFIX: --BOXED
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   --boxed modificator suffix > to add a solid box appareance to any element,
+   usually a first level element (.section or .article) It does not include a
+   padding, as it tends to not always be the same, so it's better to define it
+   in every case.
+   --------------------------------------------------------------------------
+
+    <div class="X X--boxed"></div>
+
+   -------------------------------------------------------------------------- */
+
+[class*="--boxed"] {
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background-color: #FFFFFF;
+}
+
+/* MODIFICATOR SUFFIX: --HR-TOP
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   to add even space and a divisory line from the previous/next element
+   --------------------------------------------------------------------------
+
+    <div class="X X--hr-top"></div>
+
+   -------------------------------------------------------------------------- */
+
+[class*="--hr-top"] {
+    margin-top: 24px !important;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding-top: 24px;
+}
+
+/* MODIFICATOR SUFFIX: --HR-BOTTOM
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   to add even space and a divisory line from the previous/next element
+   --------------------------------------------------------------------------
+
+    <div class="X X--hr-bottom"></div>
+
+   -------------------------------------------------------------------------- */
+
+[class*="--hr-bottom"] {
+    margin-bottom: 24px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    padding-bottom: 24px;
+}
+
+/* MODIFICATOR SUFFIX: --SEMI-NARROW
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   to limit the width of any block element and center it in the available space.
+   --------------------------------------------------------------------------
+
+    <div class="X X--narrow"></div>
+
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    [class*="--semi-narrow"] {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 720px;
+    }
+
+}
+
+/* MODIFICATOR SUFFIX: --NARROW
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   to limit the width of any block element and center it in the available space.
+   --------------------------------------------------------------------------
+
+    <div class="X X--narrow"></div>
+
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    [class*="--narrow"] {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 592px;
+    }
+
+}
+
+/* MODIFICATOR SUFFIX: --NARROWER
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   to limit the width of any block element and center it in the available space.
+   --------------------------------------------------------------------------
+
+    <div class="X X--narrower"></div>
+
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    [class*="--narrower"] {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 300px;
+    }
+
+}
+
+/* HELPER CLASSES: CLEARING
+   ========================================================================== */
+.clear {
+    clear: both;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    /* The space content is one way to avoid an Opera bug when the `contenteditable` attribute is included anywhere else in the document. Otherwise it causes space to appear at the top and bottom of elements that receive the `clearfix` class. */
+    display: table;
+    /* The use of `table` rather than `block` is only necessary if using `:before` to contain the top-margins of child elements. */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* HELPER CLASSES: VISIBILITY
+   ========================================================================== */
+
+/*!
+ * Hide/show visually and from screen readers
+ */
+
+.visibility--hidden {
+    display: none !important;
+}
+
+.visibility--visible {
+    display: block !important;
+}
+
+/* Media query to target mobile and desktop */
+@media all and (max-width:750px) and (min-width:1025px) {
+    .visibility--only-tablet {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .visibility--only-desktop {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .visibility--tablet-and-desktop {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .visibility--only-mobile {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .visibility--mobile-and-desktop {
+        display: none !important;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .visibility--mobile-and-tablet {
+        display: none !important;
+    }
+
+}
+
+/*!
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+.visibility--visually-hidden,
+.screenReaderVisibility {
+    border: 0;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+    /* For long content, line feeds are not interpreted as spaces and small width causes content to wrap 1 word per line: https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe */
+}
+
+/*!
+ * Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: https://www.drupal.org/node/897638
+ */
+.visibility--visually-hidden.focusable:active,
+.visibility--visually-hidden.focusable:focus {
+    clip: auto;
+    -webkit-clip-path: none;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    white-space: inherit;
+}
+
+/*!
+ * Hide visually and from screen readers, but maintain layout
+ */
+.visibility--invisible {
+    visibility: hidden;
+}
+
+/* TEXT: ELLIPSIS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation. Mention the width setting.
+   --------------------------------------------------------------------------
+
+    <span class="ellipsis"></span>
+
+   -------------------------------------------------------------------------- */
+
+.ellipsis {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* TEXT: LINK LIKE
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <a class="link" href="X"></a>
+
+   -------------------------------------------------------------------------- */
+
+.link {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-bottom: 6px;
+    text-decoration: none;
+    word-break: normal;
+    color: #1b1b1b;
+    /* var(--color--clickable) */
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/* TEXT: PARAGRAPH
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation. Mention the reset.
+   --------------------------------------------------------------------------
+
+    <p class="paragraph"></p>
+
+   -------------------------------------------------------------------------- */
+
+.paragraph {
+    padding-bottom: 8px;
+    line-height: 150%;
+}
+
+:not(.fluid-cols)>.paragraph:last-of-type {
+    padding-bottom: 0;
+}
+
+/* ACCORDION: SECTION AND/OR ARTICLE LEVEL
+   ========================================================================== */
+[class*="--accordion"] {
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background-color: #FFFFFF;
+}
+
+[class*="--accordion"]>[class*="__header"] {
+    position: relative;
+}
+
+[class*="--accordion"]>[class*="__header"]>[class*="__header__toggle"] {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+[class*="--accordion"]>[class*="__header"]>[class*="__header__toggle"]:before {
+    content: "\f107";
+    font: normal normal normal 24px/24px FontAwesome;
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+[class*="--accordion"][class*="--accordion__open"] [class*="__header"]>[class*="__header__toggle"]:before {
+    content: "\f106";
+}
+
+[class*="--accordion"]>[class*="__header"]+* {
+    margin-top: 0;
+}
+
+[class*="--accordion"]>[class*="__content"] {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+[class*="--accordion"]>[class*="__content"]>[class*="__content__module"] {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+[class*="--accordion"]>[class*="__content"]>[class*="__content__module"]:nth-of-type(n+2) {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+[class*="--accordion"]>[class*="__footer"] {
+    margin-top: 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    [class*="--accordion"]>[class*="__header"]>[class*="__header__toggle"] {
+        display: block;
+    }
+
+    [class*="--accordion"]:not([class*="--accordion__open"])>[class*="__content"] {
+        display: none;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    [class*="--accordion-always"]>[class*="__header"]>[class*="__header__toggle"] {
+        display: block;
+    }
+
+    [class*="--accordion-always"]:not([class*="--accordion__open"])>[class*="__content"] {
+        display: none;
+    }
+
+}
+
+/* ACCORDION: SECTION LEVEL
+   ========================================================================== */
+.section--accordion {
+    padding-top: 8px;
+}
+
+.section--accordion>.section__header {
+    min-height: 50px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.section--accordion>.section__footer .button--secondary {
+    min-width: 140px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .section--accordion {
+        padding-left: 16px;
+        padding-bottom: 16px;
+        padding-right: 16px;
+    }
+
+    .section--accordion>.section__header {
+        padding-right: 40px;
+    }
+
+    .section--accordion>.section__header>.section__header__toggle {
+        right: -16px;
+        width: 48px;
+    }
+
+    .section--accordion>.section__footer {
+        padding-top: 16px;
+    }
+
+    .section--accordion>.section__footer .button:nth-of-type(odd) {
+        float: left;
+        clear: both;
+    }
+
+    .section--accordion>.section__footer .button:nth-of-type(even) {
+        float: right;
+        margin-left: 0;
+    }
+
+    .section--accordion>.section__footer .button--link {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .section--accordion {
+        padding-left: 24px;
+        padding-bottom: 20px;
+        padding-right: 24px;
+    }
+
+    .section--accordion[class*="--accordion-always"]>.section__header {
+        padding-right: 40px;
+    }
+
+    .section--accordion[class*="--accordion-always"]>.section__header>.section__header__toggle {
+        right: -16px;
+        width: 48px;
+    }
+
+    .section--accordion>.section__footer {
+        padding-top: 20px;
+    }
+
+}
+
+/* ACCORDION: ARTICLE LEVEL
+   ========================================================================== */
+.article--accordion>.article__header {
+    min-height: 68px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.article--accordion>.article__header>.article__header__text>.article__header__text__title {
+    line-height: 135%;
+    font-weight: 500;
+}
+
+.article--accordion>.article__footer {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .article--accordion>.article__header>.article__header__text>.article__header__text__title {
+        font-size: 18px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .article--accordion>.article__header {
+        padding-left: 16px;
+        padding-right: 64px;
+    }
+
+    .article--accordion>.article__header>.article__header__toggle {
+        right: 0;
+        width: 48px;
+    }
+
+    .article--accordion>.article__content>.article__content__module {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .article--accordion>.article__footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .article--accordion>.article__header {
+        padding-left: 24px;
+    }
+
+    .article--accordion>.article__content>.article__content__module {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .article--accordion>.article__footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .article--accordion>.article__header {
+        padding-right: 80px;
+    }
+
+    .article--accordion>.article__header>.article__header__toggle {
+        right: 0;
+        width: 64px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .article--accordion>.article__header {
+        padding-right: 24px;
+    }
+
+    .article--accordion[class*="--accordion-always"]>.article__header {
+        padding-right: 80px;
+    }
+
+    .article--accordion[class*="--accordion-always"]>.article__header>.article__header__toggle {
+        right: 0;
+        width: 64px;
+    }
+
+    .article--accordion>.article__header>.article__header__text>.article__header__text__title {
+        font-size: 22px;
+    }
+
+}
+
+/* SNIPPET: ALERTS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    {% if X %}
+        <div class="alert alert--X">{{ X }}</div>
+    {% endif %}
+
+   -------------------------------------------------------------------------- */
+
+.alert {
+    margin-bottom: 20px;
+    border-left-width: 8px;
+    border-left-style: solid;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 150%;
+    font-weight: 500;
+}
+
+.alert--error {
+    border-left-color: #BC2828;
+    /* var(--color--error) */
+    background-color: #FFE5E5;
+}
+
+.alert--info {
+    border-left-color: #666666;
+    /* var(--color--brandeable--1) */
+    background-color: #D8D8D8;
+    /* var(--color--brandeable--2) */
+}
+
+.alert--warning {
+    border-left-color: #F1BE32;
+    background-color: #FCF6EA;
+}
+
+/* SNIPPET: DROPDOWN: GENERAL
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <div class="dropdown">
+        <a class="dropdown__placeholder" href="#" role="button" aria-haspopup="true" aria-expanded="false">X</a>
+
+        <ul class="dropdown__list">
+            <li class="dropdown__list__item">X</li>
+
+            <li class="dropdown__list__item">X</li>
+        </ul>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    line-height: normal;
+    font-weight: 400;
+}
+
+.dropdown--open {
+    z-index: 2;
+}
+
+.dropdown__placeholder {
+    position: relative;
+    z-index: 3;
+    display: block;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    background-color: #FFFFFF;
+    padding: 15px;
+    white-space: nowrap;
+    font-family: 'GothamBook', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.dropdown__placeholder:hover {
+    color: #666666;
+    /* var(--color--brandeable--1) */
+}
+
+.dropdown__placeholder:focus {
+    color: #D8D8D8;
+    /* var(--color--brandeable--2) */
+}
+
+.dropdown--open .dropdown__placeholder {
+    border-radius: 5px 5px 0 0;
+}
+
+.dropdown__placeholder:before {
+    content: "";
+    background: var(--icon--chevron--background--image) no-repeat center;
+    background-size: 13px;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: calc(50% - 6px);
+    right: 13px;
+}
+
+.dropdown__list {
+    display: none;
+    position: absolute;
+    top: calc(100% - 1px);
+    right: -9999px;
+    z-index: 2;
+    border-radius: 0 0 5px 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    width: auto;
+    min-width: 100%;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+.dropdown--open .dropdown__list {
+    display: block;
+    right: 0;
+}
+
+.dropdown__list__item a {
+    display: block;
+    padding: 6px 10px;
+}
+
+.dropdown__list__item+.dropdown__list__item {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.dropdown:hover .dropdown__list__item:hover a {
+    background-color: #666666;
+    /* var(--color--brandeable--1) */
+    color: #FFFFFF;
+}
+
+.dropdown__list__item--active a {
+    color: #666666;
+    /* var(--color--brandeable--1) */
+    cursor: default;
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .dropdown:hover {
+        z-index: 2;
+    }
+
+    .dropdown:hover .dropdown__placeholder {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .dropdown__list {
+        margin-bottom: 8px;
+    }
+
+    .dropdown:hover .dropdown__list {
+        display: block;
+        right: 0;
+    }
+
+}
+
+/* SNIPPET: DROPDOWN: IN SORT
+   ========================================================================== */
+.list-controls__sort .dropdown--open .dropdown__placeholder {
+    border-bottom-color: #FFFFFF;
+}
+
+.list-controls__sort .dropdown__list {
+    border-radius: 5px 0 5px 5px;
+    min-width: calc(100% + 5px);
+    max-width: none;
+}
+
+.list-controls__sort .dropdown__list .sort__item {
+    position: relative;
+    padding: 12px 10px 12px 20px;
+    white-space: nowrap;
+}
+
+/* Modifier only for records per page dropdown */
+.list-controls__sort .dropdown__list .sort__item--recordsPerPage span,
+.list-controls__sort .dropdown__list .sort__item--recordsPerPage span a {
+    display: block;
+}
+
+.list-controls__sort .dropdown:hover .dropdown__list .sort__item:hover {
+    color: #666666;
+    /* var(--color--brandeable--1) */
+}
+
+.list-controls__sort .dropdown__list .sort__item--active {
+    color: #666666;
+    /* var(--color--brandeable--1) */
+    cursor: default;
+}
+
+.list-controls__sort .dropdown__list .sort__item__icon {
+    position: absolute;
+    left: 4px;
+    line-height: inherit;
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .list-controls__sort .dropdown:hover .dropdown__placeholder {
+        border-bottom-color: #FFFFFF;
+    }
+
+}
+
+/* SNIPPET: DROPDOWN: IN ASIDE
+   ========================================================================== */
+.aside .article--actions .dropdown {
+    width: 100%;
+}
+
+.aside .article--actions .dropdown__placeholder {
+    padding: 11px 20px 11px 10px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .aside .article--actions .dropdown--open .dropdown__placeholder {
+        border-radius: 0 0 5px 5px;
+    }
+
+    .aside .article--actions .dropdown__list {
+        top: auto;
+        bottom: calc(100% - 1px);
+        border-radius: 5px 5px 0 0;
+    }
+
+}
+
+/* SNIPPET: DROPDOWN: IN TABLES
+   ========================================================================== */
+.table .dropdown {
+    min-width: 150px;
+    letter-spacing: -0.20px;
+    word-spacing: -0.20px;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .table .dropdown {
+        width: 100%;
+    }
+
+}
+
+.table .dropdown__placeholder {
+    padding: 6px 16px 6px 8px;
+}
+
+.table .dropdown__list__item a {
+    padding: 6px 8px;
+}
+
+/* SNIPPET: MESSAGE BOX
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    {% if X %}
+        <div class="message message--X">{{ X }}</div>
+    {% endif %}
+
+   -------------------------------------------------------------------------- */
+
+.message {
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    border-left-width: 8px;
+    border-left-style: solid;
+    background-color: #FFFFFF;
+    padding: 16px;
+}
+
+.message--error {
+    border-left-color: #BC2828;
+    /* var(--color--error) */
+}
+
+.message--info {
+    border-left-color: #666666;
+    /* var(--color--brandeable--1) */
+}
+
+.message--warning {
+    border-left-color: #F1BE32;
+}
+
+/* SNIPPET: PAGE BUSY
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation. Mention JS.
+   --------------------------------------------------------------------------
+
+    <body class="X tpt_pageBusy">
+        [...]
+    </body>
+
+   -------------------------------------------------------------------------- */
+
+.tpt_pageBusy,
+.tpt_pageBusy input,
+.tpt_pageBusy button,
+.tpt_pageBusy a {
+    cursor: wait;
+}
+
+/* SNIPPET: PARTIAL SAVE
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <div class="partially-saved">
+        <span class="partially-saved__dot"></span>
+    </div>
+
+   -------------------------------------------------------------------------- */
+.partially-saved {
+    position: relative;
+}
+
+.partially-saved:hover {
+    background-color: #FCF6EA;
+}
+
+.partially-saved__bar {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background-color: #F1BE32;
+}
+
+/* SNIPPET: PRELOADER
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation. Clean JS.
+   --------------------------------------------------------------------------
+
+    <div class="will-load-content awaiting-content"></div>
+
+    <script>
+        tpt.queue.add(
+            function () {
+                "use strict";
+                (function ($) {
+                    $.get(
+                        "{{ url|raw }}",
+                        function (data) {
+                            $('{{ selector }}').append(data).removeClass('awaiting-content');
+                            tpt.queue.next();
+                        }
+                    );
+                }($ || avajQuery));
+            }
+        );
+    </script>
+
+   -------------------------------------------------------------------------- */
+
+.will-load-content {
+    background-position: center center;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.will-load-content.awaiting-content {
+    background-image: var(--loading--background--image);
+}
+
+/* SNIPPET: POP-UP ON HOVER
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <div class="popup-on-hover">
+        <a class="popup-on-hover__link">X</a>
+
+        <div class="popup-on-hover__popup">
+            [...]
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.popup-on-hover {
+    display: inline;
+    position: relative;
+}
+
+.popup-on-hover__link {
+    font-weight: 500;
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+.popup-on-hover__popup {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    left: -9999px;
+    padding-top: 20px;
+    font-weight: normal;
+}
+
+.popup-on-hover:hover:before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 12px);
+    top: calc(100% + 10px);
+    display: block;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom-width: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.popup-on-hover:hover .popup-on-hover__popup {
+    display: block;
+    left: -40px;
+}
+
+.article--popup {
+    -webkit-box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+    box-shadow: 0 0 12px 0 rgba(91, 91, 91, .3);
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background-color: #FFFFFF;
+    padding: 24px 24px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .popup-on-hover__popup {
+        width: 250px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .popup-on-hover__popup {
+        width: 366px;
+    }
+
+}
+
+/* SNIPPET: RATING STARS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <span class="rating">★★★★☆</span>
+
+   -------------------------------------------------------------------------- */
+
+.rating {
+    font-size: 125%;
+    line-height: inherit;
+    letter-spacing: -2px;
+    color: #EFCE4A;
+}
+
+/* SNIPPET: SWITCHER
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <div class="switcher">
+        {{ txt["viewAs"][abc]|raw }}:
+
+        <span class="switcher__pointing">
+            <a class="switcher__pointing__option switcher__pointing__option--active" href="#">
+                <i class="fv fv-th-large fa-lg" aria-hidden="true"></i>
+            </a>
+
+            <a class="switcher__pointing__option" href="#">
+                <i class="fv fv-table fa-lg" aria-hidden="true"></i>
+            </a>
+        </span>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.switcher {
+    font-size: 14px;
+}
+
+.switcher [class*="__option"]:hover,
+.switcher [class*="__option"]:active,
+.switcher [class*="__option"]:focus {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.switcher [class*="__option--active"] {
+    cursor: default !important;
+}
+
+.switcher--as-icons [class*="__option"] {
+    margin-left: 8px;
+    color: #D10051;
+    /* var(--color--clickable) */
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.switcher--as-icons [class*="__option"]:hover,
+.switcher--as-icons [class*="__option"]:active,
+.switcher--as-icons [class*="__option"]:focus {
+    color: #666666;
+    /* var(--color--text--1) */
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.switcher--as-icons [class*="__option--active"] {
+    color: #666666;
+    /* var(--color--text--1) */
+}
+
+.switcher--as-slide .switcher__pointing {
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D10051;
+    /* var(--color--buttons--1) */
+    background-color: #FFFFFF;
+}
+
+.switcher--as-slide .switcher__pointing__option {
+    display: inline-block;
+    float: left;
+    margin: -1px;
+    outline: 0;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    text-transform: initial;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.switcher--as-slide .switcher__pointing__option--active {
+    background-color: #D10051;
+    /* var(--color--buttons--1) */
+    color: #FFFFFF;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .switcher--as-slide {
+        margin: 0;
+        width: 100%;
+    }
+
+    .switcher--as-slide .switcher__pointing__option {
+        width: calc(50% + 2px);
+        padding: 12px 16px;
+        /* We achieve 44px height trough padding */
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .switcher--as-slide .switcher__pointing__option {
+        padding: 6px 16px;
+        /* We achieve 32px height trough padding */
+    }
+
+}
+
+/* SNIPPET: VERTICAL CENTERING
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation.
+   --------------------------------------------------------------------------
+
+    <div class="valign--center">
+        [...]
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.valign--center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+/* SNIPPET: VIDEO EMBEDDING
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Brief explanation. Link to generator.
+   --------------------------------------------------------------------------
+
+    <div class="embed-container">
+        <iframe src='X' frameborder='0' allowfullscreen></iframe>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.embed-container {
+    position: relative;
+    max-width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

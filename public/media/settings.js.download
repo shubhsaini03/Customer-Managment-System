@@ -1,0 +1,48 @@
+// Document Ready
+$(function () {
+  var $heroSlider = $('.js--heroSlider'),
+      $lightboxLink = $('.js--videoLightboxLink');
+  
+  // Slideshows
+  if ($heroSlider.length) {
+    $heroSlider.fadeGallery({
+      slides: '.heroSlide_item',
+      btnPrev: 'a.js--heroSlider_prev',
+      btnNext: 'a.js--heroSlider_next',
+      pagerLinks: '.heroSlide_pagination li',
+      event: 'click',
+      generatePagination : true,
+      disableFadeIE: true,
+      autoRotation: true,
+      autoHeight: true,
+      switchTime: 10000,
+      animSpeed: 500
+    });
+    // var $prev = $('.js--heroSlider_prev'),
+    //     $next = $('.js--heroSlider_next');
+    // 
+    // $heroSlider.slick({
+    //   arrows : false,
+    //   dots : true
+    // });
+    // $prev.on('click', function () {
+    //   $heroSlider.slick('slickPrev');
+    //   return false;
+    // });
+    // $next.on('click', function () {
+    //   $heroSlider.slick('slickNext');
+    //   return false;
+    // });
+  }
+  
+  // Video Lightbox
+  if ($lightboxLink.length) {
+    $lightboxLink.magnificPopup({
+      // items: {
+      //   src: 'http://www.youtube.com/watch?v=7eo8XpT4CmM'
+      // },
+      type: 'iframe'
+    });
+  }
+  
+});

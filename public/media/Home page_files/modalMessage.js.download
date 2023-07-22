@@ -1,0 +1,19 @@
+// JS Code just for close modal window
+
+var modal = document.getElementById("modalMessage");
+var span = document.getElementById("closeModal");
+var seeMoreLink = document.getElementById("seeMoreLink");
+var seeMoreParagraph = document.getElementById("seeMoreParagraph");
+
+seeMoreLink.onclick = function() {
+  seeMoreParagraph.style.display = "block";
+  seeMoreLink.style.display = "none";
+}
+
+span.onclick = function() {
+  modal.style.marginBottom = "-20em";
+}
+
+window.onload = function() {
+    modal.style.marginBottom = "1em";
+}

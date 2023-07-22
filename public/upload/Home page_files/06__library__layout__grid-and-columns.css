@@ -1,0 +1,591 @@
+/* ==========================================================================
+   06_LAYOUT: GRID AND COLUMNS
+   --------------------------------------------------------------------------
+   * README
+
+   * GRID: BASICS
+   * GRID: WIDTHS
+   * GRID: GUTTERS
+   * GRID: VERTICAL ALIGNMENT
+   * GRID: HORIZONTAL ALIGNMENT
+   * GRID: WITH DIVIDER
+
+   * COLUMNS: BASICS
+   * COLUMNS: WIDTHS
+   * COLUMNS: GUTTERS
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Grid styles on this stylesheet are a very minimal and free adaptation of
+ * https://philipwalton.github.io/solved-by-flexbox/demos/grids/
+
+ * If you are new to flex, this article is very clear and useful:
+ * https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+ * Styles on this stylesheet are the Grid and Columns default styles.
+ * That means they apply to the specific Grid and Columns HTML, and therefore,
+ * they apply only to the pages that display this HTML.
+
+ * At the moment we have not had to deal with any exception to these Grid and
+ * Columns default styles, but if it becomes necessary, let's talk about it and
+ * find a way to incorporate the given exception to this Grid and Columns default
+ * styles, as they should be able to cover any possible use without exceptions.
+ */
+
+/* GRID: BASICS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To be used as a wrapper to manage any set of elements that need to be
+   arranged either in columns (with or without declared width) or as a grid.
+   --------------------------------------------------------------------------
+
+    <div class="grid">
+        <div class="grid__item">...</div>
+        <div class="grid__item">...</div>
+        <div class="grid__item">...</div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.grid__item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+/* GRID: WIDTHS
+   ========================================================================== */
+
+/*
+ * All items inside a .grid__item are full width, as they distribute in a column.
+ */
+.grid > .grid__item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.grid__item > *:not(.grid) {
+    width: 100%;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    /*
+     * By default all .grid__item elements are full width.
+     */
+    .grid > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    /*
+     * By default all .grid__item distribute evenly in one row. You need a grid--X
+       modifier to implement an X amount of items per row.
+     */
+    .grid > .grid__item {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+
+    /*
+     * By adding a .grid--X modifier class to the .grid element, you can set
+     * all children .grid__item width to the specified value or percentage, and
+     * they will collapse to a new row if necessary.
+     */
+    .grid--1 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .grid--2 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .grid--3 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 33.3333%;
+        -ms-flex: 0 0 33.3333%;
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .grid--4 > .grid__item,
+    .grid--5 > .grid__item,
+    .grid--6 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .grid--4 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .grid--5 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 20%;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .grid--6 > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 16.6666%;
+        -ms-flex: 0 0 16.6666%;
+        flex: 0 0 16.6666%;
+        max-width: 16.6666%;
+    }
+
+}
+
+/* GRID: GUTTERS
+   ========================================================================== */
+
+/*
+ * By default the .grid element sets the grid gutters to 24px width.
+ */
+.grid {
+    margin: -24px 0 0 -24px; /* - var(--grid--gutters--24) */
+}
+
+.grid > .grid__item {
+    padding: 24px 0 0 24px; /* + var(--grid--gutters--24) */
+}
+
+/*
+ * By adding a .grid--gutters-X modifier class to the .grid element, the grid
+ * gutters con be increased to 30px, 40px and so on.
+ */
+.grid--gutters-0 {
+    margin: 0 0 0 0;
+}
+
+.grid--gutters-0 > .grid__item {
+    padding: 0 0 0 0;
+}
+
+.grid--gutters-16 {
+    margin: -16px 0 0 -16px; /* - var(--grid--gutters--16) */
+}
+
+.grid--gutters-16 > .grid__item {
+    padding: 16px 0 0 16px; /* + var(--grid--gutters--16) */
+}
+
+.grid--gutters-32 {
+    margin: -32px 0 0 -32px;
+}
+
+.grid--gutters-32 > .grid__item {
+    padding: 32px 0 0 32px;
+}
+
+.grid--gutters-48 {
+    margin: -48px 0 0 -48px;
+}
+
+.grid--gutters-48 > .grid__item {
+    padding: 48px 0 0 48px;
+}
+
+/* GRID: VERTICAL ALIGNMENT
+   ========================================================================== */
+
+/*
+ * By default the .grid element makes all children .grid__item stretch to match
+ * the tallest one in the row.
+ */
+.grid {
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+/*
+ * By adding a .grid--valign-X modifier class to the .grid element, you can align
+ * all children .grid__item at once on top, bottom or centered in the row space.
+ */
+.grid--valign-top {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.grid--valign-bottom {
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+
+.grid--valign-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+/*
+ * By adding a .grid__item--valign-X modifier class to a specific .grid__item
+ * element, you can override any alignment set by the parent .grid element and
+ * make it individually on top, bottom or centered in the row space.
+ */
+.grid__item--valign-top {
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+}
+
+.grid__item--valign-bottom {
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+}
+
+.grid__item--valign-center {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
+
+.grid__item--valign-autosize {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+}
+
+/* GRID: HORIZONTAL ALIGNMENT
+   ========================================================================== */
+.grid--halign-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* GRID: WITH SIDEBAR
+   ========================================================================== */
+.grid--with-sidebar {
+    margin: -40px 0 0 -100px;
+}
+
+.grid--with-sidebar > .grid__item {
+    padding: 40px 0 0 100px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .grid--with-sidebar > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .section--collapsible-form-search .grid--with-sidebar .grid__item--filters {
+        padding-top: 0;
+    }
+
+    .grid--with-sidebar > .grid__item--subtabs {
+        padding-top: 24px;
+    }
+
+    .grid--with-sidebar > .grid__item--subtabs + .grid__item {
+        padding-top: 16px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .grid--with-sidebar {
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    }
+
+    .grid--with-sidebar > .grid__item--aside-right {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        -ms-flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        max-width: calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+    }
+
+    .grid--with-sidebar > .grid__item--aside-left {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        -ms-flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        flex: 0 0 calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+        max-width: calc(284px + 100px); /* var(--aside--width--desktop) + 100px gutter */
+    }
+
+    .grid--with-sidebar > .grid__item--filters {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(176px + 100px); /* var(--filters--width--tablet-and-desktop) + 100px gutter */
+        -ms-flex: 0 0 calc(176px + 100px); /* var(--filters--width--tablet-and-desktop) + 100px gutter */
+        flex: 0 0 calc(176px + 100px); /* var(--filters--width--tablet-and-desktop) + 100px gutter */
+        max-width: calc(176px + 100px); /* var(--filters--width--tablet-and-desktop) + 100px gutter */
+    }
+
+    .grid--with-sidebar > .grid__item--subtabs {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(207px + 100px); /* var(--subtabs--width--tablet-and-desktop) + 100px gutter */
+        -ms-flex: 0 0 calc(207px + 100px); /* var(--subtabs--width--tablet-and-desktop) + 100px gutter */
+        flex: 0 0 calc(207px + 100px); /* var(--subtabs--width--tablet-and-desktop) + 100px gutter */
+        max-width: calc(207px + 100px); /* var(--subtabs--width--tablet-and-desktop) + 100px gutter */
+    }
+
+}
+
+/* GRID: WITH DIVIDER
+   ========================================================================== */
+.grid--with-divider {
+    margin: 0 auto;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .grid--with-divider > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 0;
+    }
+
+    .grid--with-divider > .grid__item:nth-of-type(n+2) {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB; /* var(--color--borders--1) */
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .grid--with-divider {
+        max-width: 592px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .grid--with-divider > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .grid--with-divider > .grid__item:nth-of-type(odd) {
+        padding-right: 40px;
+        padding-left: 0;
+    }
+
+    .grid--with-divider > .grid__item:nth-of-type(even) {
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #B4B8BB; /* var(--color--borders--1) */
+        padding-right: 0;
+        padding-left: 40px;
+    }
+
+}
+
+/* GRID: METHODS
+   ========================================================================== */
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .grid--methods {
+        margin: -16px 0 0 -40px;
+    }
+
+    .grid--methods > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 16px 0 0 40px;
+    }
+
+    .grid--methods > .grid__item.list__item--linkedin {
+        padding-top: 5px;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .grid--methods {
+        margin: -48px 0 0 -40px;
+    }
+
+    .grid--methods > .grid__item {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 33.3333%;
+        -ms-flex: 0 0 33.3333%;
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+        padding: 48px 0 0 40px;
+    }
+
+}
+
+/* COLUMNS: BASICS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To arrange in columns an unknown number of elements and ensure the layout
+   will adjust fluidly no matter its number.
+   --------------------------------------------------------------------------
+
+    <div class="fluid-cols fluid-cols--gapXpx fluid-cols--colsX">
+        {% for X %}
+            <div>...</div>
+        {% endfor %}
+    </div>
+   -------------------------------------------------------------------------- */
+
+.fluid-cols {
+    display: block;
+    margin: 0;
+    word-break: break-word;
+}
+
+.fluid-cols>* {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
+
+/* COLUMNS: WIDTHS
+   ========================================================================== */
+.fluid-cols {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .fluid-cols--cols2,
+    .fluid-cols--cols3,
+    .fluid-cols--cols4 {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .fluid-cols--cols2 {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+
+    .fluid-cols--cols3 {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+
+    .fluid-cols--cols4 {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+
+}
+
+/* COLUMNS: GUTTERS
+   ========================================================================== */
+.fluid-cols {
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .fluid-cols {
+        -webkit-column-gap: 24px;
+        -moz-column-gap: 24px;
+        column-gap: 24px;
+    }
+
+    .fluid-cols--gutters-100 {
+        -webkit-column-gap: 100px;
+        -moz-column-gap: 100px;
+        column-gap: 100px;
+    }
+
+}

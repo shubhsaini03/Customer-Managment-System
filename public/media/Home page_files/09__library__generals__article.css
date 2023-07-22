@@ -1,0 +1,231 @@
+/* ==========================================================================
+   09_GENERALS: ARTICLE
+   --------------------------------------------------------------------------
+   * README
+
+   * ARTICLE
+   * ARTICLE HEADER
+   * ARTICLE CONTENT
+   * ARTICLE FOOTER
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Article default styles.
+ * That means they apply to the HTML component you most likely will use to
+ * manage the actual content inside a .section__content element if needed, and
+ * therefore, they apply only to the pages that displays this component.
+
+ * If you need to deal with an exception to these Article default styles, you
+ * should manage it by adding a .article--modifier class to the .article element
+ * and develop the given exception nested to this .article--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Article component or a new
+ * sub-element for an existing one, you should develop them in this stylesheet,
+ * under a new component subtitle or under the correspondent one accordingly.
+ */
+
+/* ARTICLE
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To manage second-level information in any page, as many times as needed. The
+   most complex part is the .article__header element, as it contemplates several
+   possible sub-elements (explicited in the class names) - of course, only keep
+   the ones that suit your needs in each case.
+   --------------------------------------------------------------------------
+
+    <article class="article">
+        <div class="article__header">
+            <div class="article__header__image">
+                <img src="X">
+            </div>
+
+            <div class="article__header__text">
+                <h3 class="article__header__text__title">
+                    <span class="article__header__text__title__icon"></span> X
+                </h3>
+
+                <div class="article__header__text__subtitle">X</div>
+            </div>
+
+            <div class="article__header__actions">
+                <a class="link" href="X">X</a>
+
+                <a class="button button--default" href="X">X</a>
+            </div>
+        </div>
+
+        <div class="article__content">X</div>
+
+        <div class="article__footer">X</div>
+    </article>
+
+   -------------------------------------------------------------------------- */
+
+.article {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.article + .article {
+    margin-top: 16px;
+}
+
+/* ARTICLE HEADER
+   ========================================================================== */
+.article__header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.article__header:not(.article__header--hr-bottom) + * {
+    margin-top: 16px;
+}
+
+.article__header__image {
+    margin-right: 12px;
+    width: 32px;
+}
+
+.article__header__image img {
+    display: block;
+    margin: auto;
+    border-radius: 100%;
+    width: 100%;
+}
+
+.article__header__text {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.article__header__text__title__icon {
+    margin-right: 8px;
+}
+
+.section .article__header__text__title__icon {
+    margin-bottom: 0.5%;
+    vertical-align: bottom;
+    color: #666666; /* var(--color--brandeable--1) */
+    text-shadow: 0 0 0 #666666; /* var(--color--brandeable--1) */
+}
+
+.article__header__text__title {
+    font-weight: 500;
+    font-family: "GothamBlack", Arial, Helvetica, sans-serif;
+}
+
+.article__header__text__title--0 {
+    font-size: 14px; /* Used in View More (in Aside) title */
+}
+
+.article__header__text__title--1 {
+    font-size: 16px; /* Used in Stats article titles */
+}
+
+.article__header__text__title--2 {
+    font-size: 18px; /* Used in Dashlets (Dashboard) and Pipeline (in Aside) article titles */
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .article__header__text__title--2 {
+        font-size: 16px; /* Used in Dashlets (Dashboard) and Pipeline (in Aside) article titles */
+    }
+
+}
+
+.article__header__text__title--3 {
+    font-size: 20px; /* Used in View More (in Content), Task and Popup article titles */
+}
+
+.article__header__text__title--4 {
+    font-size: 22px; /* Used everywhere else - the wizard Separator styles emulates this */
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .article__header__text__title--4 {
+        font-size: 20px; /* Used everywhere else - the wizard Separator styles emulates this */
+    }
+
+}
+
+.article__header__text__title--5 {
+    font-size: 24px;
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .article__header__text__title--5 {
+        font-size: 22px;
+    }
+
+}
+
+.article__header__text__title--6 {
+    font-size: 28px; /* Used in Submit Job/Goal */
+    font-weight: 400;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .article__header__text__title--6 {
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+}
+
+.article__header__text__subtitle {
+    font-size: 14px;
+    color: #B4B8BB;
+}
+
+* + .article__header__text__title {
+    margin-top: 8px;
+}
+
+* + .article__header__text__subtitle {
+    margin-top: 4px;
+}
+
+* + .article__header__text__paragraph {
+    margin-top: 8px;
+}
+
+.article__header__actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.article__header__actions>*+* {
+    margin-left: 4px;
+}
+
+/* ARTICLE CONTENT
+   ========================================================================== */
+.article__content+.article__content {
+    margin-top: 24px;
+}
+
+/* ARTICLE FOOTER
+   ========================================================================== */
+.article__footer {
+    margin-top: 24px;
+}

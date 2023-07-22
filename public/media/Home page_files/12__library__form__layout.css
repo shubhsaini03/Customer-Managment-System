@@ -1,0 +1,2352 @@
+/* ==========================================================================
+   12_FORM LAYOUT
+   --------------------------------------------------------------------------
+   * README
+
+   * GENERAL
+   * GENERAL MODIFIERS (DONE-ISH, revise)
+
+   * STRUCTURE MODIFIERS (DEALING WITH COLUMNS WITH A MODIFIER FIELD BY FIELD)
+   * STRUCTURE MODIFIERS (DEALING WITH COLUMNS WITH A MODIFIER IN THE .FORM PARENT)
+
+   * ACCEPT CHECKBOX
+   * ALERTS CUSTOM FIELDS (PENDING, it's in the careers portal, gonna see it in the future)
+   * ALERTS CUSTOM FIELDS MODIFIERS (PENDING, it's in the careers portal, gonna see it in the future)
+   * BUTTON BAR
+   * BUTTON BAR MODIFIERS
+   * CHECKBOXES LIST (DONE, evaluate further styling)
+   * CHECKBOXES LIST MODIFIERS (PENDING, probably needs redoing)
+   * CURRENCY (PENDING)
+   * DATASET
+   * DATASET MODIFIERS (PENDING)
+   * DATE
+   * FILE UPLOAD (PENDING)
+   * FILE UPLOAD MODIFIERS (PENDING)
+   * FORM (PENDING)
+   * FORM MODIFIERS (PENDING)
+   * PARAGRAPH WITH FORMAT
+   * RADIOS LIST (DONE, evaluate further styling)
+   * RADIOS LIST MODIFIERS (PENDING, probably needs redoing)
+   * SCHEDULING/TIMESLOT (PENDING MOBILE)
+   * SCHEDULING/TIMESLOT MODIFIERS (PENDING)
+   * SELECT FORM FIELD (PENDING)
+   * UI WIDGET
+   * PHOTO PREVIEW FIELD (PENDING)
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Form Layout default styles.
+ * That means they apply to the layout of the Form HTML component, andtherefore,
+ * they apply only to the pages that display that component.
+
+ * If you need to deal with an exception to these Form Layout default
+ * styles, you should manage it by adding a .X--modifier class to the .X element
+ * and develop the given exception nested to this .X--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Form Layout component
+ * or a new sub-element for an existing one, you should develop them in this
+ * stylesheet, under a new component subtitle or under the correspondent one
+ * accordingly.
+ */
+
+/* GENERAL
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+    <form class="form clearfix" action="X" autocomplete="X" id="X" method="X" role="X">
+        <fieldset class="Section SectionX">
+            <div class="Separator SeparatorX">
+                <legend>X</legend>
+
+                <div class="SeparatorDescription">
+                    <span>X</span>
+                </div>
+            </div>
+
+            <div class="fieldSpec">
+                <label for="X">X</label>
+
+                <div class="description" id="X-description">X</div>
+
+                [...]
+            </div>
+
+            <div class="fieldSpec">
+                <fieldset>
+                    <legend>X</legend>
+
+                    <div class="description" id="X-description">X</div>
+
+                    [...]
+                </fieldset>
+            </div>
+
+            [...]
+        </fieldset>
+
+        <fieldset class="Section SectionX">
+            <legend class="visibility--visually-hidden">X</legend>
+
+            <div class="fieldSpec">
+                <label for="X">X</label>
+
+                <div class="description" id="X-description">X</div>
+
+                [...]
+            </div>
+
+            <div class="fieldSpec">
+                <fieldset>
+                    <legend>X</legend>
+
+                    <div class="description" id="X-description">X</div>
+
+                    [...]
+                </fieldset>
+            </div>
+
+            [...]
+
+            <div class="button-bar">
+                <div role="navigation">
+                    [...]
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+   -------------------------------------------------------------------------- */
+
+.form {
+    margin: 0 auto;
+    width: 100%;
+    text-align: left;
+}
+
+.form+* {
+    /* margin-top: 32px; */
+}
+
+*+.form {
+    margin-top: 32px;
+}
+
+.Section:before,
+.Section:after {
+    content: "";
+    /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    display: table;
+    /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.Section:after {
+    clear: both;
+    /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.Section+.Section {
+    padding-top: 20px;
+}
+
+.Separator {
+    margin-bottom: 24px;
+}
+
+/*
+ * The following styles match the .article__header__text__title--4 default ones
+ */
+.Separator>legend {
+    display: block;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.Separator>legend:empty {
+    display: none;
+}
+
+/*
+ * The following styles match the .article__header__text__subtitle default ones
+ */
+.SeparatorDescription>span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.SeparatorDescription>span:empty {
+    display: none;
+}
+
+.fieldSpec,
+.datasetfieldSpec,
+.formfieldSpec {
+    width: 100%;
+    /* By defalut the .fieldSpec element is full width. If you need to deal with 2 columns, please refer to the GENERAL MODIFIERS subtitle for further information. */
+    max-width: 100%;
+    padding-bottom: 16px;
+    clear: both;
+}
+
+.fieldSpec>label,
+.datasetfieldSpec>label,
+.formfieldSpec>label,
+.fieldSpec fieldset>legend,
+.AlertCustomField label,
+.DateFormField>div>label {
+    display: block;
+    width: 100%;
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'GothamBlack', Arial, Helvetica, sans-serif;
+}
+
+div[class*="fieldSpec"] label:empty,
+div[class*="fieldSpec"] legend:empty,
+.AlertCustomField label:empty {
+    display: none
+}
+
+div[class*="fieldSpec"] .labelRequiredIcon {
+    color: #BC2828;
+    /* var(--color--error) */
+}
+
+div[class*="fieldSpec"] div[class*="description"] {
+    padding-bottom: 4px;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.fieldSpec.form__item--text div[class*="description"] {
+    font-size: 16px;
+}
+
+div[class*="fieldSpec"] label+div[class*="description"],
+div[class*="fieldSpec"] legend+div[class*="description"] {
+    margin-top: -2px;
+}
+
+div[class*="fieldSpec"] div[class*="description"]:empty {
+    display: none
+}
+
+div[class*="fieldSpec"]>div:not([class*="description"]):before,
+div[class*="fieldSpec"]>div:not([class*="description"]):after {
+    content: "";
+    /* 1 */
+    display: table;
+    /* 1 */
+}
+
+div[class*="fieldSpec"]>div:not([class*="description"]):after {
+    clear: both;
+    /* 1 */
+}
+
+div[class*="fieldSpec"]>fieldset>div:not([class*="description"]):before,
+div[class*="fieldSpec"]>fieldset>div:not([class*="description"]):after {
+    content: "";
+    /* 1 */
+    display: table;
+    /* 1 */
+}
+
+div[class*="fieldSpec"]>fieldset>div:not([class*="description"]):after {
+    clear: both;
+    /* 1 */
+}
+
+div[class*="fieldSpec"] label+div[class*="description"] a,
+div[class*="fieldSpec"] legend+div[class*="description"] a {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    text-decoration: none;
+    color: #0084D5;
+    /* var(--color--secondary) */
+}
+
+div[class*="fieldSpec"] label+div[class*="description"] a:hover,
+div[class*="fieldSpec"] legend+div[class*="description"] a:hover,
+div[class*="fieldSpec"] label+div[class*="description"] a:focus,
+div[class*="fieldSpec"] legend+div[class*="description"] a:focus {
+    border-bottom-color: inherit;
+}
+
+div[class*="fieldSpec"] .errorMessage {
+    display: block;
+    padding-top: 4px;
+    clear: both;
+    font-size: 14px;
+    line-height: 150%;
+    color: #BC2828;
+    /* var(--color--error) */
+}
+
+/* GENERAL MODIFIERS (DONE-ISH, revise)
+   ========================================================================== */
+
+/* DEFAULT > The .fieldSpec element is visible and displaying a label.
+   --------------------------------------------------------------------------
+   .form__item--hidden > To hide a field entirely
+   --------------------------------------------------------------------------
+   .form__item--hidden-label > To hide a field's label
+   -------------------------------------------------------------------------- */
+
+.fieldSpec.form__item--hidden {
+    display: none;
+}
+
+.fieldSpec.form__item--hidden-label>label,
+.fieldSpec.form__item--hidden-label>fieldset>legend {
+    display: none
+}
+
+/* STRUCTURE MODIFIERS (DEALING WITH COLUMNS WITH A MODIFIER FIELD BY FIELD)
+   ========================================================================== */
+
+/* DEFAULT > All .fieldSpec elements are full width.
+   --------------------------------------------------------------------------
+   .form__item--odd and .form__item--even > To deal with 2 columns, use
+   these two classes as appropriate. It may seem tedious but it's worth it:
+   they float and clear wisely to achieve complex layouts including conditional
+   fields, empty spots, combinations with full width fields, combinations with
+   very tall fields... all without exploding, without patches, without
+   min-heights nor any other weird stuff.
+   -------------------------------------------------------------------------- */
+
+.fieldSpec.form__item--odd,
+.fieldSpec.form__item--even {
+    -webkit-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    .fieldSpec.form__item--odd,
+    .fieldSpec.form__item--even {
+        width: calc(50% - 12px);
+        /* 50% - 0.5 * var(--grid--gutters--24) */
+    }
+
+    /*
+     * 1. Setting the element as a left column item.
+     * 2. Clearing all floats (two consecutive .form__item--odd elements will stack just fine).
+     */
+    .fieldSpec.form__item--odd {
+        float: left;
+        /* 1 */
+        clear: both;
+        /* 2 */
+    }
+
+    /*
+     * 1. Setting the element as a right column item.
+     * 2. Clearing only the right float (in case we have two consecutive .form__item--even elements).
+     */
+    .fieldSpec.form__item--even {
+        float: right;
+        /* 1 */
+        clear: right;
+        /* 2 */
+    }
+
+}
+
+/* STRUCTURE MODIFIERS (DEALING WITH COLUMNS AS A GRID WITH A MODIFIER IN THE .FORM PARENT)
+   ========================================================================== */
+
+/* DEFAULT > All .form--grid .fieldSpec fields are arranged in X given columns
+   per row, and then wrap to the next row. Complex layouts including conditional
+   fields, empty spots, combinations with full width fields... are not contemplated.
+   --------------------------------------------------------------------------
+   .form__item--clearer > To clear the floats
+   --------------------------------------------------------------------------
+   .form__item--full > To make a field full width
+   -------------------------------------------------------------------------- */
+
+.form--grid:not(.form--grid1) .fieldSpec.button-bar {
+    padding-bottom: 16px;
+    /* var(--fieldSpec--padding-bottom) restored */
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .form--grid .Section {
+        margin-left: -24px;
+        /* var(--grid--gutters--24) */
+    }
+
+    .form--grid .fieldSpec {
+        float: left;
+        padding-left: 24px;
+        /* var(--grid--gutters--24) */
+        clear: none;
+    }
+
+    .form--grid--1 .fieldSpec {
+        width: 100%;
+    }
+
+    .form--grid--2 .fieldSpec {
+        width: 50%;
+    }
+
+    .form--grid--2 .fieldSpec:nth-of-type(2n+1) {
+        clear: both;
+    }
+
+    .form--grid--3 .fieldSpec {
+        width: 33.33%;
+    }
+
+    .form--grid--3 .fieldSpec:nth-of-type(3n+1) {
+        clear: both;
+    }
+
+    .form--grid:not(.form--grid--1) .fieldSpec.button-bar {
+        padding-top: 23px !important;
+        /* This is the field label height */
+    }
+
+    .form--grid .fieldSpec.form__item--clearer,
+    .form--grid .fieldSpec.form__item--full {
+        clear: both !important;
+        /* 1 */
+    }
+
+    .form--grid .fieldSpec.form__item--full {
+        width: 100%;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+
+    .form--grid--4 .fieldSpec,
+    .form--grid--5 .fieldSpec {
+        width: 50%;
+    }
+
+    .form--grid--4 .fieldSpec:nth-of-type(2n+1),
+    .form--grid--5 .fieldSpec:nth-of-type(2n+1) {
+        clear: both;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .form--grid--4 .fieldSpec {
+        width: 25%;
+    }
+
+    .form--grid--4 .fieldSpec:nth-of-type(4n+1) {
+        clear: both;
+    }
+
+    .form--grid--5 .fieldSpec {
+        width: 20%;
+    }
+
+    .form--grid--5 .fieldSpec:nth-of-type(5n+1) {
+        clear: both;
+    }
+
+}
+
+/* ACCEPT CHECKBOX
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec AcceptCheckboxField fieldSpecPadder" id="fieldSpecContainerX">
+        <fieldset>
+            <legend id="X-label">X</legend>
+
+            <div class="description" id="X-description">X</div>
+
+            <div>
+                <label for="X">X</label>
+
+                <input id="X" type="checkbox" tabindex="0" value="1" name="X" aria-describedby="X-description" data-required="true" required="" aria-required="true">
+            </div>
+        </fieldset>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.fieldSpec.AcceptCheckboxField {
+    position: relative;
+}
+
+.fieldSpec+.fieldSpec.AcceptCheckboxField {
+    margin-top: 24px;
+}
+
+.fieldSpec.AcceptCheckboxField legend {
+    padding-left: 16px;
+}
+
+.body--ismobile.body--Safari .fieldSpec.AcceptCheckboxField legend {
+    padding-left: 24px;
+}
+
+.fieldSpec.AcceptCheckboxField .description {
+    font-size: 16px;
+}
+
+.fieldSpec.AcceptCheckboxField input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 3px;
+}
+
+.body--ismobile .fieldSpec.AcceptCheckboxField input {
+    margin-top: 1px;
+}
+
+/* ALERTS CUSTOM FIELDS (PENDING, it's in the careers portal, gonna see it in the future)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+
+    <div>
+        <br>
+
+        <label for="X">X</label>
+
+        <br>
+
+        <select class="jobCustomField_X SelectFormField" name="X" tabindex="X" id="X">
+            [...]
+        </select>
+
+        <br>
+
+        <label for="X">X</label>
+
+        <br>
+
+        <select class="jobCustomField_X SelectFormField" name="X" tabindex="X" id="X">
+            [...]
+        </select>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+/* Structure
+   -------------------------------------------------------------------------- */
+.AlertCustomField input,
+.AlertCustomField select,
+.AlertCustomField textarea {
+    margin-bottom: 24px;
+    /* var(--fieldSpec--padding-bottom) + 8px */
+}
+
+/* Behaviour
+   -------------------------------------------------------------------------- */
+.AlertCustomField br {
+    display: none;
+}
+
+/* BUTTON BAR
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled AND the class .button-bar assigned manually
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec button-bar fieldSpecPadder" id="fieldSpecContainerX">
+        <label>X</label>
+
+        <div role="navigation">
+            [...]
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.button-bar {
+    margin-bottom: -16px;
+    padding: 0;
+    text-align: left;
+    /* If you want centered buttons, use the .button-bar--center modifier */
+    clear: both;
+    -webkit-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+
+.fieldSpec+.button-bar.fieldSpec {
+    padding-top: 8px;
+    /* + var(--fieldSpec--padding-bottom) = 24px */
+}
+
+*+.button-bar:not(.fieldSpec) {
+    padding-top: 24px;
+    /* var(--fieldSpec--padding-bottom) + 8px */
+}
+
+.button-bar:before,
+.button-bar:after {
+    content: "";
+    /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    display: table;
+    /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.button-bar:after {
+    clear: both;
+    /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+.button-bar button,
+.button-bar input[type="submit"],
+.button-bar .button {
+    margin-bottom: 16px;
+}
+
+.button-bar:not([class*="col"]) button,
+.button-bar:not([class*="col"]) input[type="submit"],
+.button-bar:not([class*="col"]) .button {
+    min-width: 240px;
+}
+
+@media all and (max-width: 1366px){
+    .button-bar:not([class*="col"]) button,
+    .button-bar:not([class*="col"]) input[type="submit"],
+    .button-bar:not([class*="col"]) .button {
+        min-width: 220px;
+    }
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+
+    .button-bar button,
+    .button-bar input[type="submit"],
+    .button-bar .button {
+        width: 100%;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:1651px) {
+
+    .button-bar:not([class*="button-bar--"]) button,
+    .button-bar:not([class*="button-bar--"]) input[type="submit"],
+    .button-bar:not([class*="button-bar--"]) .button {
+        float: left;
+    }
+
+    .button-bar:not([class*="button-bar--"]) button+button,
+    .button-bar:not([class*="button-bar--"]) input[type="submit"]+input[type="submit"]{
+        margin-left: 16px;
+    }
+
+    .button-bar:not([class*="button-bar--"]) .button:first-of-type {
+        margin-right: 16px;
+    }
+}
+
+@media all and (max-width: 1650px){
+    .button-bar:not([class*="button-bar--"]) button+button,
+    .button-bar:not([class*="button-bar--"]) input[type="submit"]+input[type="submit"] {
+        margin-left: 0px;
+    }
+
+    .button-bar:not([class*="button-bar--"]) .button:first-of-type {
+        margin-right: 16px;
+    }
+}
+/* BUTTON BAR MODIFIERS
+   ========================================================================== */
+
+/* DEFAULT > The buttons in the .button-bar element are auto width and left
+   aligned. In tablet widths they will always arrange in two colulmns, and in
+   mobile widths they will always expand to full width.
+   --------------------------------------------------------------------------
+   .button-bar--center > To center buttons
+   .button-bar--1col > To make buttons full width
+   .button-bar--2col > To arrange buttons in two columns
+   -------------------------------------------------------------------------- */
+
+.button-bar--right {
+    text-align: right;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    .hero-buttons .button+.button {
+        margin-left: 16px;
+    }
+
+    .button-bar--1col button,
+    .button-bar--1col input[type="submit"],
+    .button-bar--1col .button {
+        width: 100%;
+    }
+
+    .button-bar--center {
+        text-align: center;
+        font-size: 0;
+        /* to kill the ghost space between children buttons with display:inline-block; */
+    }
+
+    .button-bar--center button,
+    .button-bar--center input[type="submit"],
+    .button-bar--center .button {
+        margin-right: 12px;
+        /* 0.5 * var(--grid--gutters--24) */
+        margin-left: 12px;
+        /* 0.5 * var(--grid--gutters--24) */
+    }
+
+    .button-bar--2col button,
+    .button-bar--2col input[type="submit"],
+    .button-bar--2col .button {
+        width: calc(50% - 12px);
+        margin-top: 26px;
+        /* 50% - 0.5 * var(--grid--gutters--24) */
+    }
+
+    /*
+     * 1. Setting the element as a left column item.
+     * 2. Clearing all floats (two consecutive elements will stack just fine).
+     */
+    .button-bar--2col button:nth-child(odd),
+    .button-bar--2col input[type="submit"]:nth-child(odd),
+    .button-bar--2col .button:nth-child(odd) {
+        float: left;
+        /* 1 */
+        clear: both;
+        /* 2 */
+    }
+
+    /*
+     * 1. Setting the element as a right column item.
+     * 2. Clearing only the right float (in case we have two consecutive elements).
+     */
+    .button-bar--2col button:nth-child(even),
+    .button-bar--2col input[type="submit"]:nth-child(even),
+    .button-bar--2col .button:nth-child(even) {
+        float: right;
+        /* 1 */
+        clear: right;
+        /* 2 */
+    }
+
+}
+
+/* CHECKBOXES LIST (DONE, evaluate further styling)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec CheckBoxListFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <fieldset>
+            <legend id="X-label">X</legend>
+
+            <div class="description" id="X-description">X</div>
+
+            <div class="CheckBoxListFormField" id="X">
+                <div>
+                    <input id="X_0" type="checkbox" name="X[]" value="X" tabindex="X" aria-describedby="X-description">
+                    <label id="X_0-label" for="X_0">X</label>
+                </div>
+
+                <div>
+                    <input id="X_1" type="checkbox" name="X[]" value="X" tabindex="X" aria-describedby="X-description">
+                    <label id="X_1-label" for="X_1">X</label>
+                </div>
+
+                <a class="CheckBoxListFormField_more" onclick="" href="X" data-num-options-to-show="X">more</a>
+
+                <div style="display: none;" class="CheckBoxListFormField_hiddenOptions">
+                    <div>
+                        <input id="X_2" type="checkbox" name="X[]" value="X" tabindex="X" aria-describedby="X-description">
+                        <label id="X_2-label" for="X_2">X</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].CheckBoxListFormField .CheckBoxListFormField>div:not(.CheckBoxListFormField_hiddenOptions),
+div[class*="fieldSpec"].CheckBoxListFormField .CheckBoxListFormField_hiddenOptions>div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+div[class*="fieldSpec"].CheckBoxListFormField .CheckBoxListFormField input {
+    margin: 3px 4px 3px 0;
+}
+
+div[class*="fieldSpec"].CheckBoxListFormField .CheckBoxListFormField label {
+    width: 100%;
+}
+
+.CheckBoxListFormField_more {
+    float: left;
+    margin-top: 8px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    text-decoration: none;
+    color: #D10051;
+    /* var(--color--clickable) */
+    clear: both;
+}
+
+.CheckBoxListFormField_more:hover,
+.CheckBoxListFormField_more:focus {
+    border-bottom-color: inherit;
+}
+
+/* CHECKBOXES LIST MODIFIERS (PENDING, probably needs redoing)
+   ========================================================================== */
+
+/* DEFAULT > The items in the .CheckBoxListFormField element are full width.
+   --------------------------------------------------------------------------
+   .CheckBoxListFormField--cols2 > To arrange the items list in two columns.
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    /* Structure
+      -------------------------------------------------------------------------- */
+    div[class*="fieldSpec"].CheckBoxListFormField--cols2 .CheckBoxListFormField {
+        -webkit-column-gap: 40px;
+        -moz-column-gap: 40px;
+        column-gap: 40px;
+    }
+
+    /* Behaviour
+       -------------------------------------------------------------------------- */
+    div[class*="fieldSpec"].CheckBoxListFormField--cols2 .CheckBoxListFormField {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+
+    div[class*="fieldSpec"].CheckBoxListFormField--cols2 .CheckBoxListFormField>* {
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+}
+
+/* CURRENCY (PENDING)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X">X</label>
+
+        <span class="_format">$ <input type="text" id="X" name="X" tabindex="X"></span>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+/* Structure
+   -------------------------------------------------------------------------- */
+div[class*="fieldSpec"] span[class*="_format"] input {
+    float: right;
+    width: calc(100% - 16px);
+}
+
+/* Behaviour
+   -------------------------------------------------------------------------- */
+div[class*="fieldSpec"] span[class*="_format"] {
+    display: block;
+}
+
+div[class*="fieldSpec"] span[class*="_format"]:before,
+div[class*="fieldSpec"] span[class*="_format"]:after {
+    content: "";
+    /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    display: table;
+    /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+div[class*="fieldSpec"] span[class*="_format"]:after {
+    clear: both;
+    /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+}
+
+/* Appearance
+   -------------------------------------------------------------------------- */
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    div[class*="fieldSpec"] span[class*="_format"] {
+        line-height: 44px;
+        /* var(--input--height--mobile) */
+    }
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    div[class*="fieldSpec"] span[class*="_format"] {
+        line-height: 40px;
+        /* var(--input--height--tablet-and-desktop) */
+    }
+}
+
+/* DATASET
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec MultipleDatasetEntryFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <div class="multipleDatasetWrapper">
+            <div id="multipleDatasetEntry_X_0">
+                <a class="removeDatasetRow" href="X" name="removeRowFor_X" tabindex="X" onclick="X">remove</a>
+
+                <div class="datasetFieldContainer" id="datasetFieldContainerX-1-0" data-schema-field-id="X">
+                    <div class="datasetfieldSpec SelectFormField datasetfieldSpecPadder" id="fieldSpecContainerX-1-0">
+                        <label for="X-1-0">X</label>
+
+                        <div>
+                            [...]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="addDatasetRow" href="X" id="addRowFor_X" tabindex="X" onclick="X">add another</a>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.removeDatasetRow,
+.addDatasetRow {
+    float: left;
+    padding-left: 18px;
+    background-position: left center;
+    background-size: auto 14px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    clear: both;
+}
+
+.removeDatasetRow {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    background-image: url(../images/icon--remove.svg);
+    color: #BC2828;
+    /* var(--color--error) */
+}
+
+.addDatasetRow {
+    background-image: url(../images/icon--add.svg);
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+.removeDatasetRow:hover,
+.addDatasetRow:hover,
+.removeDatasetRow:focus,
+.addDatasetRow:focus {
+    text-decoration: underline;
+}
+
+/* DATASET MODIFIERS (PENDING)
+   ========================================================================== */
+
+/* DEFAULT > The fields in the .MultipleDatasetEntryFormField element are full width.
+   --------------------------------------------------------------------------
+   .MultipleDatasetEntryFormField--no-actions > To hide the Add and Remove actions.
+   .MultipleDatasetEntryFormField--table > To simulate a table default layout.
+   .MultipleDatasetEntryFormField--cols2 > To arrange the dataset fields in two columns.
+   -------------------------------------------------------------------------- */
+
+.MultipleDatasetEntryFormField--no-actions .removeDatasetRow,
+.MultipleDatasetEntryFormField--no-actions .addDatasetRow {
+    display: none !important;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] {
+        background-color: #FFFFFF;
+        padding-top: 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(2) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(n+3) {
+        margin-top: 1px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .removeDatasetRow {
+        float: right;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .MultipleDatasetEntryFormField--table .addDatasetRow {
+        margin-top: 8px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec input,
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec select,
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec textarea {
+        font-size: 14px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec p {
+        font-size: 14px;
+        line-height: 150%;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .MultipleDatasetEntryFormField--table .multipleDatasetWrapper {
+        position: relative;
+        margin-top: 8px;
+        margin-bottom: 30px;
+        margin-left: 18px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        background-color: #FFFFFF;
+        padding-top: 40px;
+    }
+
+    .MultipleDatasetEntryFormField--table.MultipleDatasetEntryFormField--no-actions .multipleDatasetWrapper {
+        margin-bottom: 0;
+        margin-left: 0;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]>* {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .removeDatasetRow {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        margin-left: -18px;
+        height: 40px;
+        text-indent: -9999px;
+        overflow: hidden;
+    }
+
+    .MultipleDatasetEntryFormField--table .addDatasetRow {
+        position: absolute;
+        top: calc(100% + 16px);
+        left: -18px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"] .datasetfieldSpec {
+        padding: 8px 8px;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(2) .datasetfieldSpec {
+        position: relative;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(2) .datasetfieldSpec label {
+        position: absolute;
+        bottom: calc(100% + 1px);
+        margin: 0 -8px;
+        height: 40px;
+        padding: 12px 8px;
+        background-color: #B4B8BB;
+        /* var(--color--brandeable--3) */
+        vertical-align: middle;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(2) .datasetFieldContainer:first-of-type label {
+        border-radius: 5px 0 0 0;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(2) .datasetFieldContainer:last-of-type label {
+        border-radius: 0 5px 0 0;
+    }
+
+    .MultipleDatasetEntryFormField--table [id*="multipleDatasetEntry_"]:nth-of-type(n+3) .datasetfieldSpec label {
+        display: none;
+    }
+
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]:before,
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]:after {
+        content: "";
+        /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+        display: table;
+        /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    }
+
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]:after {
+        clear: both;
+        /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    }
+
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]>div {
+        -webkit-transition: all 250ms ease-in-out;
+        -ms-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+        width: calc(50% - 12px);
+        /* 50% - 0.5 * var(--grid--gutters--24) */
+    }
+
+    /*
+     * 1. Setting the element as a left column item.
+     * 2. Clearing all floats (two consecutive .form__item--odd elements will stack just fine).
+     */
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]>div:nth-of-type(odd) {
+        float: left;
+        /* 1 */
+        clear: both;
+        /* 2 */
+    }
+
+    /*
+     * 1. Setting the element as a right column item.
+     * 2. Clearing only the right float (in case we have two consecutive .form__item--even elements).
+     */
+    div[class*="fieldSpec"].MultipleDatasetEntryFormField--cols2 [id^="multipleDatasetEntry_"]>div:nth-of-type(even) {
+        float: right;
+        /* 1 */
+        clear: right;
+        /* 2 */
+    }
+
+}
+
+/* DATE
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec DateFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <fieldset>
+            <legend id="X-label">X</legend>
+
+            <div>
+                <input type="hidden" id="X" name="X" value="">
+
+                <div>
+                    <div class="MonthAndYear_YearWrapper">
+                        <label class="screenReaderVisibility" for="X_year">X</label>
+
+                        <select class="yearInput" id="X_year" name="X_year" tabindex="X">
+                            [...]
+                        </select>
+                    </div>
+
+                    <div class="MonthAndYear_MonthWrapper">
+                        <label class="screenReaderVisibility" for="X_month">X</label>
+
+                        <select class="monthInput" id="X_month" name="X_month" tabindex="X">
+                            [...]
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].DateFormField div[class*="Wrapper"] {
+    float: left;
+}
+
+div[class*="fieldSpec"].DateFormField div[class*="YearWrapper"] {
+    width: 27%;
+}
+
+div[class*="fieldSpec"].DateFormField div[class*="MonthWrapper"] {
+    width: 43%;
+}
+
+div[class*="fieldSpec"].DateFormField div[class*="DayWrapper"] {
+    width: 20%;
+}
+
+div[class*="fieldSpec"].DateFormField div[class*="Wrapper"]+div[class*="Wrapper"] {
+    margin-left: 5%;
+}
+
+/* FILE UPLOAD (PENDING)
+   ========================================================================== */
+
+/* DEFAULT > When the "dropboxChooser" and/or "googleDriveChooser" instance
+   configs are set to TRUE, two icons render next to the file input, and those
+   styles are broken by default. So you need this class.
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec FileField fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X" id="X-label">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <div id="fileInput_X">
+            <input class="FileField" type="file" name="file_X" id="X" tabindex="X" data-wizardfileinput="1" aria-labelledby="X-label">
+
+            <div class="uploadedFile">X <button class="removeFile" type="submit" name="removeFile" value="X">Remove</button></div>
+
+            <a class="dropbox-dropin-btn dropbox-dropin-default" href="#"><span class="dropin-btn-status"></span>Choose from Dropbox</a>
+
+            <a class="drivePickerButton" href="#" id="drivePicker">Choose from Google Drive</a>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] input[type="file"] {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] a {
+    display: block;
+    flex-shrink: 0;
+    margin-left: 4px;
+    box-sizing: border-box !important;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    width: 40px;
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto 60%;
+    filter: none !important;
+    padding: 0;
+    text-indent: -9999px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] a.dropbox-dropin-btn {
+    background-image: url(../images/icon--dropbox.svg);
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] a.dropbox-dropin-btn .dropin-btn-status {
+    display: none;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] a.drivePickerButton {
+    background-image: url(../images/icon--google-drive.svg);
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"] span,
+div[class*="fieldSpec"].FileField .uploadedFile {
+    order: 2;
+    display: block;
+    width: 100%;
+    padding-top: 4px;
+    font-size: 14px;
+    line-height: 150%;
+    font-style: italic;
+    word-break: break-all;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInput_"]>button,
+div[class*="fieldSpec"].FileField div[id*="fileInput_"]>button:hover,
+div[class*="fieldSpec"].FileField div[id*="fileInput_"]>button:active,
+div[class*="fieldSpec"].FileField div[id*="fileInput_"]>button:focus {
+    margin-left: 4px;
+    border: none;
+    width: 15px;
+    height: 15px;
+    background-color: #FFFFFF;
+    background-image: url(../images/icon--remove.svg);
+    background-position: center center;
+    padding: 0;
+    text-indent: -9999px;
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    div[class*="fieldSpec"].FileField div[id*="fileInput_"] a {
+        height: 44px;
+        /* var(--input--height--mobile) */
+    }
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    div[class*="fieldSpec"].FileField div[id*="fileInput_"] a {
+        height: 40px;
+        /* var(--input--height--tablet-and-desktop) */
+    }
+}
+
+/* PHOTO UPLOAD (PENDING)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec FileField fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X" id="X-label">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <div id="fileInput_X">
+            <div id="fileInputContainer_X">
+                <div class="photoInputPreviewWrapper">
+                    <div class="photoInputPreviewContainer photoPreviewUnselected" id="photoPreviewContainer_X"></div>
+
+                    <input type="file" name="file_X" id="X" tabindex="X" data-wizardfileinput="1" aria-labelledby="X-label">
+
+                    <button id="fileInputCancelButton_X" class="fileInputCancelButton" type="button" style="display: none;">Remove photo</button>
+                </div>
+            </div>
+
+            <div class="uploadedFile">X <button class="removeFile" type="submit" name="removeFile" value="X">Remove</button></div>
+
+            <a class="dropbox-dropin-btn dropbox-dropin-default" href="#"><span class="dropin-btn-status"></span>Choose from Dropbox</a>
+
+            <a class="drivePickerButton" href="#" id="drivePicker">Choose from Google Drive</a>
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] .photoInputPreviewWrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] .photoInputPreviewWrapper .photoInputPreviewContainer,
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] .photoInputPreviewWrapper .photoInputPreviewContainer img {
+    display: block;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] .photoInputPreviewWrapper .photoInputPreviewContainer {
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+
+div[class*="fieldSpec"].FileField div[id*="fileInputContainer_"] .photoInputPreviewWrapper .photoInputPreviewContainer.photoPreviewUnselected {
+    background-image: url(../images/icon--user.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* FORM (PENDING)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec formContainer fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <div class="formContainer">
+            <div class="FormHeader FormHeader_X">
+                <h3>X</h3>
+            </div>
+
+            <div class="schemaFieldContainer" id="schemaFieldContainerX-1" data-schema-field-id="178">
+                <div class="formfieldSpec X formfieldSpecPadder" id="fieldSpecContainerX-1">
+                    <label for="X-1">X</label>
+
+                    <div class="X" id="X-1">
+                        [...]
+                    </div>
+                </div>
+            </div>
+
+            [...]
+
+        </div>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.fieldSpec.formContainer .FormHeader {
+    margin-bottom: 12px;
+}
+
+.fieldSpec.formContainer>label {
+    display: none;
+}
+
+.fieldSpec.formContainer .description {
+    display: none;
+}
+
+.fieldSpec.formContainer .FormHeader h3 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* FORM MODIFIERS (PENDING)
+   ========================================================================== */
+
+/* DEFAULT > The form title is visible.
+   --------------------------------------------------------------------------
+   .form__item--hidden-form-title > To a form title.
+   .formContainer--cols2 > To arrange the items list in two columns.
+   -------------------------------------------------------------------------- */
+
+/* Behaviour
+   -------------------------------------------------------------------------- */
+.fieldSpec.formContainer.form__item--hidden-form-title .FormHeader {
+    display: none;
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    /* Structure
+      -------------------------------------------------------------------------- */
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer {
+        width: calc(50% - 12px);
+        /* 50% - 0.5 * var(--grid--gutters--24) */
+    }
+
+    /*
+     * 1. Setting the element as a left column item.
+     */
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer:nth-of-type(even) {
+        float: left;
+        /* 1 */
+    }
+
+    /*
+     * 1. Setting the element as a right column item.
+     */
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer:nth-of-type(odd) {
+        float: right;
+        /* 1 */
+    }
+
+    /* Behaviour
+      -------------------------------------------------------------------------- */
+
+    .fieldSpec.formContainer--cols2 .formContainer:before,
+    .fieldSpec.formContainer--cols2 .formContainer:after {
+        content: "";
+        /* Line 1/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+        display: table;
+        /* Line 2/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    }
+
+    .fieldSpec.formContainer--cols2 .formContainer:after {
+        clear: both;
+        /* Line 3/3 for a clearfix workaround for when we can't access the HTML to add a .clearfix class */
+    }
+
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer {
+        -webkit-transition: all 250ms ease-in-out;
+        -ms-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+    }
+
+    /*
+     * 1. Clearing all floats (two consecutive .form__item--odd elements will stack just fine).
+     */
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer:nth-of-type(even) {
+        clear: both;
+        /* 1 */
+    }
+
+    /*
+     * 1. Clearing only the right float (in case we have two consecutive .form__item--even elements).
+     */
+    .fieldSpec.formContainer--cols2 .schemaFieldContainer:nth-of-type(odd) {
+        clear: right;
+        /* 1 */
+    }
+
+}
+
+/* PARAGRAPH WITH FORMAT
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec ParagraphWithFormatFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X" id="X-label">X</label>
+
+        <div id="mceu_15" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application" style="visibility:hidden;border-width: 1px;width:100%;">
+            <div id="mceu_15-body" class="mce-container-body mce-stack-layout">
+                [...]
+            </div>
+        </div>
+
+        <textarea id="X" name="X" tabindex="0" class=" ParagraphWithFormatFormField ParagraphWithFormatTextArea" dir="auto" placeholder="" aria-labelledby="X-label" style="display:none;" aria-hidden="true"></textarea>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+.fieldSpec.ParagraphWithFormatFormField .mce-tinymce {
+    border-radius: 5px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.fieldSpec.ParagraphWithFormatFormField .mce-panel {
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    background-color: #FFFFFF;
+}
+
+.fieldSpec.ParagraphWithFormatFormField .mce-statusbar {
+    display: none !important;
+}
+
+/* RADIOS LIST (DONE, evaluate further styling)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec RadioButtonListFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <fieldset>
+            <legend id="X-label">X</legend>
+
+            <div class="description" id="X-description">X</div>
+
+            <div id="X">
+                <div class="cb">
+                    <input class="RadioButtonListFormField" type="radio" name="X" tabindex="X" value="X" id="X_0">
+                    &nbsp;
+                    <label for="X_0">X</label>
+                </div>
+
+                <div class="cb">
+                    <input class="RadioButtonListFormField" type="radio" name="X" tabindex="X" value="X" id="X_1">
+                    &nbsp;
+                    <label for="X_1">X</label>
+                </div>
+
+                <div class="cb">
+                    <input class="RadioButtonListFormField" type="radio" name="X" tabindex="X" value="X" id="X_2">
+                    &nbsp;
+                    <label for="X_2">X</label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].RadioButtonListFormField .cb {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+div[class*="fieldSpec"].RadioButtonListFormField .cb input {
+    margin: 3px 4px 3px 0;
+}
+
+div[class*="fieldSpec"].RadioButtonListFormField .cb label {
+    width: 100%;
+}
+
+.RadioButtonListFormField_more {
+    float: left;
+    margin-top: 8px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    text-decoration: none;
+    color: #D10051;
+    /* var(--color--clickable) */
+    clear: both;
+}
+
+.RadioButtonListFormField_more:hover,
+.RadioButtonListFormField_more:focus {
+    border-bottom-color: inherit;
+}
+
+/* RADIOS LIST MODIFIERS (PENDING, probably needs redoing)
+   ========================================================================== */
+
+/* DEFAULT > The items in the .RadioButtonListFormField element are full width.
+   --------------------------------------------------------------------------
+   .RadioButtonListFormField--cols2 > To arrange the items list in two columns.
+   -------------------------------------------------------------------------- */
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    /* Structure
+    -------------------------------------------------------------------------- */
+    div[class*="fieldSpec"].RadioButtonListFormField--cols2 legend+div:before,
+    div[class*="fieldSpec"].RadioButtonListFormField--cols2 legend+div:after {
+        display: none;
+    }
+
+    div[class*="fieldSpec"].RadioButtonListFormField--cols2 legend+div {
+        -webkit-column-gap: 40px;
+        -moz-column-gap: 40px;
+        column-gap: 40px;
+    }
+
+    /* Behaviour
+     -------------------------------------------------------------------------- */
+    div[class*="fieldSpec"].RadioButtonListFormField--cols2 legend+div {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+
+    div[class*="fieldSpec"].RadioButtonListFormField--cols2 legend+div>* {
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+}
+
+/* SCHEDULING/TIMESLOT (PENDING MOBILE)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X" id="X-label">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <div class="schedulerWidget">
+            <div class="headerContainer">
+                <p class="title">X</p>
+                <p class="description">X</p>
+            </div>
+
+            <div class="companySelectorContainer">
+                <select class="companySelector" id="X">
+                    <option value="X">X</option>
+                    <option value="X">X</option>
+                </select>
+            </div>
+
+            <div class="schedulerDatePicker datepicker-skin-scheduling hasDatepicker" id="X_datepicker_scheduling">
+                <div class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display: block;">
+                    <div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                        <a class="ui-datepicker-prev ui-corner-all ui-state-disabled" title="Previous">
+                            <span class="ui-icon ui-icon-circle-triangle-w">Previous</span>
+                        </a>
+
+                        <a class="ui-datepicker-next ui-corner-all" data-handler="next" data-event="click" title="Next">
+                            <span class="ui-icon ui-icon-circle-triangle-e">Next</span>
+                        </a>
+
+                        <div class="ui-datepicker-title">
+                            <span class="ui-datepicker-month">XX</span>
+                            &nbsp;
+                            <span class="ui-datepicker-year">XXXX</span>
+                        </div>
+                    </div>
+
+                    <table class="ui-datepicker-calendar">
+                        <thead>
+                            <tr>
+                                <th class="ui-datepicker-week-end"><span title="Sunday">Su</span></th>
+                                <th><span title="Monday">Mo</span></th>
+                                <th><span title="Tuesday">Tu</span></th>
+                                <th><span title="Wednesday">We</span></th>
+                                <th><span title="Thursday">Th</span></th>
+                                <th><span title="Friday">Fr</span></th>
+                                <th class="ui-datepicker-week-end"><span title="Saturday">Sa</span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">28</span></td>
+                                <td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">29</span></td>
+                                <td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">30</span></td>
+                                <td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">31</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">1</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">2</span></td>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">3</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">4</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">5</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">6</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">7</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">8</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">9</span></td>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">10</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">11</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">12</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">13</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">14</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">15</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">16</span></td>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">17</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">18</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">19</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">20</span></td>
+                                <td class=" ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">21</span></td>
+                                <td class=" selectable-day ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default ui-state-highlight" href="#">22</a></td>
+                                <td class=" selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">23</a></td>
+                                <td class=" ui-datepicker-week-end selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">24</a></td>
+                            </tr>
+
+                            <tr>
+                                <td class=" ui-datepicker-week-end selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">25</a></td>
+                                <td class=" selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">26</a></td>
+                                <td class=" selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">27</a></td>
+                                <td class=" selectable-day ui-datepicker-current-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default ui-state-active" href="#">28</a></td>
+                                <td class=" not-selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">29</a></td>
+                                <td class=" not-selectable-day" data-handler="selectDay" data-event="click" data-month="10" data-year="2018"><a class="ui-state-default" href="#">30</a></td>
+                                <td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled not-selectable-day"><span class="ui-state-default">1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="results">
+                <p class="availability">Availability for <span class="currentDay">X, X XX, XXXX</span></p>
+
+                <div class="noResults" style="display:none">
+                    <p class="noResultsText">No results found. Please choose a different date</p>
+                </div>
+
+                <div class="resultsList">
+                    <div class="resultItem" item_id="X" item_timestamp="X">
+                        <p class="title">X</p>
+                        <p class="time"><span class="timeLocal">XX:XX XX - XX:XX XX</span></p>
+                    </div>
+
+                    <div class="resultItem" item_id="X" item_timestamp="X">
+                        <p class="title">X</p>
+                        <p class="time"><span class="timeLocal">XX:XX XX - XX:XX XX</span></p>
+                    </div>
+
+                    <div class="resultItem" item_id="X" item_timestamp="X">
+                        <p class="title">X</p>
+                        <p class="time"><span class="timeLocal">XX:XX XX - XX:XX XX</span></p>
+                    </div>
+
+                    <div class="resultItem" item_id="X" item_timestamp="X">
+                        <p class="title">X</p>
+                        <p class="time"><span class="timeLocal">XX:XX XX - XX:XX XX</span></p>
+                    </div>
+
+                    <div class="resultItem selected" item_id="X" item_timestamp="X">
+                        <p class="title">X</p>
+                        <p class="time"><span class="timeLocal">XX:XX XX - XX:XX XX</span></p>
+                    </div>
+                </div>
+
+                <p class="allDay" style="display:none">All day</p>
+            </div>
+        </div>
+    </div>
+   -------------------------------------------------------------------------- */
+
+.schedulerWidget {
+    background: none;
+    padding: 0;
+    margin-bottom: 0;
+    border: none;
+}
+
+.schedulerWidget.error {
+    background: none;
+    padding: 0;
+    margin-bottom: 0;
+    border: none;
+}
+
+.schedulerWidget .headerContainer {
+    display: none;
+}
+
+.schedulerWidget .headerContainer .title {
+    padding-bottom: 4px;
+    font-size: inherit;
+    font-weight: 700;
+}
+
+.schedulerWidget .headerContainer .description {
+    font-size: 80%;
+    padding-top: 0;
+    padding-bottom: 8px;
+}
+
+.datepicker-skin-scheduling {
+    font-size: 100%;
+}
+
+.datepicker-skin-scheduling .ui-widget {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+.datepicker-skin-scheduling .ui-datepicker-header {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: none;
+    height: 40px;
+    background: none;
+    font-size: inherit;
+    font-weight: normal;
+}
+
+.datepicker-skin-scheduling .ui-datepicker-header .ui-state-hover {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+.datepicker-skin-scheduling .ui-datepicker {
+    display: none;
+    box-shadow: none;
+    width: 100%;
+    background: none;
+    padding: 0;
+}
+
+.datepicker-skin-scheduling .ui-datepicker table {
+    margin: 0;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: inherit;
+}
+
+.datepicker-skin-scheduling .ui-datepicker th {
+    border: none;
+    border: 0;
+    background-color: transparent;
+    padding: 1em 0;
+    font-size: inherit;
+    font-weight: 500;
+    text-align: center;
+    color: inherit;
+}
+
+.datepicker-skin-scheduling .ui-datepicker td {
+    border: none;
+    border: 0;
+    background: none;
+    padding: 0;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-header {
+    position: relative;
+    margin: 0;
+    padding: 40px 0;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-title {
+    margin: 0;
+    height: auto;
+    line-height: 40px;
+    text-align: center;
+    color: inherit;
+}
+
+.datepicker-skin-scheduling td .ui-state-default {
+    border: none;
+    margin: 0;
+    background: none;
+    padding: 8px 8px;
+    font-size: inherit;
+    font-weight: normal;
+    text-align: center;
+    color: inherit;
+}
+
+.datepicker-skin-scheduling .ui-state-disabled {
+    opacity: 1;
+}
+
+.datepicker-skin-scheduling .ui-state-disabled .ui-state-default {
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.datepicker-skin-scheduling td .ui-state-active,
+.datepicker-skin-scheduling td .ui-state-hover {
+    background: #A9A9A9;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev-hover,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next-hover {
+    top: 0;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev span,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    margin-top: 0;
+    margin-left: 0;
+    background: none;
+    font-weight: normal;
+    text-indent: -99999px;
+    overflow: hidden;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev span:before,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next span:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    line-height: 40px;
+    text-align: center;
+    text-indent: 0;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev span:before {
+    content: '<';
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next span:before {
+    content: '>';
+}
+
+.datepicker-skin-scheduling .ui-datepicker select.ui-datepicker-month,
+.datepicker-skin-scheduling .ui-datepicker select.ui-datepicker-year {
+    width: 49%;
+}
+
+.datepicker-skin-scheduling .ui-datepicker-unselectable.ui-state-disabled,
+.datepicker-skin-scheduling .ui-datepicker-unselectable.ui-state-disabled span,
+.datepicker-skin-scheduling .ui-datepicker-other-month.ui-datepicker-unselectable {
+    background: none;
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.datepicker-skin-scheduling .ui-datepicker th span,
+.datepicker-skin-scheduling .ui-datepicker th a,
+.datepicker-skin-scheduling .ui-datepicker td span,
+.datepicker-skin-scheduling .ui-datepicker td a {
+    display: block;
+    padding: 8px 8px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.datepicker-skin-scheduling .ui-datepicker td span.ui-state-hover,
+.datepicker-skin-scheduling .ui-datepicker td a.ui-state-hover,
+.datepicker-skin-scheduling .ui-datepicker td.selectable-day {
+    background-color: #E5E5E5;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-current-day,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-current-day a,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-current-day a.ui-state-hover {
+    background-color: #666666;
+    /* var(--color--brandeable--1) */
+    color: #FFFFFF;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-today,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-today a,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-today a.ui-state-hover {
+    font-weight: 700;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev-hover,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next-hover,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next,
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev {
+    top: 0;
+    border: none;
+    background: none;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-prev-hover {
+    left: 2px;
+}
+
+.datepicker-skin-scheduling .ui-datepicker .ui-datepicker-next-hover {
+    right: 2px;
+}
+
+.schedulerWidget .results .availability {
+    font-size: inherit;
+    font-weight: 500;
+    padding: 0 0 8px;
+}
+
+.schedulerWidget .results .resultsList,
+.schedulerWidget .results .noResults {
+    height: 24em;
+    overflow: auto;
+}
+
+.schedulerWidget .results .noResults .noResultsText {
+    font-size: 80%;
+}
+
+.schedulerWidget .results .resultsList .resultItem {
+    background: none;
+    padding: 8px 8px;
+    border-bottom: 1px solid #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.schedulerWidget .results .resultsList .resultItem:hover {
+    background: #E5E5E5;
+    cursor: pointer;
+}
+
+.schedulerWidget .results .resultsList .resultItem.selected {
+    background: #666666;
+    /* var(--color--brandeable--1) */
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.schedulerWidget .results .resultsList .resultItem .title {
+    font-size: inherit;
+    font-weight: 500;
+}
+
+.schedulerWidget .results .resultsList .resultItem .time,
+.schedulerWidget .results .resultsList .resultItem .location,
+.schedulerWidget .results .resultsList .resultItem .allDay {
+    font-size: 80%;
+}
+
+.schedulerWidget .results .resultsList .resultItem .time .timeZone {
+    color: #868686;
+    padding-left: 4px;
+}
+
+/* Media query to target tablet and desktop */
+
+/* SCHEDULING/TIMESLOT MODIFIERS (PENDING)
+   ========================================================================== */
+
+/* DEFAULT > The .schedulerWidget widget has no borders.
+   --------------------------------------------------------------------------
+   .schedulerWidget--with-borders > To wrap the widget in a boxed style.
+   -------------------------------------------------------------------------- */
+
+/* Structure
+   -------------------------------------------------------------------------- */
+.schedulerWidget--with-borders .schedulerWidget {
+    padding: 8px;
+}
+
+/* Appearance
+   -------------------------------------------------------------------------- */
+.schedulerWidget--with-borders .schedulerWidget {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    border-radius: 5px;
+}
+
+.schedulerWidget--with-borders .results {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    /* Appearance
+     -------------------------------------------------------------------------- */
+    .schedulerWidget--with-borders .results {
+        border-top: none;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+}
+
+/* SELECT FORM FIELD (PENDING)
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   Type 1: With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec SelectFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <label for="X">X</label>
+
+        <div class="description" id="X-description">X</div>
+
+        <select class="SelectFormField" name="X" tabindex="X" id="X" aria-describedby="X-description" aria-labeledby="X-label">
+            <option value="X">X</option>
+
+            <optgroup label="X">
+                <option value="X">X</option>
+            </optgroup>
+
+            <optgroup label="X">
+                <option value="X">X</option>
+                <option value="X">X</option>
+                <option value="X">X</option>
+            </optgroup>
+        </select>
+    </div>
+
+   --------------------------------------------------------------------------
+   Type 2: With accesibility mode enabled
+   --------------------------------------------------------------------------
+
+    <div class="fieldSpec SelectFormField fieldSpecPadder" id="fieldSpecContainerX">
+        <fieldset>
+            <legend>Source</legend>
+
+            <select name="X" tabindex="X" class="SelectFormField" id="X" aria-describedby="X-description" aria-labeledby="X-label">
+                <option value="X">X</option>
+
+                <optgroup label="X">
+                    <option value="X">X</option>
+                </optgroup>
+
+                <optgroup label="X">
+                    <option value="X">X</option>
+                    <option value="X">X</option>
+                    <option value="X">X</option>
+                </optgroup>
+            </select>
+        </fieldset>
+    </div>
+
+   -------------------------------------------------------------------------- */
+
+/* Structure
+   -------------------------------------------------------------------------- */
+
+div[class*="fieldSpec"].SelectFormField>div:not(.description)>label+label {
+    margin-top: 8px;
+}
+
+div[class*="fieldSpec"].SelectFormField>div:not(.description)>label>* {
+    margin-top: 4px;
+}
+
+/* Behaviour
+   -------------------------------------------------------------------------- */
+div[class*="fieldSpec"].SelectFormField>div:not(.description)>label {
+    display: block;
+}
+
+/* Appearance
+   -------------------------------------------------------------------------- */
+div[class*="fieldSpec"].SelectFormField>div:not(.description)>label {
+    font-size: 14px;
+    line-height: normal;
+    font-weight: 400;
+    color: #565656;
+    /* var(--color--text--2) */
+}
+
+/* UI WIDGET
+   ========================================================================== */
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+    background-color: #FFFFFF;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/*
+ * Emulates the .visibility--visually-hidden styles from stylesheet #13
+ */
+.ui-widget .screenReaderVisibility {
+    border: 0;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}

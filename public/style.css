@@ -1,0 +1,196 @@
+body{
+    font-family: 'Lora', serif;
+
+}
+#header {
+    background: linear-gradient(to right,rgb(21, 44, 137),rgb(9, 25, 91));
+    padding: 10px,0px;
+}
+
+#header img {
+    width: 200px
+}
+
+#header ul li a {
+    color: rgb(199, 212, 208);
+    transition-property: color;
+    transition-duration: 2s;
+
+
+}
+
+#header ul li a:hover {
+    color: white
+}
+
+#header .bi {
+    color: white;
+}
+
+#header .navbar-toggler {
+    border: 1px solid white;
+}
+
+#header .navbar-toggler:focus {
+    box-shadow: none;
+}
+#banner {
+    background: linear-gradient(to right,rgb(21, 44, 137),rgb(9, 25, 91));
+}
+#banner h3{
+    color: white;
+}
+#banner p{
+    color: white;
+    text-transform: capitalize;
+    font-size: small;
+}
+#banner img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+    width: 160px;
+}
+#banner #banner-border  {
+   
+    width: 100%;
+}
+#content img
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    margin-top: 1cm;
+}
+#content h3{
+    font-weight: bold;
+}
+#content a button{
+    transition-property:color;
+    transition-duration: 0.50s;
+     
+    background-color:  aliceblue
+
+ }
+ #content a :hover{
+    background-color:skyblue;
+ }
+ #test a button{
+    transition-property:color;
+    transition-duration: 0.50s;
+     
+    background-color:  aliceblue
+
+ }
+ #test a :hover{
+    background-color:skyblue;
+ }
+
+ #test {
+    padding: 15px 0px;
+}
+
+
+#test img{
+    
+    border-radius: 50%;
+    
+}
+#test h2{
+    text-align: center;
+   
+    font-weight: light;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+}
+#platform h2{
+    font-weight: bold;
+    font-size: 50px;
+    
+}
+#quote img{
+    width: 150px;
+}
+
+#footer{
+    background: linear-gradient(to right,rgb(21, 44, 137),rgb(9, 25, 91));
+    
+}
+#footer img{
+    
+    width: 30px;
+    
+    padding-bottom: 15px;
+
+}
+#footer h2{
+    color: white;
+    font-size: 20px;
+}
+#footer .bi{
+    color: white;
+    font-size: 20px;
+}
+#footer span{
+    color:rgb(199, 212, 208);
+    font-size: 15px;
+}
+#footer #footer-logo{
+    width: 200px;
+}
+#footer p{
+    color: rgb(199, 212, 208);
+}
+#footer #footer-border{
+    width: 100%;
+}
+#header button a{
+text-decoration: none;
+color: white;
+}
+#profile h2{
+    text-transform: capitalize;
+    font-family: 'Kolker Brush', cursive;
+    font-weight: bold;
+ }
+ #profile img{
+    width: 150px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ 
+ #profile a button{
+    transition-property:color;
+    transition-duration: 0.50s;
+    
+    background-color: white;
+
+
+ }
+ #profile a :hover{
+    background-color:  rgb(199, 212, 208);
+ }
+ #userecord h4{
+    text-transform: capitalize;
+    font-weight:bold;
+    font-size: 25px;
+ }
+ #userecord p{
+    text-transform: capitalize;
+    font-weight:bold;
+    font-size: 18px;
+ }
+ #profile p{
+    font-weight: bold;
+ }
+ #review h2{
+    font-family: 'Kolker Brush', cursive;
+    font-weight: bold;
+    font-size: 40px;
+    text-transform: capitalize;
+ }

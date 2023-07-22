@@ -1,0 +1,816 @@
+/* ==========================================================================
+   11_FORM ELEMENTS
+   --------------------------------------------------------------------------
+   * README
+
+   * INPUT, SELECT & TEXTAREA
+
+   * BUTTONS: ALL
+   * BUTTONS: PRIMARY
+   * BUTTONS: SECONDARY
+   * BUTTONS: CANCEL
+   * BUTTONS: CANCEL IN WIZARDS WITH SECONDARY SIBLING
+   * BUTTONS: LINK
+   * BUTTONS: ACTIONS
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Form Elements default styles.
+ * That means they apply to the actual elements inside the Form HTML component,
+ * and therefore, they apply only to the pages that display that component.
+
+ * If you need to deal with an exception to these Form Elements default
+ * styles, you should manage it by adding a .X--modifier class to the .X element
+ * and develop the given exception nested to this .X--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with a cross-browser fix for a Form Element, you should
+ * develop it in this stylesheet, under the correspondent subtitle.
+
+ */
+
+/* INPUT, SELECT & TEXTAREA
+   ========================================================================== */
+
+.form input:not([type="checkbox"]):not([type="radio"]):not([class*="select2"]),
+.form select,
+.form textarea {
+    display: block;
+    outline-width: 0;
+    border-radius: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /*var(--color--borders--1)*/width: 100%;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    font-style: normal;
+    color: #565656;
+    /*var(--color--text--2)*/-webkit-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
+.form input:not([type="checkbox"]):not([type="radio"]):focus,
+.form select:focus,
+.form textarea:focus {
+    border-color: #1D3C6D;
+    /* var(--color--borders--2) */
+}
+
+.form .hasErrors input:not([type="checkbox"]):not([type="radio"]),
+.form .hasErrors select,
+.form .hasErrors textarea {
+    border-color: #BC2828;
+    /* var(--color--error) */
+}
+
+::-webkit-input-placeholder {
+    opacity: 1;
+    color: #999999;
+}
+
+::-moz-placeholder {
+    opacity: 1;
+    color: #999999;
+}
+
+:-ms-input-placeholder {
+    opacity: 1;
+    color: #999999;
+}
+
+:-moz-placeholder {
+    opacity: 1;
+    color: #999999;
+}
+
+.form input[type="file"]::-ms-value {
+    border-width: 0;
+    background-color: transparent;
+}
+
+.form input[type="file"]::-ms-browse {
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+
+    .form select[multiple],
+    .form textarea {
+        height: 83px;
+    }
+
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+
+    .form select[multiple],
+    .form textarea {
+        height: 112px;
+    }
+
+}
+
+.form select[multiple] option {
+    background-color: inherit;
+}
+
+.form textarea {
+    line-height: 150%;
+}
+
+/* INPUT, SELECT & TEXTAREA: SIZING
+   ========================================================================== */
+.form textarea {
+    padding: 9px 8px;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .form input {
+        padding: 11px 8px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .body:not(.body--Firefox) .form input[type="date"],
+    .body:not(.body--Firefox) .form input[type="datetime-local"],
+    .body:not(.body--Firefox) .form input[type="month"],
+    .body:not(.body--Firefox) .form input[type="time"],
+    .body:not(.body--Firefox) .form input[type="week"] {
+        padding: 9px 8px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .form input[type="file"] {
+        padding: 8px 8px 8px 4px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .body--Firefox .form input[type="file"] {
+        padding: 6px 4px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .form select:not([multiple]) {
+        height: 44px;
+        /* needed for macOS */
+        padding: 11px 8px 10px 4px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .body--Firefox .form select {
+        padding: 11px 8px 10px 4px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .body--ismobile .form select[multiple] {
+        height: 44px;
+        /* needed for macOS */
+        padding: 11px 8px 10px 4px;
+        /* We achieve 44px height trough padding */
+    }
+
+    .form select[multiple] option {
+        padding: 11px 8px;
+        /* We achieve 44px height trough padding */
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+    .form input {
+        padding: 14px 10px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .body:not(.body--Firefox) .form input[type="date"],
+    .body:not(.body--Firefox) .form input[type="datetime-local"],
+    .body:not(.body--Firefox) .form input[type="month"],
+    .body:not(.body--Firefox) .form input[type="time"],
+    .body:not(.body--Firefox) .form input[type="week"] {
+        padding: 14px 10px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .form input[type="file"] {
+        padding: 6px 8px 6px 4px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .body--Firefox .form input[type="file"] {
+        padding: 4px 4px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .form select:not([multiple]) {
+        height: 50px;
+        /* needed for macOS */
+        padding: 9px 12px 8px 10px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .body--Firefox .form select {
+        padding: 9px 12px 8px 10px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .body--ismobile .form select[multiple] {
+        height: 50px;
+        /* needed for macOS */
+        padding: 9px 12px 8px 10px;
+        /* We achieve 40px height trough padding */
+    }
+
+    .form select[multiple] option {
+        padding: 9px 8px;
+        /* We achieve 40px height trough padding */
+    }
+
+}
+
+/* BUTTONS: ALL
+   ========================================================================== */
+button,
+input[type="submit"],
+.genericButton,
+.saveButton,
+.nextButton,
+.gotoButton,
+.redirectUrlButton,
+.previousButton,
+.homeButton,
+.clearButton,
+.cancelButton,
+.button {
+    display: inline-block;
+    outline: 0;
+    border-radius: 8px;
+    border-width: 2px;
+    border-style: solid;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: baseline;
+    cursor: pointer;
+    -webkit-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+    font-family: 'GothamBlack', Arial, Helvetica, sans-serif;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+
+    button,
+    input[type="submit"],
+    .genericButton,
+    .saveButton,
+    .nextButton,
+    .gotoButton,
+    .redirectUrlButton,
+    .previousButton,
+    .homeButton,
+    .clearButton,
+    .cancelButton,
+    .button {
+        padding: 11px 16px;
+        /* We achieve 44px height trough padding */
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    button,
+    input[type="submit"],
+    .genericButton,
+    .saveButton,
+    .nextButton,
+    .gotoButton,
+    .redirectUrlButton,
+    .previousButton,
+    .homeButton,
+    .clearButton,
+    .cancelButton,
+    .button {
+        padding: 14px 16px;
+        /* We achieve 40px height trough padding */
+    }
+
+}
+
+button:hover,
+button:active,
+input[type="submit"]:hover,
+input[type="submit"]:active,
+.genericButton:hover,
+.genericButton:active,
+.saveButton:hover,
+.saveButton:active,
+.nextButton:hover,
+.nextButton:active,
+.gotoButton:hover,
+.gotoButton:active,
+.redirectUrlButton:hover,
+.redirectUrlButton:active,
+.previousButton:hover,
+.previousButton:active,
+.homeButton:hover,
+.homeButton:active,
+.clearButton:hover,
+.clearButton:active,
+.cancelButton:hover,
+.cancelButton:active,
+.button:hover,
+.button:active {
+    text-decoration: none;
+}
+
+button:focus,
+input[type="submit"]:focus,
+.genericButton:focus,
+.saveButton:focus,
+.nextButton:focus,
+.gotoButton:focus,
+.redirectUrlButton:focus,
+.previousButton:focus,
+.homeButton:focus,
+.clearButton:focus,
+.cancelButton:focus,
+.button:focus {
+    text-decoration: none;
+}
+
+.button--medium {
+    padding: 4px 16px;
+}
+
+.smallButton,
+.button--small {
+    padding: 2px 4px;
+    font-size: 11px;
+}
+
+.removeFile {
+    margin-left: 16px;
+    padding: 2px 4px;
+}
+
+.button__icon {
+    float: left;
+    margin-right: 8px;
+    line-height: inherit !important;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .button__icon {
+        float: none;
+        vertical-align: bottom;
+    }
+
+}
+
+/* BUTTONS: PRIMARY
+   ========================================================================== */
+button,
+button:link,
+button:visited,
+input[type="submit"],
+input[type="submit"]:link,
+input[type="submit"]:visited,
+.button--default,
+.button--default:link,
+.button--default:visited,
+.genericButton,
+.genericButton:link,
+.genericButton:visited,
+.saveButton,
+.saveButton:link,
+.saveButton:visited,
+.nextButton,
+.nextButton:link,
+.nextButton:visited,
+.gotoButton,
+.gotoButton:link,
+.gotoButton:visited,
+.redirectUrlButton,
+.redirectUrlButton:link,
+.redirectUrlButton:visited {
+    border-color: #D10051;
+    /* var(--color--buttons--1) */
+    background-color: #D10051;
+    /* var(--color--buttons--1) */
+    color: #FFFFFF;
+}
+
+button:hover,
+button:active,
+input[type="submit"]:hover,
+input[type="submit"]:active,
+.button--default:hover,
+.button--default:active,
+.genericButton:hover,
+.genericButton:active,
+.saveButton:hover,
+.saveButton:active,
+.nextButton:hover,
+.nextButton:active,
+.gotoButton:hover,
+.gotoButton:active,
+.redirectUrlButton:hover,
+.redirectUrlButton:active {
+    border-color: #e4007d;
+    background-color: #e4007d;
+    color: #FFFFFF;
+}
+
+button:focus,
+input[type="submit"]:focus,
+.button--default:focus,
+.genericButton:focus,
+.saveButton:focus,
+.nextButton:focus,
+.gotoButton:focus,
+.redirectUrlButton:focus {
+    border-color: #e4007d;
+    background-color: #e4007d;
+    color: #FFFFFF;
+}
+
+/* BUTTONS: SECONDARY
+   ========================================================================== */
+.button--secondary,
+.button--secondary:link,
+.button--secondary:visited,
+.partialSaveButton,
+.partialSaveButton:link,
+.partialSaveButton:visited,
+.previousButton,
+.previousButton:link,
+.previousButton:visited,
+.homeButton,
+.homeButton:link,
+.homeButton:visited,
+.clearButton,
+.clearButton:link,
+.clearButton:visited {
+    /* var(--color--buttons--1) */
+    background-color: transparent;
+    /* var(--color--buttons--1) */
+    border-color: #D10051;
+    color: #1b1b1b;
+}
+
+.button--secondary:hover,
+.button--secondary:active,
+.partialSaveButton:hover,
+.partialSaveButton:active,
+.previousButton:hover,
+.previousButton:active,
+.homeButton:hover,
+.homeButton:active,
+.clearButton:hover,
+.clearButton:active {
+    background-color: #d10051;
+    color: #fff;
+    border-color: #d10051;
+}
+
+.button--secondary:focus,
+.partialSaveButton:focus,
+.previousButton:focus,
+.homeButton:focus,
+.clearButton:focus {
+    background-color: #d10051;
+    color: #fff;
+    border-color: #d10051;
+}
+
+/* BUTTONS: CANCEL
+   ========================================================================== */
+.button--cancel,
+.button--cancel:link,
+.button--cancel:visited,
+.cancelButton,
+.cancelButton:link,
+.cancelButton:visited {
+    border-color: #D10051;
+    /* var(--color--buttons--1) */
+    background-color: #FFFFFF;
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.button--cancel:hover,
+.button--cancel:active,
+.cancelButton:hover,
+.cancelButton:active {
+    border-color: #2C74D7;
+    /* var(--color--buttons--2) */
+    background-color: #FFFFFF;
+    color: #2C74D7;
+    /* var(--color--buttons--2) */
+}
+
+.button--cancel:focus,
+.cancelButton:focus {
+    border-color: #2C74D7;
+    /* var(--color--buttons--2) */
+    background-color: #FFFFFF;
+    color: #2C74D7;
+    /* var(--color--buttons--2) */
+}
+
+/* BUTTONS: CANCEL IN WIZARDS WITH SECONDARY SIBLING
+   ========================================================================== */
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton,
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton:link,
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton:visited {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton:hover,
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton:active {
+    border-color: #D10051;
+    /* var(--color--buttons--1) */
+    background-color: #2C74D7;
+    /* var(--color--buttons--4) */
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.fieldSpec.button-bar button:not(.genericButton, .saveButton, .nextButton, .gotoButton, .redirectUrlButton)+.cancelButton:focus {
+    border-color: #2C74D7;
+    /* var(--color--buttons--3) */
+    background-color: #2C74D7;
+    /* var(--color--buttons--4) */
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.button-bar .button--secondary+.button--cancel,
+.button-bar .button--secondary+.button--cancel:link,
+.button-bar .button--secondary+.button--cancel:visited {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.button-bar .button--secondary+.button--cancel:hover,
+.button-bar .button--secondary+.button--cancel:active {
+    border-color: #D10051;
+    /* var(--color--buttons--1) */
+    background-color: #2C74D7;
+    /* var(--color--buttons--4) */
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+.button-bar .button--secondary+.button--cancel:focus {
+    border-color: #2C74D7;
+    /* var(--color--buttons--3) */
+    background-color: #2C74D7;
+    /* var(--color--buttons--4) */
+    color: #D10051;
+    /* var(--color--buttons--1) */
+}
+
+/* BUTTONS: LINK LIKE
+   ========================================================================== */
+.button--link {
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.button--link+.button {
+    margin-left: 8px;
+}
+
+.button--link,
+.button--link:link,
+.button--link:visited {
+    border-color: transparent;
+    background-color: transparent;
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+.button--link:hover,
+.button--link:active {
+    border-color: transparent;
+    background-color: transparent;
+    color: #D10051;
+    /* var(--color--clickable) */
+    text-decoration: underline;
+}
+
+.button--link:focus {
+    border-color: transparent;
+    background-color: transparent;
+    color: #D10051;
+    /* var(--color--clickable) */
+}
+
+/* BUTTONS: ACTIONS
+   ========================================================================== */
+[class*="button--action-"] {
+    padding: 4px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.button--action-default,
+.button--action-default:link,
+.button--action-default:visited {
+    background-color: #FFFFFF;
+    color: #1b1b1b;
+    /* var(--color--buttons--1) */
+}
+
+.button--action-default:hover,
+.button--action-default:active {
+    background-color: #D10051;
+    color: #ffffff;
+    /* var(--color--buttons--1) */
+}
+
+.button--action-default:focus {
+    background-color: #D10051;
+    color: #ffffff;
+    /* var(--color--buttons--1) */
+}
+
+.button--action-secondary,
+.button--action-secondary:link,
+.button--action-secondary:visited {
+    background-color: #FFFFFF;
+    color: #8F98A7;
+}
+
+.button--action-secondary:hover,
+.button--action-secondary:active {
+    background-color: #FFFFFF;
+    color: #8F98A7;
+}
+
+.button--action-secondary:focus {
+    background-color: #FFFFFF;
+    color: #8F98A7;
+}
+
+.button--action-disabled,
+.button--action-disabled:link,
+.button--action-disabled:visited {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+    font-size: 13px;
+}
+
+.button--action-disabled:hover,
+.button--action-disabled:active {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.button--action-disabled:focus {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+
+    .button--action-default,
+    .button--action-default:link,
+    .button--action-default:visited {
+        border-color: #D10051;
+        padding: 10px 15px;
+    }
+
+    .button--action-default:hover,
+    .button--action-default:active {
+        border-color: transparent;
+    }
+
+    .button--action-default:focus {
+        border-color: transparent;
+    }
+
+    .button--action-secondary,
+    .button--action-secondary:link,
+    .button--action-secondary:visited {
+        border-color: transparent;
+    }
+
+    .button--action-secondary:hover,
+    .button--action-secondary:active {
+        border-color: transparent;
+    }
+
+    .button--action-secondary:focus {
+        border-color: transparent;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    .button--action-default,
+    .button--action-default:link,
+    .button--action-default:visited {
+        border-color: #D10051;
+        padding: 15px 20px;
+        /* var(--color--buttons--1) */
+    }
+
+    .button--action-default:hover,
+    .button--action-default:active {
+        border-color: #D10051;
+        /* var(--color--buttons--1) */
+    }
+
+    .button--action-default:focus {
+        border-color: #2C74D7;
+        /* var(--color--buttons--3) */
+    }
+
+    .button--action-secondary,
+    .button--action-secondary:link,
+    .button--action-secondary:visited {
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .button--action-secondary:hover,
+    .button--action-secondary:active {
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .button--action-secondary:focus {
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+}
+
+.removeFile,
+.removeFile:link,
+.removeFile:visited {
+    border-color: transparent;
+    background-color: transparent;
+    color: #0084D5;
+    /* var(--color--secondary) */
+}
+
+.removeFile:hover,
+.removeFile:active {
+    border-color: #0084D5;
+    /* var(--color--secondary) */
+    background-color: transparent;
+    color: #0084D5;
+    /* var(--color--secondary) */
+}
+
+.removeFile:focus {
+    border-color: #0084D5;
+    /* var(--color--secondary) */
+    background-color: transparent;
+    color: #0084D5;
+    /* var(--color--secondary) */
+}

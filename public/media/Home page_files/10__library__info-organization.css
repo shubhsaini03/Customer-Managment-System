@@ -1,0 +1,1315 @@
+/* ==========================================================================
+   10_INFO ORGANIZATION
+   --------------------------------------------------------------------------
+   * README
+
+   * LISTS
+   * LISTS MODIFIERS
+
+   * TABLES: GENERAL
+   * TABLES: DEFAULT
+   * TABLES: DEFAULT-LIKE WITH FIXED FIRST COLUMN
+   * TABLES: CARDS ON MOBILE AND TABLET
+   * TABLES: CARDS WITH NO ACTIONS ON MOBILE AND TABLET
+   * TABLES: CARDS WITH NO SUBTITLE ON MOBILE AND TABLET
+   * TABLES: CARDS ON DESKTOP TOO, WITH SWITCH
+   * TABLES: CARDS WITH NO ACTIONS ON DESKTOP TOO, WITH SWITCH
+   * TABLES: CARDS WITH NO SUBTITLE ON DESKTOP TOO, WITH SWITCH
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * Styles on this stylesheet are the Info Organization default styles.
+ * That means they apply to different HTML components you can use to organize
+ * iterable sets of text information, and therefore, they apply only to the
+ * pages that display one or more of these components.
+
+ * If you need to deal with an exception to these Info Organization default
+ * styles, you should manage it by adding a .X--modifier class to the .X element
+ * and develop the given exception nested to this .X--modifier class in
+ * stylesheet #17 under the corresponding page subtitle.
+
+ * If you need to deal with styles for a new type of Info Organization component
+ * or a new sub-element for an existing one, you should develop them in this
+ * stylesheet, under a new component subtitle or under the correspondent one
+ * accordingly.
+ */
+
+/* LISTS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   To manage sets of iterable information in any page, as many times as needed.
+   This complex example contemplates several possible sub-elements (explicited
+   in the class names) - of course, only keep the ones that suit your needs in
+   each case.
+   --------------------------------------------------------------------------
+
+    <ul class="list">
+        <li class="list__item">
+            <div class="list__item__image">
+                <img src="X">
+            </div>
+
+            <div class="list__item__count">
+                <span class="list__item__count__value">X</span>
+            </div>
+
+            <div class="list__item__text">
+                <div class="list__item__text__title">X</div>
+
+                <div class="list__item__text__subtitle">X</div>
+            </div>
+
+            <div class="list__item__actions">
+                <a class="link" href="X">X</a>
+
+                <a class="link" href="X">X</a>
+            </div>
+        </li>
+
+        <li class="list__item">X</li>
+
+        <li class="list__item">X</li>
+    </ul>
+
+   -------------------------------------------------------------------------- */
+
+/*
+ * There are not any default styles for lists, as the basic reset is covered in
+ * reset.css, and particular styles for each List component implementation are
+ * covered using .list--modifier classes in stylesheet #16
+ */
+
+/* LISTS MODIFIERS
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   .list--disc > To display list items with a disc marker
+   --------------------------------------------------------------------------
+   .X--rich-text ul > To display list items with a disc marker
+   --------------------------------------------------------------------------
+   .list--numeric > To display list items with a numeric marker
+   --------------------------------------------------------------------------
+   .X--rich-text ol > To display list items with a numeric marker
+   -------------------------------------------------------------------------- */
+
+.list--disc,
+.list--numeric,
+[class*="--rich-text"] ul,
+[class*="--rich-text"] ol,
+div[class*="fieldSpec"] [class*="description"] ul,
+div[class*="fieldSpec"] [class*="description"] ol {
+    margin-bottom: 8px;
+    padding-left: 36px;
+}
+
+.list--disc,
+[class*="--rich-text"] ul,
+div[class*="fieldSpec"] [class*="description"] ul {
+    list-style-type: disc;
+}
+
+.list--numeric,
+[class*="--rich-text"] ol,
+div[class*="fieldSpec"] [class*="description"] ol {
+    list-style: decimal;
+}
+
+/* TABLES: GENERAL
+   ========================================================================== */
+.table,
+.tableField {
+    border-collapse: separate;
+    width: 100%;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    text-align: left;
+}
+
+/*
+ * 1. This will only work if the table also has table-layout: fixed set (as in .table--default)
+ */
+.table thead th,
+.tableField thead th {
+    text-align: inherit;
+    white-space: nowrap;
+    /* 1 */
+    text-overflow: ellipsis;
+    /* 1 */
+    overflow: hidden;
+    /* 1 */
+}
+
+.table tbody td,
+.tableField tbody td {
+    line-height: 150%;
+}
+
+.table tbody td img,
+.tableField tbody td img {
+    border-radius: 100%;
+}
+
+.table tbody td .link,
+.tableField tbody td .link {
+    font-weight: 500;
+}
+
+/* TABLES: DEFAULT
+   ========================================================================== */
+.table--default thead th,
+.tableField thead th,
+.table--default td[data-th]:before {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.table--default tbody td,
+.tableField tbody td {
+    font-size: 14px;
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .table--default {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .table--default thead,
+    .table--default thead tr,
+    .table--default thead th {
+        display: none;
+    }
+
+    .table--default tbody {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        margin: -24px 0 0 -24px;
+        /* - var(--grid--gutters--24) */
+        width: calc(100% + 24px);
+        /* 100% + var(--grid--gutters--24) */
+
+    }
+
+    .table--default tbody tr,
+    .table--default tbody td {
+        display: block;
+    }
+
+    .table--default tbody tr {
+        margin: 24px 0 0 24px;
+        /* + var(--grid--gutters--24) */
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        -ms-flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        width: 100%;
+        max-width: calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        background-color: #FFFFFF;
+    }
+
+    .table--default tbody td {
+        padding-left: 16px;
+        vertical-align: top;
+    }
+
+    .table--default tbody td:nth-of-type(1),
+    .table--default tbody td:nth-of-type(2) {
+        padding-right: 70px;
+    }
+
+    .table--default.table--people tbody td:nth-of-type(1),
+    .table--default.table--people tbody td:nth-of-type(2) {
+        padding-left: 65px;
+    }
+
+    .table--default tbody td:nth-of-type(1) {
+        position: relative;
+        height: 44px;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .table--default.table--people tbody td:nth-of-type(1) img {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 40px;
+    }
+
+    .table--default tbody td:nth-of-type(1) .link {
+        display: block;
+        border-bottom-color: transparent;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .table--default tbody td:nth-of-type(2) {
+        height: 32px;
+        padding-top: 0;
+        padding-bottom: 16px;
+        font-size: 14px;
+        line-height: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #565656;
+        /* var(--color--text--2) */
+    }
+
+    .table--default tbody td:nth-child(n+4):not(:last-child) {
+        padding-top: 4px;
+    }
+
+    .table--default tbody td:nth-child(n+3):not(:last-child):not(:nth-last-child(2)) {
+        padding-bottom: 4px;
+    }
+
+    .table--default tbody td:nth-of-type(3) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 16px;
+    }
+
+    .table--default tbody td:nth-last-child(2) {
+        padding-bottom: 16px;
+    }
+
+    .table--default tbody td[data-th]:nth-child(n+3):not(:last-child):before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+    .table--default tbody td:last-child {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .table--default tbody td[data-th]:last-child:before {
+        content: '';
+    }
+
+    .table--default tbody td[data-th]:last-child:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .table--default tbody td:last-child .link {
+        text-transform: uppercase;
+    }
+
+    .table--default tbody td:last-child .link+.link {
+        margin-left: 16px;
+    }
+
+    .table--default tbody tr .table__row__toggle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 75px;
+        /* This is the height of :nth-of-type(1) + :nth-of-type(2) */
+        text-align: center;
+        vertical-align: middle;
+        line-height: 75px;
+        cursor: pointer;
+    }
+
+    .table--default tbody tr .table__row__toggle:before {
+        content: "\f107";
+        font: normal normal normal 24px/24px FontAwesome;
+        color: #1D3C6D;
+        /* var(--color--clickable) */
+    }
+
+    .table--default tbody tr.table__row--open .table__row__toggle:before {
+        content: "\f106";
+    }
+
+    .table--default tbody tr:not(.table__row--open) td:nth-child(n+3):not(:last-child) {
+        display: none;
+    }
+
+}
+
+/* Media query to target tablet and desktop */
+@media all and (min-width:751px) {
+
+    .table--default,
+    .tableField {
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .table--default thead th,
+    .tableField thead th {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        height: 46px;
+        padding: 4px 8px;
+        background-color: #B4B8BB;
+        /* var(--color--brandeable--3) */
+        vertical-align: middle;
+    }
+
+    .table--default.table--people thead th:nth-of-type(1) {
+        padding-left: 56px;
+    }
+
+    .table--default tbody td,
+    .tableField tbody td {
+        height: 46px;
+        padding: 8px 8px;
+        background-color: #FFFFFF;
+        vertical-align: middle;
+    }
+
+    .table--default.table--jobs tbody td:nth-of-type(1),
+    .table--default.table--people tbody td:nth-of-type(1) {
+        position: relative;
+    }
+
+    .table--default tbody td:nth-of-type(1) .link {
+        white-space: nowrap;
+    }
+
+    .table--default.table--people tbody td:nth-of-type(1) {
+        padding-left: 50px;
+    }
+
+    .table--default.table--people tbody td:nth-of-type(1) img {
+        position: absolute;
+        left: 8px;
+        top: calc(50% - 16px);
+        width: 30px;
+    }
+
+    .table--default tbody td[data-th*="Action"] {
+        width: 1px;
+        white-space: nowrap;
+    }
+
+    .table--default tbody td:last-child .link {
+        float: left;
+        clear: both;
+        white-space: nowrap;
+    }
+
+    .table--default tbody tr+tr td,
+    .tableField tbody tr+tr td {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+}
+
+/* TABLES: DEFAULT-LIKE WITH FIXED FIRST COLUMN
+   ========================================================================== */
+.table--fixed-first-column__wrap {
+    position: relative;
+    z-index: 1;
+    overflow-x: scroll;
+    -webkit-box-shadow: inset 0 0 12px 0 rgba(91, 91, 91, .3);
+    box-shadow: inset 0 0 12px 0 rgba(91, 91, 91, .3);
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.table--fixed-first-column__wrap:after {
+    content: '';
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 33px;
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(91, 91, 91, .3) 100%);
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(91, 91, 91, .3) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(91, 91, 91, .3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#5B5B5B', GradientType=1);
+}
+
+.table--fixed-first-column {
+    min-width: 100%;
+}
+
+.table--fixed-first-column thead th {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #B4B8BB;
+    /* var(--color--borders--1) */
+    height: 46px;
+    padding: 4px 8px;
+    background-color: #B4B8BB;
+    /* var(--color--brandeable--3) */
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table--fixed-first-column td {
+    background: #fff;
+    height: 46px;
+    padding: 8px 8px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table--fixed-first-column thead th:first-child,
+.table--fixed-first-column tbody td:first-child {
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.table--fixed-first-column tbody tr+tr td {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB;
+    /* var(--color--borders--1) */
+}
+
+.table--fixed-first-column tr>*:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+/* TABLES: DEFAULT
+   ========================================================================== */
+.table--horizontal {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #E7E7E7;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #E7E7E7;
+}
+
+.table--horizontal thead,
+.table--horizontal thead tr,
+.table--horizontal thead th {
+    display: none;
+}
+
+.table--horizontal tbody th,
+.table--horizontal tbody td {
+    vertical-align: top;
+}
+
+.table--horizontal tbody th {
+    background-color: #E7E7E7;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.table--horizontal tbody td {
+    background-color: #FFFFFF;
+    font-size: 14px;
+}
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+
+    .table--horizontal tbody tr+tr th,
+    .table--horizontal tbody tr+tr td {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #E7E7E7;
+    }
+
+    .table--horizontal tbody th,
+    .table--horizontal tbody td {
+        height: 51px;
+        vertical-align: top;
+    }
+
+    .table--horizontal tbody th {
+        width: 1px;
+        padding: 16px 16px;
+        text-align: center;
+    }
+
+    .table--horizontal tbody td {
+        padding: 16px 8px;
+    }
+
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+
+    .table--horizontal,
+    .table--horizontal tbody,
+    .table--horizontal tbody tr,
+    .table--horizontal tbody td {
+        display: block;
+    }
+
+    .table--horizontal tbody tr+tr {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #E7E7E7;
+    }
+
+    .table--horizontal tbody th {
+        width: 60px;
+        padding: 2px 4px;
+    }
+
+    .table--horizontal tbody td {
+        padding: 4px 4px;
+    }
+
+    .table--horizontal tbody td:empty:before {
+        content: '\a0';
+    }
+
+}
+
+/* TABLES: CARDS ON MOBILE AND TABLET
+   ========================================================================== */
+.table--cards thead th,
+.table--cards td[data-th]:before {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.table--cards tbody td {
+    font-size: 14px;
+}
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .table--cards {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .table--cards thead,
+    .table--cards thead tr,
+    .table--cards thead th {
+        display: none;
+    }
+
+    .table--cards tbody {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        margin: -24px 0 0 -24px;
+        /* - var(--grid--gutters--24) */
+        width: calc(100% + 24px);
+        /* 100% + var(--grid--gutters--24) */
+
+    }
+
+    .table--cards tbody tr,
+    .table--cards tbody td {
+        display: block;
+    }
+
+    .table--cards tbody tr {
+        margin: 24px 0 0 24px;
+        /* + var(--grid--gutters--24) */
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        background-color: #FFFFFF;
+    }
+
+    .table--cards tbody tr.partially-saved:hover {
+        background-color: transparent;
+    }
+
+    .table--cards tbody td {
+        padding-left: 16px;
+        vertical-align: top;
+    }
+
+    .table--cards.table--people tbody td:nth-of-type(1),
+    .table--cards.table--people tbody td:nth-of-type(2) {
+        padding-left: 65px;
+    }
+
+    .table--cards tbody tr.partially-saved:hover td:nth-of-type(1),
+    .table--cards tbody tr.partially-saved:hover td:nth-of-type(2) {
+        background-color: #FCF6EA;
+    }
+
+    .table--cards tbody td:nth-of-type(1) {
+        position: relative;
+        height: 44px;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .table--cards tbody td:nth-of-type(1) .partially-saved__bar {
+        height: 75px;
+    }
+
+    .table--cards.table--people tbody td:nth-of-type(1) img {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 40px;
+    }
+
+    .table--cards tbody td:nth-of-type(1) .link {
+        display: block;
+        border-bottom-color: transparent;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .table--cards tbody td:nth-of-type(2) {
+        height: 32px;
+        padding-top: 0;
+        padding-bottom: 16px;
+        font-size: 14px;
+        line-height: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #565656;
+        /* var(--color--text--2) */
+    }
+
+    .table--cards tbody td:nth-child(n+4):not(:last-child) {
+        padding-top: 4px;
+    }
+
+    .table--cards tbody td:nth-child(n+3):not(:last-child):not(:nth-last-child(2)) {
+        padding-bottom: 4px;
+    }
+
+    .table--cards tbody td:nth-of-type(3) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 16px;
+    }
+
+    .table--cards tbody td:nth-last-child(2) {
+        padding-bottom: 16px;
+    }
+
+    .table--cards tbody td[data-th]:nth-child(n+3):not(:last-child):before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+    .table--cards tbody td:last-child {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .table--cards tbody td[data-th]:last-child:before {
+        content: '';
+    }
+
+    .table--cards tbody td[data-th]:last-child:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .table--cards tbody td:last-child .link {
+        text-transform: uppercase;
+    }
+
+    .table--cards tbody td:last-child .link+.link {
+        margin-left: 16px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .table--cards tbody tr {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        -ms-flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        flex: 0 0 calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+        width: 100%;
+        max-width: calc(100% - 24px);
+        /* 100% - var(--grid--gutters--24) */
+    }
+
+    .table--cards tbody td:nth-of-type(1),
+    .table--cards tbody td:nth-of-type(2) {
+        padding-right: 70px;
+    }
+
+    .table--cards tbody tr .table__row__toggle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 75px;
+        /* This is the height of :nth-of-type(1) + :nth-of-type(2) */
+        text-align: center;
+        vertical-align: middle;
+        line-height: 75px;
+        cursor: pointer;
+    }
+
+    .table--cards tbody tr .table__row__toggle:before {
+        content: "\f107";
+        font: normal normal normal 24px/24px FontAwesome;
+        color: #1D3C6D;
+        /* var(--color--clickable) */
+    }
+
+    .table--cards tbody tr.table__row--open .table__row__toggle:before {
+        content: "\f106";
+    }
+
+    .table--cards tbody tr:not(.table__row--open) td:nth-child(n+3):not(:last-child) {
+        display: none;
+    }
+
+}
+
+/* Media query to target only tablet */
+@media all and (min-width:751px) and (max-width:1024px) {
+    .table--cards tbody tr {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(50% - 24px);
+        /* 50% - var(--grid--gutters--24) */
+        -ms-flex: 0 0 calc(50% - 24px);
+        /* 50% - var(--grid--gutters--24) */
+        flex: 0 0 calc(50% - 24px);
+        /* 50% - var(--grid--gutters--24) */
+        width: 100%;
+        max-width: calc(50% - 24px);
+        /* 50% - var(--grid--gutters--24) */
+    }
+
+    .table--cards tbody td:nth-of-type(1),
+    .table--cards tbody td:nth-of-type(2) {
+        padding-right: 16px;
+    }
+
+    .table--cards tbody td:nth-last-child(2) {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+    }
+
+}
+
+/* TABLES: CARDS WITH NO ACTIONS ON MOBILE AND TABLET
+   ========================================================================== */
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .table--cards-with-no-actions.table--cards tbody td:nth-last-child(2) {
+        padding-bottom: 4px;
+    }
+
+    .table--cards-with-no-actions.table--cards tbody td:last-child {
+        border-top-width: 0;
+        padding-top: 4px;
+        padding-bottom: 16px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .table--cards-with-no-actions.table--cards tbody td[data-th]:last-child:before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .table--cards-with-no-actions.table--cards tbody tr:not(.table__row--open) td:last-child {
+        display: none;
+    }
+
+}
+
+/* TABLES: CARDS WITH NO SUBTITLE ON MOBILE AND TABLET
+   ========================================================================== */
+
+/* Media query to target mobile and tablet */
+@media all and (max-width:1024px) {
+    .table--cards-with-no-subtitle.table--cards tbody td:nth-of-type(1) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        height: 75px;
+        padding-bottom: 16px;
+    }
+
+    .table--cards-with-no-subtitle.table--cards tbody td:nth-of-type(2) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        height: auto;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        font-size: 14px;
+        line-height: 150%;
+        white-space: initial;
+        color: inherit;
+    }
+
+    .table--cards-with-no-subtitle.table--cards.table--people tbody td:nth-of-type(2) {
+        padding-left: 16px;
+    }
+
+    .table--cards-with-no-subtitle.table--cards tbody td:nth-of-type(2):before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+    .table--cards-with-no-subtitle.table--cards tbody td:nth-of-type(3) {
+        border-top-width: 0;
+        padding-top: 4px;
+    }
+
+}
+
+/* Media query to target only mobile */
+@media all and (max-width:750px) {
+    .table--cards-with-no-subtitle.table--cards tbody tr:not(.table__row--open) td:nth-child(2) {
+        display: none;
+    }
+
+}
+
+/* TABLES: CARDS ON DESKTOP TOO, WITH SWITCH
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   To enable the switcher, add 'displaySwitcher': true, in the
+   tpt/listControlsPerson.tpt include settings.
+   The switcher snippet and styles are defined in stylesheet #13.
+   The switcher functionality is defined in js/tptImplementations.js
+   -------------------------------------------------------------------------- */
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .table--cards:not(.table--cards__cards-view) {
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .table--cards:not(.table--cards__cards-view) thead th {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        height: 46px;
+        padding: 4px 8px;
+        background-color: #B4B8BB;
+        /* var(--color--brandeable--3) */
+        vertical-align: middle;
+    }
+
+    .table--cards.table--people:not(.table--cards__cards-view) thead th:nth-of-type(1) {
+        padding-left: 56px;
+    }
+
+    .table--cards:not(.table--cards__cards-view) tbody td {
+        height: 46px;
+        padding: 8px 8px;
+        vertical-align: middle;
+    }
+
+    .table--cards:not(.table--cards__cards-view) tbody td:nth-of-type(1) {
+        position: relative;
+        white-space: nowrap;
+    }
+
+    .table--cards.table--people:not(.table--cards__cards-view) tbody td:nth-of-type(1) {
+        padding-left: 50px;
+    }
+
+    .table--cards.table--people:not(.table--cards__cards-view) tbody td:nth-of-type(1) img {
+        position: absolute;
+        left: 8px;
+        top: calc(50% - 16px);
+        width: 30px;
+    }
+
+    .table--cards:not(.table--cards__cards-view) tbody td[data-th*="Action"] {
+        width: 1px;
+        white-space: nowrap;
+    }
+
+    .table--cards:not(.table--cards__cards-view) tbody td:last-child .link {
+        float: left;
+        clear: both;
+        white-space: nowrap;
+    }
+
+    .table--cards:not(.table--cards__cards-view) tbody tr+tr td {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+    }
+
+    .table--cards__cards-view {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .table--cards__cards-view thead,
+    .table--cards__cards-view thead tr,
+    .table--cards__cards-view thead th {
+        display: none;
+    }
+
+    .table--cards__cards-view tbody {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        margin: -24px 0 0 -24px;
+        /* - var(--grid--gutters--24) */
+        width: calc(100% + 24px);
+        /* 100% + var(--grid--gutters--24) */
+
+    }
+
+    .table--cards__cards-view tbody tr,
+    .table--cards__cards-view tbody td {
+        display: block;
+    }
+
+    .table--cards__cards-view tbody tr {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 calc(33.33% - 24px);
+        /* 33.33% - var(--grid--gutters--24) */
+        -ms-flex: 0 0 calc(33.33% - 24px);
+        /* 33.33% - var(--grid--gutters--24) */
+        flex: 0 0 calc(33.33% - 24px);
+        /* 33.33% - var(--grid--gutters--24) */
+        margin: 24px 0 0 24px;
+        /* + var(--grid--gutters--24) */
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        width: 100%;
+        max-width: calc(33.33% - 24px);
+        /* 33.33% - var(--grid--gutters--24) */
+        background-color: #FFFFFF;
+    }
+
+    .table--cards__cards-view tbody tr.partially-saved:hover {
+        background-color: transparent;
+    }
+
+    .table--cards__cards-view tbody td {
+        padding-right: 16px;
+        padding-left: 16px;
+        vertical-align: top;
+    }
+
+    .table--cards__cards-view.table--people tbody td:nth-of-type(1),
+    .table--cards__cards-view.table--people tbody td:nth-of-type(2) {
+        padding-left: 65px;
+    }
+
+    .table--cards__cards-view tbody tr.partially-saved:hover td:nth-of-type(1),
+    .table--cards__cards-view tbody tr.partially-saved:hover td:nth-of-type(2) {
+        background-color: #FCF6EA;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(1) {
+        position: relative;
+        height: 44px;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(1) .partially-saved__bar {
+        height: 75px;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(1) img {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 40px;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(1) .link {
+        display: block;
+        border-bottom-color: transparent;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(2) {
+        height: 32px;
+        padding-top: 0;
+        padding-bottom: 16px;
+        font-size: 14px;
+        line-height: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #565656;
+        /* var(--color--text--2) */
+    }
+
+    .table--cards__cards-view tbody td:nth-child(n+4):not(:last-child) {
+        padding-top: 4px;
+    }
+
+    .table--cards__cards-view tbody td:nth-child(n+3):not(:last-child):not(:nth-last-child(2)) {
+        padding-bottom: 4px;
+    }
+
+    .table--cards__cards-view tbody td:nth-of-type(3) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 16px;
+    }
+
+    .table--cards__cards-view tbody td:nth-last-child(2) {
+        padding-bottom: 16px;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+    }
+
+    .table--cards__cards-view tbody td[data-th]:nth-child(n+3):not(:last-child):before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+    .table--cards__cards-view tbody td:last-child {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .table--cards__cards-view tbody td[data-th]:last-child:before {
+        content: '';
+    }
+
+    .table--cards__cards-view tbody td[data-th]:last-child:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .table--cards__cards-view tbody td:last-child .link {
+        text-transform: uppercase;
+    }
+
+    .table--cards__cards-view tbody td:last-child .link+.link {
+        margin-left: 8px;
+    }
+
+}
+
+/* TABLES: CARDS WITH NO ACTIONS ON DESKTOP TOO, WITH SWITCH
+   ========================================================================== */
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .table--cards-with-no-actions.table--cards__cards-view tbody td:nth-last-child(2) {
+        padding-bottom: 4px;
+    }
+
+    .table--cards-with-no-actions.table--cards__cards-view tbody td:last-child {
+        border-top-width: 0;
+        padding-top: 4px;
+        padding-bottom: 16px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .table--cards-with-no-actions.table--cards__cards-view tbody td[data-th]:last-child:before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+}
+
+/* TABLES: CARDS WITH NO SUBTITLE ON DESKTOP TOO, WITH SWITCH
+   ========================================================================== */
+
+/* Media query to target only desktop */
+@media all and (min-width:1025px) {
+    .table--cards-with-no-subtitle.table--cards__cards-view tbody td:nth-of-type(1) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        height: 75px;
+        padding-bottom: 16px;
+    }
+
+    .table--cards-with-no-subtitle.table--cards__cards-view tbody td:nth-of-type(2) {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #B4B8BB;
+        /* var(--color--borders--1) */
+        height: auto;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        font-size: 14px;
+        line-height: 150%;
+        white-space: initial;
+        color: inherit;
+    }
+
+    .table--cards-with-no-subtitle.table--cards__cards-view.table--people tbody td:nth-of-type(2) {
+        padding-left: 16px;
+    }
+
+    .table--cards-with-no-subtitle.table--cards__cards-view tbody td:nth-of-type(2):before {
+        content: attr(data-th)":\00a0 ";
+        display: inline-block;
+    }
+
+    .table--cards-with-no-subtitle.table--cards__cards-view tbody td:nth-of-type(3) {
+        border-top-width: 0;
+        padding-top: 4px;
+    }
+
+}

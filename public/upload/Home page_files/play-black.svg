@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>play</title>
+    <defs>
+        <path d="M6.96428571,5.6100816 L6.96428571,22.2508581 L19.9071119,13.9304699 L6.96428571,5.6100816 Z M6.43123649,2.50767341 L22.6812365,12.954102 C23.3919688,13.4110013 23.3919688,14.4499384 22.6812365,14.9068377 L6.43123649,25.3532663 C5.65876763,25.8498534 4.64285714,25.2952159 4.64285714,24.3768984 L4.64285714,3.48404128 C4.64285714,2.56572385 5.65876763,2.01108629 6.43123649,2.50767341 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="component/video/desktop-large" transform="translate(-61.000000, -673.000000)">
+            <g id="Video" transform="translate(0.000000, -0.000000)">
+                <g id="Watch-the-film" transform="translate(30.000000, 646.000000)">
+                    <g id="play" transform="translate(27.285714, 25.071429)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Group" mask="url(#mask-2)" fill="#000000">
+                            <g id="COLOR/-black">
+                                <rect id="Rectangle" x="0" y="0" width="27.8571429" height="27.8571429"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

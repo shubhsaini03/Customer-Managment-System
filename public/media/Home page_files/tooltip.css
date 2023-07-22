@@ -1,0 +1,62 @@
+/* SNIPPET: TOOLTIP
+   ========================================================================== */
+
+/* HTML Snippet
+   --------------------------------------------------------------------------
+   From https://github.com/nico3333fr/van11y-accessible-simple-tooltip-aria
+   --------------------------------------------------------------------------
+
+    <span class="js-simple-tooltip" data-simpletooltip-text="X"></span>
+
+   -------------------------------------------------------------------------- */
+.simpletooltip[aria-hidden="true"] {
+    display: none;
+}
+
+.simpletooltip_container {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+}
+
+.simpletooltip {
+    position: absolute;
+    z-index: 3;
+    border-radius: 3px;
+    width: 120px;
+    padding: 5px;
+    background: #333333;
+    font-size: 12px;
+    line-height: 150%;
+    font-weight: 500;
+    white-space: initial;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.simpletooltip::before {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent;
+    speak: none;
+    pointer-events: none;
+}
+
+/*
+ * Tooltip above
+ */
+.simpletooltip {
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+}
+
+.simpletooltip::before {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: #333333;
+}

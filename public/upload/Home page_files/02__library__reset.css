@@ -1,0 +1,225 @@
+/* ==========================================================================
+   02_RESET
+   --------------------------------------------------------------------------
+   * README
+
+   * ALL
+   * SECTIONS (https://html.spec.whatwg.org/multipage/semantics.html#sections)
+   * GROUPING content (https://html.spec.whatwg.org/multipage/semantics.html#grouping-content)
+   * TEXT-LEVEL SEMANTICS (https://html.spec.whatwg.org/multipage/semantics.html#text-level-semantics)
+   * EMBEDDED CONTENT (https://html.spec.whatwg.org/multipage/embedded-content.html#embedded-content)
+   * USER NTERACTION (https://html.spec.whatwg.org/multipage/interaction.html#editing)
+   ========================================================================== */
+
+/* README
+   ========================================================================== */
+
+/*!
+ * reset.css v2.0 | Public Domain License | meyerweb.com/eric/tools/css/reset
+
+ * Styles on this stylesheet are based on reset.css, plus a few additions.
+
+ * reset.css resets the most commonly unwanted styles (the ones you'll probably
+ * overwrite anyways) of most HTML elements to a consistent baseline, and
+ * redefines others to a slightly better approach. This ensures you are avoiding
+ * cross-browser differences as much as possible, and starting from a clean slate.
+ */
+
+/* ALL
+   ========================================================================== */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* SECTIONS (https://html.spec.whatwg.org/multipage/semantics.html#sections)
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* GROUPING content (https://html.spec.whatwg.org/multipage/semantics.html#grouping-content)
+   ========================================================================== */
+
+blockquote {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after {
+    content: "";
+    content: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+    display: block;
+    margin: 1em 0;
+    border: 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #B4B8BB; /* var(--color--borders--1) */
+    padding: 0;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+p {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* TEXT-LEVEL SEMANTICS
+   ========================================================================== */
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+q {
+    font-style: italic;
+}
+
+q:before {
+    content: open-quote;
+}
+
+q:after {
+    content: close-quote;
+}
+
+/* EMBEDDED CONTENT (https://html.spec.whatwg.org/multipage/embedded-content.html#embedded-content)
+   ========================================================================== */
+
+img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+}
+
+/* USER NTERACTION (https://html.spec.whatwg.org/multipage/interaction.html#editing)
+   ========================================================================== */
+
+/*
+ * Remove outline when focusing for all elements
+ */
+:focus {
+    outline: none;
+}
+
+/*
+ * Restore outline when focusing for the elements that we want to have a visible focus
+ */
+a:focus,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline-width: thin;
+    outline-style: dotted;
+    outline-color: #5E6D81;
+}
+
+:invalid {
+    outline-color: #DD0000;
+    outline-color: rgba(221, 0, 0, 0.5);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

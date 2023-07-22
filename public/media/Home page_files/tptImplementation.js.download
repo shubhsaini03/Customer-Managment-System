@@ -1,0 +1,584 @@
+/* This scripts are intended to be run deferred */
+
+/* Back links behaviour */
+tpt.back("a.tpt_back");
+
+/* Anchors Focus at load */
+if (window.location.hash) {
+  var isLetter = /^[a-zA-Z]*$/;
+  if (
+    window.location.hash.indexOf(" ") === -1 &&
+    isLetter.test(window.location.hash[1])
+  ) {
+    tpt(window.location.hash).setEphimeralFocus();
+  }
+}
+
+/* Anchors Focus */
+tpt(".tpt_localAnchor").onActive(function (event) {
+  "use strict";
+  tpt(
+    "#" + tpt.getElementFromEvent(event).href.split("#")[1]
+  ).setEphimeralFocus();
+});
+
+/* Forms canceling after submit */
+(function () {
+  "use strict";
+  var someFormPosted = false;
+  tpt("form[data-preventMultipleSubmit='true']").addListener(
+    "submit",
+    function (event) {
+      if (someFormPosted) {
+        tpt.cancelEvent(event);
+        return false;
+      } else {
+        tpt(tpt.getElementFromEvent(event)).addClass("tpt_formSubmitted");
+        someFormPosted = true;
+        tpt.togglePageBusy(true);
+        return true;
+      }
+    }
+  );
+
+  tpt(".tpt_resumePaste").addListener("change", function (event) {
+    someFormPosted = false;
+  });
+})();
+
+/* Login hidden fields toggle */
+tpt(".tpt_loginHiddenFieldsToggle").onActive(function () {
+  "use strict";
+  tpt(".tpt_loginHiddenFields")
+    .toggleClass("visibility--visible")
+    .toggleClass("visibility--hidden");
+  tpt(".tpt_uploadResumeLoginLegend")
+    .toggleClass("visibility--visible")
+    .toggleClass("visibility--hidden");
+}, true);
+
+/* Lists sorting */
+tpt(".tpt_listSortableItem").onActive(function (event) {
+  "use strict";
+  var trigger = tpt.getElementFromEvent(event);
+  tpt.listSearchAndSort(
+    trigger.getAttribute("data-sortBy"),
+    trigger.getAttribute("data-entity")
+  );
+  tpt.togglePageBusy(true);
+}, true);
+
+tpt(".tpt_peopleFilterByJob").onActive(function (event) {
+  "use strict";
+  tpt.listSearchAndSortPeopleByJobId(
+    tpt.getElementFromEvent(event).getAttribute("data-jobid")
+  );
+  tpt.togglePageBusy(true);
+}, true);
+
+/* Social Share */
+tpt(".tpt_socialShareButton").onActive(function (event) {
+  "use strict";
+  tpt(tpt.getElementFromEvent(event).parentElement)
+    .toggleClass("social-share--open")
+    .selectAll(".tpt_socialShareIcon")
+    .each(function (socialIcon) {
+      if (socialIcon.nodeType === 1) {
+        if (socialIcon.tabIndex < 0) {
+          socialIcon.tabIndex = 0;
+        } else {
+          socialIcon.tabIndex = -1;
+        }
+      }
+    });
+}, true);
+
+tpt(".tpt_socialSharePopupTrigger").onActive(function (event) {
+  "use strict";
+  var activeSocialLink = tpt.getElementFromEvent(event);
+  window.open(
+    activeSocialLink.href,
+    "popup_id" + tpt.trim(activeSocialLink.title),
+    "scrollbars,resizable,width=700,height=500"
+  );
+}, true);
+
+/* Profile upload file */
+tpt(".tpt_uploadFileCaptionTrigger").onActive(function () {
+  "use strict";
+  tpt(".tpt_uploadFileCaption")
+    .toggleClass("visibility--visible")
+    .toggleClass("visibility--hidden");
+  tpt(".tpt_uploadFile")
+    .toggleClass("visibility--visible")
+    .toggleClass("visibility--hidden");
+}, true);
+
+/* Attachments */
+tpt(".tpt_attachments_showPreviewTrigger").onActive(function (event) {
+  "use strict";
+  tpt.attachments.showPreview(tpt.getElementFromEvent(event));
+}, true);
+
+tpt(".tpt_attachments_hidePreviewTrigger").onActive(function () {
+  "use strict";
+  tpt.attachments.hidePreview();
+}, true);
+
+tpt(".tpt_attachments_deleteFileTrigger").onActive(function (event) {
+  "use strict";
+  tpt.attachments.deleteFile(tpt.getElementFromEvent(event));
+}, true);
+
+/* Mobile menu */
+tpt.menu(".tpt_mobile-menu--from-right--moves-over");
+
+$(document).ready(function () {
+  // Get Scroll bottom of the document
+  function getScrollBottom(element) {
+    return (
+      $(document).outerHeight() - element.scrollTop() - element.outerHeight()
+    );
+  }
+
+  /* --- sticky header and banner ---*/
+  function stickyActions() {
+    var paddingTop = 0;
+    var body = $("body");
+    var originalBannerHeight = body.find(".banner--main").outerHeight();
+
+    // adding padding top for header
+    if ($(".body--header-fixed-on-scroll").length) {
+      var headerHeight = body.find(".header").outerHeight();
+      paddingTop = paddingTop + headerHeight;
+      var hasStickyHeader = true;
+      $(window).scroll(function (event) {
+        var scroll = $(window).scrollTop();
+        if (scroll > 0) {
+          $(".body--header-fixed-on-scroll .header").addClass(
+            "header--scrolling"
+          );
+        } else {
+          $(".body--header-fixed-on-scroll .header").removeClass(
+            "header--scrolling"
+          );
+        }
+      });
+    }
+
+    // adding padding top for banner
+    if (
+      $(".body--banner-fixed-on-scroll").length &&
+      $(window).innerWidth() > 750
+    ) {
+      paddingTop = paddingTop + originalBannerHeight;
+      var headerHeight = body.find(".header").outerHeight();
+      body.find(".banner--main").css("top", headerHeight);
+      var hasStickyBanner = true;
+
+      $(window).scroll(function (event) {
+        // resize banner
+        var scroll = $(window).scrollTop();
+        if (scroll > 0 && scroll < originalBannerHeight - 70) {
+          //variable height
+          var setHeight = originalBannerHeight - scroll;
+          body.find(".banner--main").addClass("banner--scrolling");
+        } else if (scroll <= 0) {
+          // height when I scroll to top.
+          var setHeight = originalBannerHeight;
+          body.find(".banner--main").removeClass("banner--scrolling");
+        } else {
+          // height when I scroll to bottom.
+          var setHeight = 70;
+          body.find(".banner--main").addClass("banner--scrolling");
+        }
+
+        var headerHeight = $(
+          ".body--header-fixed-on-scroll header"
+        ).outerHeight();
+        var newBannerHeight = body.find(".banner--main").outerHeight();
+
+        if ($(window).innerWidth() > 750) {
+          paddingTop = headerHeight + setHeight;
+          body.find(".banner--main").css("max-height", setHeight);
+        } else {
+          paddingTop = headerHeight;
+          body.find(".banner--main").css("max-height", "100%");
+        }
+
+        //set the padding again for body
+        body.find(".body__content").css("padding-top", paddingTop);
+      });
+    }
+
+    // setting the padding-top that body__content needs
+    if (paddingTop != 0) {
+      body.find(".body__content").css("padding-top", paddingTop);
+    }
+
+    //setting sticky aside
+    if (
+      $(".body--aside-fixed-on-scroll .aside").length &&
+      $(window).innerWidth() > 1024
+    ) {
+      var hasStickyAside = true,
+        aside = $(".body--aside-fixed-on-scroll .aside"),
+        asideOffset = $(".aside").offset().top - $(window).scrollTop(),
+        asideContent = aside.parent(),
+        contentPadding = parseInt(asideContent.css("padding-top")),
+        tabsHeight = $(".tabs").outerHeight(),
+        tabsSeparation = 40,
+        footerHeight = $(".footer").outerHeight()
+          ? $(".footer").outerHeight()
+          : 0;
+
+      // on init
+      //aside.css('position', 'static');
+      aside.css("top", asideOffset);
+      aside.css("bottom", footerHeight);
+
+      //on scroll
+      $(window).scroll(function (event) {
+        if ($(window).innerWidth() > 1024) {
+          var bodyContentPadding = parseInt(
+            $(".body__content").css("padding-top")
+          );
+          var scroll = $(window).scrollTop();
+
+          if (hasStickyHeader && hasStickyBanner) {
+            tabsSeparation = 0;
+          }
+          if (
+            scroll <=
+            asideOffset -
+              contentPadding -
+              bodyContentPadding -
+              tabsHeight +
+              tabsSeparation
+          ) {
+            aside.css("position", "static");
+          } else {
+            aside.css("position", "fixed");
+            aside.css("top", bodyContentPadding + contentPadding);
+          }
+
+          var scrollBottom = getScrollBottom($(window));
+          if (scrollBottom > footerHeight) {
+            aside.css("bottom", 0);
+          } else {
+            aside.css("bottom", footerHeight - scrollBottom + 1);
+          }
+        }
+      });
+    } else {
+      var style = {
+        position: "",
+        top: "",
+        bottom: "",
+        position: "",
+      };
+      // Clear all styles
+      $(".body--aside-fixed-on-scroll .aside").css(style);
+    }
+
+    //extra panel position in tablet
+    if (
+      $(".body--extra-panel-from-side #extra-panel").length > 0 &&
+      $(window).innerWidth() > 750 &&
+      $(window).innerWidth() < 1025
+    ) {
+      var paddingFromBody = parseInt(
+        $(".body__content").css("padding-top"),
+        10
+      );
+      $("#extra-panel").css("top", paddingFromBody);
+      $(window).scroll(function (event) {
+        //apply the same when scroll
+        var paddingFromBody = parseInt(
+          $(".body__content").css("padding-top"),
+          10
+        );
+        $("#extra-panel").css("top", paddingFromBody);
+      });
+    }
+
+    //footer sticky fix
+    (footerHeight = $(".footer").outerHeight()
+      ? $(".footer").outerHeight()
+      : 0),
+      (asideButton = $(".aside .article--actions"));
+    if (asideButton.length && $(window).innerWidth() < 1025) {
+      $(window).scroll(function (event) {
+        var scrollBottom = getScrollBottom($(window));
+        if (scrollBottom > footerHeight) {
+          asideButton.css("bottom", 0);
+        } else {
+          asideButton.css("bottom", footerHeight - scrollBottom);
+        }
+      });
+    } else {
+      asideButton.css("bottom", "");
+    }
+  }
+
+  stickyActions();
+
+  $(window).resize(function (event) {
+    stickyActions();
+  });
+
+  var mainOriginalPaddingB = parseInt(
+    $(".main__wrapper").css("padding-bottom")
+  );
+  function setMainPaddingBottom() {
+    // add enough padding bottom to main in order to fit the article-actions below
+    if ($(".article--actions").length && $(window).innerWidth() <= 1024) {
+      var actionHeight = $(".article--actions").outerHeight();
+      $(".main__wrapper")
+        .css("padding-bottom", mainOriginalPaddingB + actionHeight)
+        .addClass("js-bottom-fixed");
+    } else if ($(window).innerWidth() > 1024) {
+      $(".main__wrapper.js-bottom-fixed")
+        .css("padding-bottom", "")
+        .removeClass("js-bottom-fixed");
+    }
+  }
+
+  setMainPaddingBottom();
+
+  function tabsDropdown() {
+    // list tabs
+    if ($(".tabs .tabs__list__item--active").length) {
+      if ($(window).innerWidth() <= 1024) {
+        //use active element to use as trigger
+        var triggerText = $(".tabs .tabs__list__item--active h2").html();
+        $(
+          '<div class="tabs__placeholder" aria-expanded="false">' +
+            "Filter by Region" +
+            "</div>"
+        ).prependTo(".tabs");
+
+        //setting actions to trigger
+        $(".tabs__placeholder").on("click", function (e) {
+          e.preventDefault();
+          $(".section--collapsible-form-search .form--search").removeClass(
+            "form--open"
+          );
+          $(this).attr(
+            "aria-expanded",
+            $(this).attr("aria-expanded") == "false" ? true : false
+          );
+          $(this).closest(".tabs").toggleClass("tabs--open");
+        });
+      }
+    }
+  }
+
+  function tabsDropdownCheck() {
+    if ($(".tabs__placeholder").length && $(window).innerWidth() > 1024) {
+      $(".tabs__placeholder").remove();
+      $(".tabs").removeClass("tabs--open");
+    } else if (!$(".tabs__placeholder").length) {
+      tabsDropdown();
+    }
+  }
+
+  tabsDropdownCheck();
+
+  $(window).bind("resize", function () {
+    stickyActions();
+    tabsDropdownCheck();
+    setMainPaddingBottom();
+  });
+
+  $(".nav__item--has-subnav .nav__item__link").on("click", function (e) {
+    if ($(window).width() < 768){
+      e.preventDefault();
+    }
+
+    if ($(this).parent().hasClass("nav__item--has-subnav--open")) {
+      $(this).parent().removeClass("nav__item--has-subnav--open");
+    } else {
+      $(
+        ".nav__item--has-subnav.nav__item--has-subnav--open .nav__item__link"
+      ).attr("aria-expanded", false);
+      $(".nav__item--has-subnav.nav__item--has-subnav--open").removeClass(
+        "nav__item--has-subnav--open"
+      );
+      $(this).parent().addClass("nav__item--has-subnav--open");
+    }
+
+    $(this).attr("aria-expanded", !!$(this).attr("aria-expanded"));
+  });
+
+  $(".nav__item--has-subnav").on("mouseleave", function () {
+    $(this).removeClass("nav__item--has-subnav--open");
+    $(this).find(".nav__item__link").attr("aria-expanded", false);
+  });
+
+  $(".dropdown__placeholder").click(function (e) {
+    e.preventDefault();
+    $(this).parent().toggleClass("dropdown--open");
+    $(this).attr("aria-expanded", !!$(this).attr("aria-expanded"));
+  });
+
+  // focus on selected sorting element
+  var sortKey = $("#tpt_jobSort").length
+    ? $("#tpt_jobSort").val()
+    : $("#tpt_personSort").length
+    ? $("#tpt_personSort").val()
+    : null;
+  if (sortKey) {
+    $(".sort__item.sort__item--active[data-sortby=" + sortKey + "]").focus();
+  }
+
+  $(document).on(
+    "click",
+    '[class*="--accordion"] [class*="__header__toggle"]',
+    function (e) {
+      e.preventDefault();
+      $(this)
+        .closest('[class*="--accordion"]')
+        .toggleClass("article--accordion__open");
+    }
+  );
+
+  $(document).on("click", ".popup-on-hover__link", function (e) {
+    if ($(window).innerWidth() > 1024) {
+      return false;
+    }
+  });
+
+  $(document).on("click", ".js-toggle-search", function (e) {
+    e.preventDefault();
+    $(".tabs").removeClass("tabs--open");
+    $(".tabs__placeholder").attr("aria-expanded", false);
+    $(".section--collapsible-form-search .form--search").toggleClass(
+      "form--open"
+    );
+  });
+
+  $(document).on("click", ".table__row__toggle", function (e) {
+    e.preventDefault();
+    if ($(window).innerWidth() < 1025) {
+      $(e.target).closest("tr").toggleClass("table__row--open");
+    }
+  });
+
+  // default toggle (show/hide mode)
+  $(".switcher__pointing .switcher__pointing__option").on("click", function (
+    e
+  ) {
+    var target = $(this).attr("href");
+    $(target).show();
+    $(this).addClass("switcher__pointing__option--active");
+    $(this)
+      .siblings()
+      .each(function () {
+        $(this).removeClass("switcher__pointing__option--active");
+        var othertarget = $(this).attr("href");
+        $(othertarget).hide();
+      });
+    e.preventDefault();
+  });
+
+  // default toggle (class switch mode)
+  $(".switcher__toggling .switcher__toggling__option").on("click", function (
+    e
+  ) {
+    e.preventDefault();
+    var target = $(this).data("href");
+    if ($(window).innerWidth() > 1024) {
+      $(".switcher--table .switcher__toggling__option--active").removeClass(
+        "switcher__toggling__option--active"
+      );
+      $(this).toggleClass("switcher__toggling__option--active");
+      if ($(this).data("addclass")) {
+        $(target).addClass($(this).data("addclass"));
+      }
+      if ($(this).data("removeclass")) {
+        $(target).removeClass($(this).data("removeclass"));
+      }
+    }
+  });
+
+  // Save lists view type choosen
+  var tableViewSelectionPageName =
+    "tableViewSelection_" + window.location.pathname.replace(/\//g, "");
+
+  $(document).on("click", ".js-save-choice", function (e) {
+    e.preventDefault();
+    localStorage.setItem(
+      tableViewSelectionPageName,
+      $(this).data("saved-choice")
+    );
+  });
+
+  if (localStorage.getItem(tableViewSelectionPageName) == "cards") {
+    $(".js-save-choice").removeClass("switcher__toggling__option--active");
+    $('.js-save-choice[data-saved-choice="cards"]').addClass(
+      "switcher__toggling__option--active"
+    );
+    $(".table--cards").addClass("table--cards__cards-view");
+  }
+
+  //Automatic data th Labels
+  if ($(".table").length) {
+    var $list = $(".table");
+    $list.each(function () {
+      var $listItems = $(this).find("tbody tr");
+      var $listItemsLabels = $(this).find("thead th");
+      $listItems.each(function () {
+        $(this)
+          .find("td")
+          .each(function (e) {
+            $(this).attr("data-th", $listItemsLabels[e].innerText);
+          });
+      });
+    });
+  }
+});
+
+function resizeIframe() {
+  var iFrame = document.getElementById("iframe1");
+  iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+}
+
+function onIframeLoad() {
+  document.getElementById("iframe1").height = 150;
+  setTimeout(function () {
+    resizeIframe();
+  }, 250); //prevent js loads from wizards
+}
+
+/* TABS VALUES */
+
+$(document).ready(function(){
+
+  $('#tabs .box--quare').addClass('inactive');
+  $('.tabs-content').hide();
+
+  $('.box--quare').on('click', function(){
+    var t = $(this).attr('id');
+
+    if($(this).hasClass('inactive')){
+      $('.box--quare').addClass('inactive');
+      $(this).removeClass('inactive');
+
+      $('.tabs-content').hide();
+      $('#'+ t + 'C').fadeIn('slow');
+   } else {
+      $('.box--quare').addClass('inactive');
+      $('.tabs-content').hide();
+   }
+  })
+
+    $('.tabs-content .close__preview__icon').on('click', function(e){
+      e.preventDefault();
+
+      if ($(this).parent().css('display', 'flex')){
+        $(this).parent().css('display', 'none')
+        $('#tabs .box--quare').addClass('inactive');
+      }
+    })
+});

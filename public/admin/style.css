@@ -1,0 +1,62 @@
+#adminlogin{
+    position: relative;
+    top: 200px;
+    
+}
+#adminlogin img{
+    margin-left: 50px;
+}
+#adminlogin h2{
+    font-family: 'Kolker Brush', cursive;
+    font-weight: bold;
+    font-size: 50px;
+}
+#header img{
+    width: 200px;
+}
+#header {
+    background-color: darkblue;
+    padding: 15px 0px;
+}
+#header button{
+float: right;
+}
+#header button a{
+    text-decoration: none;
+    color: white;
+}
+#header h2{
+    color: white;
+}
+#mid a button{
+    color:white;
+}
+#mid table td{
+    font-size: small;
+    text-align: center;
+}
+#mid table th{
+    text-align: center;
+}
+#mid table{
+    border:1px solid darkblue;
+}
+#mid label{
+    font-weight: bold;
+    text-transform: capitalize;
+}
+#mid h2{
+    font-family: 'Kolker Brush', cursive;
+    font-weight: bold;
+    font-size: 40px;
+}
+#mid img{
+    display: block;
+    width: 300px;
+    position: relative;
+    top: 50px;
+    left: 240px;
+    
+
+
+}
